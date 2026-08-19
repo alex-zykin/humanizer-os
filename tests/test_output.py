@@ -4,7 +4,7 @@ import json
 from dataclasses import replace
 
 from humanizer_os.analyzer import Analyzer
-from humanizer_os.models import AuditReport, LanguageGuess, VerificationReport
+from humanizer_os.models import VerificationReport
 from humanizer_os.output import (
     render_audit_text,
     render_rewrite_text,
@@ -12,7 +12,6 @@ from humanizer_os.output import (
     reports_sarif,
     verification_json,
 )
-from humanizer_os.registry import RuleRegistry
 from humanizer_os.rewriter import Rewriter
 
 
