@@ -16,7 +16,7 @@ class Replacement:
     replacement: str
 
     @classmethod
-    def from_dict(cls, data: dict[str, Any]) -> "Replacement":
+    def from_dict(cls, data: dict[str, Any]) -> Replacement:
         return cls(pattern=str(data["pattern"]), replacement=str(data.get("replacement", "")))
 
 
@@ -26,7 +26,7 @@ class Autofix:
     replacements: tuple[Replacement, ...] = ()
 
     @classmethod
-    def from_dict(cls, data: dict[str, Any] | None) -> "Autofix | None":
+    def from_dict(cls, data: dict[str, Any] | None) -> Autofix | None:
         if not data:
             return None
         replacements = tuple(Replacement.from_dict(item) for item in data.get("replacements", []))
@@ -40,7 +40,7 @@ class DetectorSpec:
     params: dict[str, Any] = field(default_factory=dict)
 
     @classmethod
-    def from_dict(cls, data: dict[str, Any]) -> "DetectorSpec":
+    def from_dict(cls, data: dict[str, Any]) -> DetectorSpec:
         return cls(
             type=str(data["type"]),
             patterns=tuple(str(item) for item in data.get("patterns", [])),
@@ -72,7 +72,7 @@ class Rule:
     sources: tuple[str, ...] = ()
 
     @classmethod
-    def from_dict(cls, data: dict[str, Any]) -> "Rule":
+    def from_dict(cls, data: dict[str, Any]) -> Rule:
         return cls(
             id=str(data["id"]),
             locale=str(data["locale"]),
