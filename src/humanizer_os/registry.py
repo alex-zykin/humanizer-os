@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import builtins
 import json
 import re
 from collections.abc import Iterable
@@ -32,10 +33,10 @@ class RuleRegistry:
     """Loads and validates the built-in rule packs."""
 
     def __init__(self, extra_rules: Iterable[Rule] | None = None) -> None:
-        builtins = list(_load_all_builtin_rules())
+        loaded_rules = builtins.list(_load_all_builtin_rules())
         if extra_rules:
-            builtins.extend(extra_rules)
-        self._rules = tuple(builtins)
+            loaded_rules.extend(extra_rules)
+        self._rules = tuple(loaded_rules)
         self._by_id = {rule.id: rule for rule in self._rules}
         if len(self._by_id) != len(self._rules):
             raise ValueError("Rule IDs must be unique")
@@ -171,11 +172,11 @@ class RuleRegistry:
             if minimum > maximum:
                 raise ValueError(f"min_words exceeds max_words in {rule.id}")
 
-    def list(self, locale: str | None = None, genre: str = "general") -> list[Rule]:
+    def list(self, locale: str | None = None, genre: str = "general") -> builtins.list[Rule]:
         self._validate_genre(genre)
         if locale is not None and locale not in _SUPPORTED_LOCALES:
             raise ValueError(f"Unsupported locale: {locale}")
-        result: list[Rule] = []
+        result: builtins.list[Rule] = []
         for rule in self._rules:
             if locale and rule.locale != locale:
                 continue
@@ -183,7 +184,7 @@ class RuleRegistry:
                 result.append(rule)
         return sorted(result, key=lambda item: item.id)
 
-    def active(self, locale: str, genre: str, text_length: int) -> list[Rule]:
+    def active(self, locale: str, genre: str, text_length: int) -> builtins.list[Rule]:
         self._validate_genre(genre)
         if locale not in _SUPPORTED_LOCALES:
             raise ValueError(f"Unsupported locale: {locale}")
@@ -208,7 +209,7 @@ class RuleRegistry:
 
 @lru_cache(maxsize=1)
 def _load_all_builtin_rules() -> tuple[Rule, ...]:
-    result: list[Rule] = []
+    result: builtins.list[Rule] = []
     package = resources.files("humanizer_os.data.rules")
     for locale in sorted(_SUPPORTED_LOCALES):
         locale_dir = package.joinpath(locale)
