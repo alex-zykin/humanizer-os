@@ -1,0 +1,147 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/alex-zykin/humanizer-os/schemas/rules-output.schema.json",
+  "title": "HumanizerOS rule-list JSON output",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "tool",
+    "rules"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "tool": {
+      "type": "object",
+      "required": [
+        "name",
+        "version"
+      ],
+      "properties": {
+        "name": {
+          "const": "humanizer-os"
+        },
+        "version": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": false
+    },
+    "rules": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/rule"
+      }
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "rule": {
+      "type": "object",
+      "required": [
+        "id",
+        "locale",
+        "name",
+        "description",
+        "category",
+        "severity",
+        "confidence",
+        "message",
+        "suggestion",
+        "genres",
+        "excluded_genres",
+        "detector",
+        "safe_autofix",
+        "sources"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^(EN|RU)-[A-Z]+-[0-9]{3}$"
+        },
+        "locale": {
+          "enum": [
+            "en",
+            "ru"
+          ]
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "category": {
+          "type": "string"
+        },
+        "severity": {
+          "enum": [
+            "info",
+            "warning",
+            "error"
+          ]
+        },
+        "confidence": {
+          "enum": [
+            "low",
+            "medium",
+            "high"
+          ]
+        },
+        "message": {
+          "type": "string"
+        },
+        "suggestion": {
+          "type": "string"
+        },
+        "genres": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "excluded_genres": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "detector": {
+          "type": "object",
+          "required": [
+            "type",
+            "patterns",
+            "params"
+          ],
+          "properties": {
+            "type": {
+              "type": "string"
+            },
+            "patterns": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "params": {
+              "type": "object"
+            }
+          },
+          "additionalProperties": false
+        },
+        "safe_autofix": {
+          "type": "boolean"
+        },
+        "sources": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

@@ -1,0 +1,30 @@
+{"id": "ru-generic-opening", "genre": "article", "text": "В современном мире команды публикуют больше контента.", "expect": ["RU-OPEN-001"]}
+{"id": "ru-not-just", "genre": "landing", "text": "Это не просто панель, а новая система работы.", "expect": ["RU-RHET-001"]}
+{"id": "ru-copula", "genre": "article", "text": "Промпт является инструкцией для модели.", "expect": ["RU-LANG-001"]}
+{"id": "ru-nominalization", "genre": "article", "text": "Проведение оптимизации повысило скорость.", "expect": ["RU-LANG-002"]}
+{"id": "ru-calque", "genre": "article", "text": "Стоит отметить, что релиз перенесли.", "expect": ["RU-LANG-003"]}
+{"id": "ru-vague-word", "genre": "article", "text": "Данный метод не прошёл проверку.", "expect": ["RU-LANG-004"]}
+{"id": "ru-hedge", "genre": "landing", "text": "Инструмент может стать полезным для команды.", "expect": ["RU-LANG-005"]}
+{"id": "ru-marketing", "genre": "landing", "text": "Платформа раскрывает весь потенциал команды.", "expect": ["RU-LANG-006"]}
+{"id": "ru-filler", "genre": "email", "text": "На сегодняшний день отчёт готов.", "expect": ["RU-LANG-007"]}
+{"id": "ru-hedge-stack", "genre": "article", "text": "Возможно, можно предположить, что задержка повторится.", "expect": ["RU-LANG-008"]}
+{"id": "ru-passive", "genre": "article", "text": "Было принято решение перенести запуск.", "expect": ["RU-LANG-009"]}
+{"id": "ru-announcement", "genre": "article", "text": "Давайте разберёмся, почему сборка упала.", "expect": ["RU-RHET-003"]}
+{"id": "ru-conclusion", "genre": "article", "text": "Таким образом, миграции нужна ещё неделя.", "expect": ["RU-RHET-004"]}
+{"id": "ru-honesty", "genre": "social", "text": "Вот честный разбор запуска без воды.", "expect": ["RU-RHET-005"]}
+{"id": "ru-therapy", "genre": "social", "text": "Вы не одиноки: многим трудно начать.", "expect": ["RU-RHET-006"]}
+{"id": "ru-canned-answer", "genre": "social", "text": "Почему? Потому что сроки сгорели.", "expect": ["RU-RHET-007"]}
+{"id": "ru-positive-ending", "genre": "landing", "text": "Мы запустили бета-версию. Это только начало.", "expect": ["RU-CONTENT-001"]}
+{"id": "ru-deeper-truth", "genre": "article", "text": "Суть в том, что доверие важнее скорости.", "expect": ["RU-CONTENT-002"]}
+{"id": "ru-objection", "genre": "article", "text": "Может показаться, что дополнительный шаг не нужен.", "expect": ["RU-CONTENT-003"]}
+{"id": "ru-chatbot-preface", "genre": "general", "text": "Вот переработанная версия вашего текста:\nЗапуск начнётся в понедельник.", "expect": ["RU-ART-001"]}
+{"id": "ru-chatbot-outro", "genre": "article", "text": "Запуск начнётся в понедельник.\n\nНадеюсь, это поможет!", "expect": ["RU-ART-002"]}
+{"id": "ru-tool-artifact", "genre": "docs", "text": "В ответ попал маркер turn5view1 и [cite: 3].", "expect": ["RU-ART-003"]}
+{"id": "ru-placeholder", "genre": "landing", "text": "Свяжитесь с [название компании] до [дата].", "expect": ["RU-ART-004"]}
+{"id": "ru-bold-list", "genre": "article", "text": "- **Скорость:** сборка занимает две минуты.\n- **Цена:** запуск бесплатный.", "expect": ["RU-FMT-001"]}
+{"id": "ru-fragments", "genre": "article", "text": "Сборка упала. Без логов. Без следов. Без причин. Мы откатили релиз.", "expect": ["RU-STYLE-003"]}
+{"id": "ru-clean-email", "genre": "email", "text": "Счёт во вложении. Оплатите его до 19 августа 2026 года.", "clean": true}
+{"id": "ru-clean-doc", "genre": "docs", "text": "Запустите `humanizer-os audit README.md`. Команда вернёт код 1, если найдено нарушение заданного уровня.", "clean": true}
+{"id": "ru-quoted-formula", "genre": "article", "text": "Редактор попросил убрать фразу «Таким образом». Мы её убрали.", "forbid": ["RU-RHET-004"]}
+{"id": "ru-legal-filler-exempt", "genre": "legal", "text": "На сегодняшний день обязательство считается исполненным.", "forbid": ["RU-LANG-007"]}
+{"id": "ru-clean-markdown-source-link", "genre": "docs", "text": "Перед правкой правила прочитайте [источник](https://example.com).", "clean": true}

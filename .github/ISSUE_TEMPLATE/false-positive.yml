@@ -1,0 +1,42 @@
+name: False positive
+description: A legitimate construction was reported in the wrong context.
+title: "false positive: "
+labels: [false-positive]
+body:
+  - type: markdown
+    attributes:
+      value: False positives are product defects. Please do not paste private or copyrighted text.
+  - type: input
+    id: rule
+    attributes:
+      label: Rule ID
+      placeholder: RU-LANG-007
+    validations:
+      required: true
+  - type: dropdown
+    id: language
+    attributes:
+      label: Language
+      options: [English, Russian]
+    validations:
+      required: true
+  - type: dropdown
+    id: genre
+    attributes:
+      label: Genre
+      options: [general, social, email, landing, article, docs, fiction, academic, legal]
+    validations:
+      required: true
+  - type: textarea
+    id: text
+    attributes:
+      label: Minimal safe example
+      render: text
+    validations:
+      required: true
+  - type: textarea
+    id: reason
+    attributes:
+      label: Why is the construction legitimate here?
+    validations:
+      required: true

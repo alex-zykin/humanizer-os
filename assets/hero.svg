@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="420" viewBox="0 0 1200 420" role="img" aria-labelledby="title desc">
+  <title id="title">HumanizerOS</title>
+  <desc id="desc">The open platform for humanizing text. English and Russian, fact-safe and explainable.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0b1020"/>
+      <stop offset="0.55" stop-color="#111827"/>
+      <stop offset="1" stop-color="#17122f"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#7c3aed"/>
+      <stop offset="0.48" stop-color="#22d3ee"/>
+      <stop offset="1" stop-color="#34d399"/>
+    </linearGradient>
+    <filter id="glow" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="24"/>
+    </filter>
+  </defs>
+  <rect width="1200" height="420" rx="28" fill="url(#bg)"/>
+  <circle cx="1080" cy="60" r="170" fill="#7c3aed" opacity="0.16" filter="url(#glow)"/>
+  <circle cx="130" cy="380" r="190" fill="#22d3ee" opacity="0.12" filter="url(#glow)"/>
+  <g transform="translate(72 74)">
+    <rect width="108" height="108" rx="28" fill="url(#accent)"/>
+    <path d="M28 30v48M80 30v48M28 54h52" fill="none" stroke="#07111d" stroke-width="13" stroke-linecap="round"/>
+    <path d="M16 89c15-3 27-1 38 7 11-8 23-10 38-7" fill="none" stroke="#07111d" stroke-width="7" stroke-linecap="round" opacity="0.9"/>
+  </g>
+  <text x="214" y="133" fill="#f8fafc" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="70" font-weight="750" letter-spacing="-2">HumanizerOS</text>
+  <text x="74" y="234" fill="#e2e8f0" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="33" font-weight="600">The open platform for humanizing text.</text>
+  <text x="74" y="286" fill="#94a3b8" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="23">Natural language. Preserved facts. Your voice.</text>
+  <g transform="translate(74 329)" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="17" font-weight="650">
+    <rect width="116" height="38" rx="19" fill="#7c3aed" opacity="0.22" stroke="#a78bfa"/>
+    <text x="58" y="25" text-anchor="middle" fill="#ddd6fe">RU + EN</text>
+    <rect x="132" width="142" height="38" rx="19" fill="#0891b2" opacity="0.22" stroke="#67e8f9"/>
+    <text x="203" y="25" text-anchor="middle" fill="#cffafe">Fact Guard</text>
+    <rect x="290" width="190" height="38" rx="19" fill="#059669" opacity="0.22" stroke="#6ee7b7"/>
+    <text x="385" y="25" text-anchor="middle" fill="#d1fae5">Explainable rules</text>
+    <rect x="496" width="144" height="38" rx="19" fill="#475569" opacity="0.28" stroke="#94a3b8"/>
+    <text x="568" y="25" text-anchor="middle" fill="#e2e8f0">Local-first</text>
+  </g>
+</svg>

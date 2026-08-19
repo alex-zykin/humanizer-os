@@ -1,0 +1,27 @@
+include .editorconfig
+include .gitattributes
+include .gitignore
+include .pre-commit-config.yaml
+include .github/CODEOWNERS
+include LICENSE
+include README.md
+include README.ru.md
+include CHANGELOG.md
+include CITATION.cff
+include CODE_OF_CONDUCT.md
+include CONTRIBUTING.md
+include SECURITY.md
+include SUPPORT.md
+include THIRD_PARTY_NOTICES.md
+include Makefile
+recursive-include src/humanizer_os/data/rules *.json
+include src/humanizer_os/py.typed
+recursive-include docs *.md
+recursive-include schemas *.json
+recursive-include evals *.md *.jsonl
+recursive-include skills *.md
+recursive-include scripts *.py
+recursive-include tests *.py
+recursive-include .github *.yml *.md
+
+recursive-include assets *.svg *.png

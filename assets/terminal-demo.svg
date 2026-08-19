@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="350" viewBox="0 0 1100 350" role="img" aria-labelledby="title desc">
+  <title id="title">HumanizerOS terminal example</title>
+  <desc id="desc">An audit identifies a verbose connective and suggests a safe fix while preserving facts.</desc>
+  <rect width="1100" height="350" rx="20" fill="#0b1020"/>
+  <rect x="1" y="1" width="1098" height="348" rx="19" fill="none" stroke="#334155" stroke-width="2"/>
+  <circle cx="34" cy="30" r="7" fill="#fb7185"/>
+  <circle cx="58" cy="30" r="7" fill="#fbbf24"/>
+  <circle cx="82" cy="30" r="7" fill="#34d399"/>
+  <text x="108" y="36" fill="#64748b" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="15">humanizer-os</text>
+  <g font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="18">
+    <text x="28" y="84" fill="#22d3ee">$</text>
+    <text x="54" y="84" fill="#f8fafc">humanizer-os audit draft.md --lang en --genre article</text>
+    <text x="28" y="130" fill="#94a3b8">draft.md  [en/article]</text>
+    <text x="28" y="163" fill="#cbd5e1">9 words · 1 sentence · 1 finding · review priority 5/100</text>
+    <text x="28" y="208" fill="#a78bfa">I  EN-LANG-004  1:1  Verbose connective</text>
+    <text x="28" y="242" fill="#f8fafc">In order to ship, we need one more test.</text>
+    <text x="28" y="276" fill="#94a3b8">The phrase is longer than the meaning requires.</text>
+    <text x="28" y="310" fill="#34d399">→ To ship, we need one more test.  [safe fix]</text>
+  </g>
+</svg>

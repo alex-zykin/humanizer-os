@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/alex-zykin/humanizer-os/schemas/verification-output.schema.json",
+  "title": "HumanizerOS verification JSON output",
+  "type": "object",
+  "required": [
+    "schema_version", "tool", "ok", "lost", "added",
+    "original_count", "revised_count"
+  ],
+  "properties": {
+    "schema_version": { "const": 1 },
+    "tool": {
+      "type": "object",
+      "required": ["name", "version"],
+      "properties": {
+        "name": { "const": "humanizer-os" },
+        "version": { "type": "string", "minLength": 1 }
+      },
+      "additionalProperties": false
+    },
+    "ok": { "type": "boolean" },
+    "lost": { "type": "array", "items": { "$ref": "#/$defs/fact" } },
+    "added": { "type": "array", "items": { "$ref": "#/$defs/fact" } },
+    "original_count": { "type": "integer", "minimum": 0 },
+    "revised_count": { "type": "integer", "minimum": 0 }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "fact": {
+      "type": "object",
+      "required": ["kind", "value", "normalized", "start", "end"],
+      "properties": {
+        "kind": { "type": "string" },
+        "value": { "type": "string" },
+        "normalized": { "type": "string" },
+        "start": { "type": "integer", "minimum": 0 },
+        "end": { "type": "integer", "minimum": 0 }
+      },
+      "additionalProperties": false
+    }
+  }
+}

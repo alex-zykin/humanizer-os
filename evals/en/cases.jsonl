@@ -1,0 +1,27 @@
+{"id": "en-generic-opening", "genre": "article", "text": "In today's fast-paced world, teams publish more content than ever.", "expect": ["EN-OPEN-001"]}
+{"id": "en-not-just", "genre": "landing", "text": "This is not just a dashboard, but a new operating model.", "expect": ["EN-RHET-001"]}
+{"id": "en-vague-source", "genre": "article", "text": "Experts believe the format increases trust.", "expect": ["EN-LANG-002"]}
+{"id": "en-chatbot-preface", "genre": "general", "text": "Here is the polished version of your text:\nThe launch starts Monday.", "expect": ["EN-ART-001"]}
+{"id": "en-chatbot-outro", "genre": "article", "text": "The launch starts Monday.\n\nI hope this helps!", "expect": ["EN-ART-002"]}
+{"id": "en-tool-artifact", "genre": "docs", "text": "The source was recorded as turn4search2 and [cite: 8].", "expect": ["EN-ART-003"]}
+{"id": "en-placeholder", "genre": "landing", "text": "Contact [insert company name] before [date].", "expect": ["EN-ART-004"]}
+{"id": "en-filler", "genre": "email", "text": "In order to approve it, reply before Friday.", "expect": ["EN-LANG-004"]}
+{"id": "en-hedge-stack", "genre": "article", "text": "The change could potentially reduce retries.", "expect": ["EN-LANG-005"]}
+{"id": "en-marketing-stack", "genre": "landing", "text": "A seamless, intuitive, powerful workflow for creators.", "expect": ["EN-LANG-006"]}
+{"id": "en-announcement", "genre": "article", "text": "Let's dive into the workflow that caused the outage.", "expect": ["EN-RHET-002"]}
+{"id": "en-conclusion", "genre": "article", "text": "In conclusion, the migration needs one more week.", "expect": ["EN-RHET-003"]}
+{"id": "en-fake-candid", "genre": "social", "text": "Let's be honest: the first release was bad.", "expect": ["EN-RHET-004"]}
+{"id": "en-canned-answer", "genre": "social", "text": "Why? Because speed matters.", "expect": ["EN-RHET-005"]}
+{"id": "en-positive-ending", "genre": "landing", "text": "We shipped the beta. This is only the beginning.", "expect": ["EN-CONTENT-001"]}
+{"id": "en-deeper-truth", "genre": "article", "text": "At its core, this is a story about trust.", "expect": ["EN-CONTENT-002"]}
+{"id": "en-objection", "genre": "article", "text": "You might be wondering whether the extra step is necessary.", "expect": ["EN-CONTENT-003"]}
+{"id": "en-title-case", "genre": "article", "text": "# Building A Better Content Workflow\n\nThe release is ready.", "expect": ["EN-FMT-001"]}
+{"id": "en-bold-list", "genre": "article", "text": "- **Speed:** Builds finish in two minutes.\n- **Cost:** The runner is free.", "expect": ["EN-FMT-002"]}
+{"id": "en-emoji-list", "genre": "landing", "text": "🚀 Launch on Monday\n💡 Share the guide", "expect": ["EN-FMT-003"]}
+{"id": "en-fragments", "genre": "article", "text": "The build failed. No logs. No trace. No clue. We rolled back.", "expect": ["EN-STYLE-003"]}
+{"id": "en-repeated-starts", "genre": "article", "text": "We shipped the parser. We shipped the CLI. We shipped the tests. The team reviewed everything. The release is ready. We shipped the docs too.", "expect": ["EN-STRUCT-003"]}
+{"id": "en-clean-email", "genre": "email", "text": "The invoice is attached. Please send payment by 14 August 2026.", "clean": true}
+{"id": "en-clean-doc", "genre": "docs", "text": "Run `humanizer-os audit README.md`. The command returns exit code 1 when a configured threshold is reached.", "clean": true}
+{"id": "en-quoted-formula", "genre": "article", "text": "The reviewer asked us to remove the phrase “In conclusion”. We removed it.", "forbid": ["EN-RHET-003"]}
+{"id": "en-legal-filler-exempt", "genre": "legal", "text": "In order to comply with this clause, the processor shall retain the record.", "forbid": ["EN-LANG-004"]}
+{"id": "en-clean-markdown-source-link", "genre": "docs", "text": "Read the [source](https://example.com) before editing the rule.", "clean": true}

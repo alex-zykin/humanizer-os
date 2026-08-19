@@ -1,0 +1,19 @@
+cff-version: 1.2.0
+message: "If you use HumanizerOS in research or a published tool, please cite this repository."
+title: "HumanizerOS"
+type: software
+authors:
+  - family-names: "Zykin"
+    given-names: "Alex"
+version: 0.1.0
+date-released: 2026-08-19
+license: MIT
+repository-code: "https://github.com/alex-zykin/humanizer-os"
+url: "https://github.com/alex-zykin/humanizer-os"
+keywords:
+  - writing quality
+  - text humanization
+  - multilingual editing
+  - Russian
+  - English
+  - fact preservation

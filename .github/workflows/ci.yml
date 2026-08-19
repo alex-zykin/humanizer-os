@@ -1,0 +1,70 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+env:
+  PIP_DISABLE_PIP_VERSION_CHECK: "1"
+  PYTHONUTF8: "1"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    name: Python ${{ matrix.python-version }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.11", "3.12", "3.13", "3.14"]
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v6
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+      - run: python -m pip install --upgrade pip
+      - run: python -m pip install -e ".[dev]"
+      - run: pytest --cov=humanizer_os --cov-report=term-missing --cov-report=xml
+      - run: python scripts/evaluate.py
+      - run: python scripts/check_release.py
+
+  quality:
+    name: Quality and packaging
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.14"
+          cache: pip
+      - run: python -m pip install --upgrade pip
+      - run: python -m pip install -e ".[dev]"
+      - run: ruff check --output-format=github .
+      - run: mypy src/humanizer_os
+      - run: python scripts/check_docs.py
+      - run: python scripts/generate_rule_catalog.py --check
+      - name: Self-audit project prose
+        run: make selfcheck
+      - run: python -m build
+      - name: Install wheel in a clean environment
+        run: |
+          python -m venv /tmp/humanizer-os-smoke
+          /tmp/humanizer-os-smoke/bin/python -m pip install --upgrade pip
+          /tmp/humanizer-os-smoke/bin/python -m pip install dist/*.whl
+          /tmp/humanizer-os-smoke/bin/humanizer-os --version
+          printf 'In order to ship, test.\n' | /tmp/humanizer-os-smoke/bin/humanizer-os audit - --lang en --fail-on error
+          /tmp/humanizer-os-smoke/bin/python -m pip check

@@ -1,0 +1,230 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/alex-zykin/humanizer-os/schemas/rule.schema.json",
+  "title": "HumanizerOS rule pack",
+  "type": "object",
+  "required": [
+    "version",
+    "locale",
+    "rules"
+  ],
+  "properties": {
+    "version": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "locale": {
+      "enum": [
+        "en",
+        "ru"
+      ]
+    },
+    "rules": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/rule"
+      }
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "rule": {
+      "type": "object",
+      "required": [
+        "id",
+        "locale",
+        "name",
+        "category",
+        "severity",
+        "confidence",
+        "message",
+        "suggestion",
+        "detector"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^(EN|RU)-[A-Z]+-[0-9]{3}$"
+        },
+        "locale": {
+          "enum": [
+            "en",
+            "ru"
+          ]
+        },
+        "name": {
+          "type": "string",
+          "minLength": 3
+        },
+        "description": {
+          "type": "string"
+        },
+        "category": {
+          "enum": [
+            "artifact",
+            "language",
+            "rhetoric",
+            "content",
+            "formatting",
+            "structure"
+          ]
+        },
+        "severity": {
+          "enum": [
+            "info",
+            "warning",
+            "error"
+          ]
+        },
+        "confidence": {
+          "enum": [
+            "low",
+            "medium",
+            "high"
+          ]
+        },
+        "message": {
+          "type": "string",
+          "minLength": 3
+        },
+        "suggestion": {
+          "type": "string"
+        },
+        "detector": {
+          "type": "object",
+          "required": [
+            "type"
+          ],
+          "properties": {
+            "type": {
+              "enum": [
+                "regex",
+                "short_sentence_stack",
+                "uniform_paragraphs",
+                "uniform_sentences",
+                "repeated_starts",
+                "transition_density",
+                "dash_density",
+                "title_case_headings",
+                "bold_list_headings",
+                "emoji_bullets",
+                "list_density"
+              ]
+            },
+            "patterns": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "params": {
+              "type": "object"
+            }
+          },
+          "additionalProperties": false
+        },
+        "genres": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "*",
+              "general",
+              "social",
+              "email",
+              "landing",
+              "article",
+              "docs",
+              "fiction",
+              "academic",
+              "legal"
+            ]
+          },
+          "default": [
+            "*"
+          ],
+          "uniqueItems": true
+        },
+        "excluded_genres": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "general",
+              "social",
+              "email",
+              "landing",
+              "article",
+              "docs",
+              "fiction",
+              "academic",
+              "legal"
+            ]
+          },
+          "uniqueItems": true
+        },
+        "min_chars": {
+          "type": "integer",
+          "minimum": 0,
+          "default": 0
+        },
+        "max_findings": {
+          "type": "integer",
+          "minimum": 1,
+          "default": 20
+        },
+        "ignore_in_quotes": {
+          "type": "boolean"
+        },
+        "enabled": {
+          "type": "boolean"
+        },
+        "autofix": {
+          "type": "object",
+          "required": [
+            "safe",
+            "replacements"
+          ],
+          "properties": {
+            "safe": {
+              "const": true
+            },
+            "replacements": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": "object",
+                "required": [
+                  "pattern",
+                  "replacement"
+                ],
+                "properties": {
+                  "pattern": {
+                    "type": "string"
+                  },
+                  "replacement": {
+                    "type": "string"
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          },
+          "additionalProperties": false
+        },
+        "sources": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "uri"
+          }
+        },
+        "ignore_in_code": {
+          "type": "boolean"
+        },
+        "ignore_in_urls": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

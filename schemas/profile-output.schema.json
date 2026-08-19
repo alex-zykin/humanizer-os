@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/alex-zykin/humanizer-os/schemas/profile-output.schema.json",
+  "title": "HumanizerOS voice-profile JSON output",
+  "type": "object",
+  "required": [
+    "schema_version", "tool", "locale", "characters", "words", "sentences",
+    "paragraphs", "avg_sentence_words", "sentence_word_stdev",
+    "avg_paragraph_words", "type_token_ratio", "first_person_per_1000",
+    "second_person_per_1000", "question_marks_per_1000",
+    "exclamation_marks_per_1000", "em_dashes_per_1000",
+    "semicolons_per_1000", "emoji_lines_ratio", "bullet_lines_ratio"
+  ],
+  "properties": {
+    "schema_version": { "const": 1 },
+    "tool": {
+      "type": "object",
+      "required": ["name", "version"],
+      "properties": {
+        "name": { "const": "humanizer-os" },
+        "version": { "type": "string", "minLength": 1 }
+      },
+      "additionalProperties": false
+    },
+    "locale": { "enum": ["en", "ru"] },
+    "characters": { "type": "integer", "minimum": 0 },
+    "words": { "type": "integer", "minimum": 0 },
+    "sentences": { "type": "integer", "minimum": 0 },
+    "paragraphs": { "type": "integer", "minimum": 0 },
+    "avg_sentence_words": { "type": "number", "minimum": 0 },
+    "sentence_word_stdev": { "type": "number", "minimum": 0 },
+    "avg_paragraph_words": { "type": "number", "minimum": 0 },
+    "type_token_ratio": { "type": "number", "minimum": 0, "maximum": 1 },
+    "first_person_per_1000": { "type": "number", "minimum": 0 },
+    "second_person_per_1000": { "type": "number", "minimum": 0 },
+    "question_marks_per_1000": { "type": "number", "minimum": 0 },
+    "exclamation_marks_per_1000": { "type": "number", "minimum": 0 },
+    "em_dashes_per_1000": { "type": "number", "minimum": 0 },
+    "semicolons_per_1000": { "type": "number", "minimum": 0 },
+    "emoji_lines_ratio": { "type": "number", "minimum": 0, "maximum": 1 },
+    "bullet_lines_ratio": { "type": "number", "minimum": 0, "maximum": 1 }
+  },
+  "additionalProperties": false
+}

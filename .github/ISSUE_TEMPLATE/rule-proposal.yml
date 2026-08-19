@@ -1,0 +1,45 @@
+name: Rule proposal
+description: Propose a narrow, testable pattern with evidence and boundaries.
+title: "rule: "
+labels: [rule-proposal]
+body:
+  - type: dropdown
+    id: language
+    attributes:
+      label: Language
+      options: [English, Russian]
+    validations:
+      required: true
+  - type: textarea
+    id: pattern
+    attributes:
+      label: Observable pattern
+      description: Describe the construction without claiming authorship.
+    validations:
+      required: true
+  - type: textarea
+    id: positive
+    attributes:
+      label: Positive example
+      render: text
+    validations:
+      required: true
+  - type: textarea
+    id: clean
+    attributes:
+      label: Legitimate or adversarial example
+      render: text
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence or provenance links
+    validations:
+      required: true
+  - type: textarea
+    id: boundary
+    attributes:
+      label: Genre limits and false-positive boundary
+    validations:
+      required: true

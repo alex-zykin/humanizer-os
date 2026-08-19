@@ -1,0 +1,414 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/alex-zykin/humanizer-os/schemas/rewrite-output.schema.json",
+  "title": "HumanizerOS rewrite JSON output",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "tool",
+    "reports"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "tool": {
+      "$ref": "#/$defs/tool"
+    },
+    "reports": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/rewrite_report"
+      }
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "tool": {
+      "type": "object",
+      "required": [
+        "name",
+        "version"
+      ],
+      "properties": {
+        "name": {
+          "const": "humanizer-os"
+        },
+        "version": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": false
+    },
+    "language_guess": {
+      "type": "object",
+      "required": [
+        "code",
+        "confidence",
+        "cyrillic_letters",
+        "latin_letters"
+      ],
+      "properties": {
+        "code": {
+          "enum": [
+            "ru",
+            "en",
+            "mixed",
+            "unknown"
+          ]
+        },
+        "confidence": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "cyrillic_letters": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "latin_letters": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "additionalProperties": false
+    },
+    "finding": {
+      "type": "object",
+      "required": [
+        "rule_id",
+        "rule_name",
+        "category",
+        "severity",
+        "confidence",
+        "message",
+        "suggestion",
+        "start",
+        "end",
+        "line",
+        "column",
+        "excerpt",
+        "fixable"
+      ],
+      "properties": {
+        "rule_id": {
+          "type": "string",
+          "pattern": "^(EN|RU)-[A-Z]+-[0-9]{3}$"
+        },
+        "rule_name": {
+          "type": "string"
+        },
+        "category": {
+          "type": "string"
+        },
+        "severity": {
+          "enum": [
+            "info",
+            "warning",
+            "error"
+          ]
+        },
+        "confidence": {
+          "enum": [
+            "low",
+            "medium",
+            "high"
+          ]
+        },
+        "message": {
+          "type": "string"
+        },
+        "suggestion": {
+          "type": "string"
+        },
+        "start": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "end": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "line": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "column": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "excerpt": {
+          "type": "string"
+        },
+        "fixable": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false
+    },
+    "metrics": {
+      "type": "object",
+      "required": [
+        "characters",
+        "words",
+        "sentences",
+        "paragraphs",
+        "findings",
+        "categories",
+        "severities",
+        "review_priority",
+        "review_priority_note"
+      ],
+      "properties": {
+        "characters": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "words": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "sentences": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "paragraphs": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "findings": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "categories": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "integer",
+            "minimum": 0
+          }
+        },
+        "severities": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "integer",
+            "minimum": 0
+          }
+        },
+        "review_priority": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "review_priority_note": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "audit_report": {
+      "type": "object",
+      "required": [
+        "source",
+        "locale",
+        "detected_language",
+        "genre",
+        "findings",
+        "metrics",
+        "tool_version"
+      ],
+      "properties": {
+        "source": {
+          "type": "string"
+        },
+        "locale": {
+          "enum": [
+            "en",
+            "ru"
+          ]
+        },
+        "detected_language": {
+          "$ref": "#/$defs/language_guess"
+        },
+        "genre": {
+          "type": "string"
+        },
+        "findings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/finding"
+          }
+        },
+        "metrics": {
+          "$ref": "#/$defs/metrics"
+        },
+        "tool_version": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": false
+    },
+    "fact": {
+      "type": "object",
+      "required": [
+        "kind",
+        "value",
+        "normalized",
+        "start",
+        "end"
+      ],
+      "properties": {
+        "kind": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        },
+        "normalized": {
+          "type": "string"
+        },
+        "start": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "end": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "additionalProperties": false
+    },
+    "verification": {
+      "type": "object",
+      "required": [
+        "ok",
+        "lost",
+        "added",
+        "original_count",
+        "revised_count"
+      ],
+      "properties": {
+        "ok": {
+          "type": "boolean"
+        },
+        "lost": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/fact"
+          }
+        },
+        "added": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/fact"
+          }
+        },
+        "original_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "revised_count": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "additionalProperties": false
+    },
+    "change": {
+      "type": "object",
+      "required": [
+        "rule_id",
+        "start",
+        "end",
+        "before",
+        "after",
+        "line",
+        "column"
+      ],
+      "properties": {
+        "rule_id": {
+          "type": "string",
+          "pattern": "^(EN|RU)-[A-Z]+-[0-9]{3}$"
+        },
+        "start": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "end": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "before": {
+          "type": "string"
+        },
+        "after": {
+          "type": "string"
+        },
+        "line": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "column": {
+          "type": "integer",
+          "minimum": 1
+        }
+      },
+      "additionalProperties": false
+    },
+    "rewrite_report": {
+      "type": "object",
+      "required": [
+        "source",
+        "locale",
+        "genre",
+        "original",
+        "revised",
+        "changes",
+        "verification",
+        "before_audit",
+        "after_audit",
+        "blocked"
+      ],
+      "properties": {
+        "source": {
+          "type": "string"
+        },
+        "locale": {
+          "enum": [
+            "en",
+            "ru"
+          ]
+        },
+        "genre": {
+          "type": "string"
+        },
+        "original": {
+          "type": "string"
+        },
+        "revised": {
+          "type": "string"
+        },
+        "changes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/change"
+          }
+        },
+        "verification": {
+          "$ref": "#/$defs/verification"
+        },
+        "before_audit": {
+          "$ref": "#/$defs/audit_report"
+        },
+        "after_audit": {
+          "$ref": "#/$defs/audit_report"
+        },
+        "blocked": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}
