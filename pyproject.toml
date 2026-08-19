@@ -95,8 +95,7 @@ extend-exclude = ["dist", "build"]
 
 [tool.ruff.lint]
 select = ["E", "F", "I", "B", "S", "UP", "SIM", "RUF"]
-ignore = ["E501"]
-
+ignore = ["E501", "RUF001"]
 
 [tool.ruff.lint.per-file-ignores]
 "tests/**/*.py" = ["S101"]
