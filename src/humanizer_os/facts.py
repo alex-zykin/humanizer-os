@@ -82,7 +82,7 @@ _FACT_PATTERNS: tuple[tuple[str, re.Pattern[str]], ...] = (
 def normalize_fact(kind: str, value: str) -> str:
     value = value.strip()
     if kind == "url":
-        value = value.rstrip(".,;:!?)]}»”\"")
+        value = value.rstrip('.,;:!?)]}»”"')
     value = re.sub(r"\s+", " ", value)
     if kind in {"email", "url", "handle", "hashtag", "date", "uuid", "version", "commit"}:
         value = value.casefold()
@@ -90,7 +90,7 @@ def normalize_fact(kind: str, value: str) -> str:
 
 
 def _trim_url_fact(fact: Fact) -> Fact:
-    trimmed = fact.value.rstrip(".,;:!?)]}»”\"")
+    trimmed = fact.value.rstrip('.,;:!?)]}»”"')
     if trimmed == fact.value:
         return fact
     return replace(

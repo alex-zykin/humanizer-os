@@ -112,9 +112,7 @@ def build_voice_profile(samples: Iterable[str], locale: str = "auto") -> VoicePr
     first_count = sum(1 for token in token_list if token in first)
     second_count = sum(1 for token in token_list if token in second)
     emoji_lines = sum(
-        1
-        for line in lines
-        if re.match(r"\s*[\U0001F300-\U0001FAFF\u2600-\u27BF]", line)
+        1 for line in lines if re.match(r"\s*[\U0001F300-\U0001FAFF\u2600-\u27BF]", line)
     )
     bullet_lines = sum(1 for line in lines if re.match(r"\s*(?:[-*+] |\d+[.)]\s+)", line))
 
@@ -126,9 +124,7 @@ def build_voice_profile(samples: Iterable[str], locale: str = "auto") -> VoicePr
         paragraphs=len(paragraph_items),
         avg_sentence_words=round(statistics.fmean(sentence_counts), 2) if sentence_counts else 0.0,
         sentence_word_stdev=(
-            round(statistics.pstdev(sentence_counts), 2)
-            if len(sentence_counts) > 1
-            else 0.0
+            round(statistics.pstdev(sentence_counts), 2) if len(sentence_counts) > 1 else 0.0
         ),
         avg_paragraph_words=(
             round(statistics.fmean(paragraph_counts), 2) if paragraph_counts else 0.0

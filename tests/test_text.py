@@ -12,7 +12,7 @@ from humanizer_os.text import (
 
 
 def test_span_detection_and_masking() -> None:
-    text = 'Text `code` and “quote” and https://example.com/x.'
+    text = "Text `code` and “quote” and https://example.com/x."
     code = find_code_spans(text)
     quotes = find_quote_spans(text)
     urls = find_url_spans(text)
@@ -30,7 +30,11 @@ def test_fenced_and_indented_code() -> None:
 
 def test_sentence_paragraph_offsets_and_helpers() -> None:
     text = "First sentence. Second one!\n\nThird paragraph?"
-    assert [item.text for item in sentences(text)] == ["First sentence.", "Second one!", "Third paragraph?"]
+    assert [item.text for item in sentences(text)] == [
+        "First sentence.",
+        "Second one!",
+        "Third paragraph?",
+    ]
     assert len(paragraphs(text)) == 2
     assert word_count(text) == 6
     assert line_col(text, text.index("Third")) == (3, 1)
@@ -40,7 +44,10 @@ def test_sentence_paragraph_offsets_and_helpers() -> None:
 def test_markdown_blockquotes_are_quote_spans() -> None:
     text = "> Quoted first line.\n> Quoted second line.\n\nOwn paragraph."
     spans = find_quote_spans(text)
-    assert any(span.kind == "quote" and text[span.start:span.end].startswith(">") for span in spans)
+    assert any(
+        span.kind == "quote" and text[span.start : span.end].startswith(">") for span in spans
+    )
+
 
 def test_unclosed_fenced_code_is_protected_through_eof() -> None:
     text = "Before\n\n```python\nprint('in order to')\n"

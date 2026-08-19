@@ -40,9 +40,7 @@ def find_code_spans(text: str) -> list[Span]:
     while match := opener.search(text, cursor):
         fence = match.group(1)
         marker = re.escape(fence[0])
-        closer = re.compile(
-            rf"(?m)^[ \t]{{0,3}}{marker}{{{len(fence)},}}[ \t]*(?:\n|$)"
-        )
+        closer = re.compile(rf"(?m)^[ \t]{{0,3}}{marker}{{{len(fence)},}}[ \t]*(?:\n|$)")
         closing = closer.search(text, match.end())
         end = closing.end() if closing else len(text)
         spans.append(Span(match.start(), end, "code_block"))

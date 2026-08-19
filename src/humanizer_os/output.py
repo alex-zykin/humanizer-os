@@ -88,8 +88,7 @@ def render_rules_text(rules: Iterable[Rule]) -> str:
         return "No rules match this filter."
     width = max(len(item.id) for item in rows)
     return "\n".join(
-        f"{item.id:<{width}}  {item.severity:<7} {item.confidence:<6}  {item.name}"
-        for item in rows
+        f"{item.id:<{width}}  {item.severity:<7} {item.confidence:<6}  {item.name}" for item in rows
     )
 
 

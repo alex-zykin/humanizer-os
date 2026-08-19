@@ -6,7 +6,12 @@ def finding_ids(text: str, locale: str = "en", genre: str = "article") -> set[st
 
 
 def test_uniform_paragraph_detector() -> None:
-    paragraph = " ".join(["The release candidate passed the parser test and the team recorded every result carefully."] * 3)
+    paragraph = " ".join(
+        [
+            "The release candidate passed the parser test and the team recorded every result carefully."
+        ]
+        * 3
+    )
     text = "\n\n".join([paragraph] * 4)
     assert "EN-STRUCT-001" in finding_ids(text)
 
@@ -31,7 +36,9 @@ def test_transition_density_detector() -> None:
 
 
 def test_dash_density_detector() -> None:
-    text = ("This clause — interrupts the point — and the next clause — interrupts it again — " * 7).strip()
+    text = (
+        "This clause — interrupts the point — and the next clause — interrupts it again — " * 7
+    ).strip()
     assert "EN-STYLE-002" in finding_ids(text)
 
 

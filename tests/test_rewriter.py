@@ -9,7 +9,9 @@ def test_applies_safe_english_fixes_and_preserves_case() -> None:
 
 
 def test_applies_safe_russian_fixes_and_preserves_case() -> None:
-    report = Rewriter().fix("На сегодняшний день мы работаем для того чтобы запустить тест.", locale="ru")
+    report = Rewriter().fix(
+        "На сегодняшний день мы работаем для того чтобы запустить тест.", locale="ru"
+    )
     assert report.revised == "Сейчас мы работаем чтобы запустить тест."
     assert report.verification.ok
 

@@ -24,7 +24,7 @@ def test_russian_surface_rules() -> None:
 
 
 def test_code_and_quotes_are_ignored() -> None:
-    text = 'Use `in order to` in the exact parser test. The customer said “In conclusion”.'
+    text = "Use `in order to` in the exact parser test. The customer said “In conclusion”."
     found = ids(text, locale="en")
     assert "EN-LANG-004" not in found
     assert "EN-RHET-003" not in found

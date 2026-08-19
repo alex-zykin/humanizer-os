@@ -213,9 +213,7 @@ def detect_bold_list_headings(rule: Rule, text: str) -> list[Detection]:
 
 def detect_emoji_bullets(rule: Rule, text: str) -> list[Detection]:
     # Broad emoji ranges are intentional here; the detector only fires at line starts.
-    pattern = re.compile(
-        r"(?m)^\s*(?:[-*+]\s+)?[\U0001F300-\U0001FAFF\u2600-\u27BF](?:\uFE0F)?\s+"
-    )
+    pattern = re.compile(r"(?m)^\s*(?:[-*+]\s+)?[\U0001F300-\U0001FAFF\u2600-\u27BF](?:\uFE0F)?\s+")
     return [Detection(match.start(), match.end()) for match in pattern.finditer(text)]
 
 

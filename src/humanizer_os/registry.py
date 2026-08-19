@@ -156,9 +156,7 @@ class RuleRegistry:
         if "max_per_1000" in params:
             value = params["max_per_1000"]
             if isinstance(value, bool) or not isinstance(value, int | float) or value <= 0:
-                raise ValueError(
-                    f"Detector parameter max_per_1000 must be positive in {rule.id}"
-                )
+                raise ValueError(f"Detector parameter max_per_1000 must be positive in {rule.id}")
 
         if "characters" in params:
             value = params["characters"]

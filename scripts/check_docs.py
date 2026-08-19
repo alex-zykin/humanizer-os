@@ -17,9 +17,7 @@ HTML_LINK_RE = re.compile(r"(?i)\b(?:href|src)=[\"']([^\"']+)[\"']")
 
 def markdown_files() -> list[Path]:
     return sorted(
-        path
-        for path in ROOT.rglob("*.md")
-        if not any(part in IGNORED_PARTS for part in path.parts)
+        path for path in ROOT.rglob("*.md") if not any(part in IGNORED_PARTS for part in path.parts)
     )
 
 
@@ -56,9 +54,7 @@ def main() -> int:
             target = normalize_target(raw)
             path = local_target(source, target)
             if path is not None and not path.exists():
-                failures.append(
-                    f"{source.relative_to(ROOT)}: missing local link {target!r}"
-                )
+                failures.append(f"{source.relative_to(ROOT)}: missing local link {target!r}")
 
     if failures:
         print("\n".join(failures), file=sys.stderr)
