@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import contextlib
 import json
 from collections.abc import Iterable
 from pathlib import Path
@@ -210,10 +211,8 @@ def reports_sarif(reports: Iterable[AuditReport]) -> str:
     for report in reports:
         source = report.source
         if source not in {"<stdin>", "<text>"}:
-            try:
+            with contextlib.suppress(TypeError):
                 source = Path(source).as_posix()
-            except TypeError:
-                pass
         for item in report.findings:
             rule_meta.setdefault(
                 item.rule_id,
