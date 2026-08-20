@@ -64,6 +64,12 @@ def main() -> int:
     if not re.search(rf"(?m)^version:\s*[\"']?{re.escape(package_version)}[\"']?\s*$", citation):
         fail("CITATION.cff version differs")
 
+    skill = (ROOT / "SKILL.md").read_text(encoding="utf-8")
+    if not re.search(rf'(?m)^\s*version:\s*[\"\']?{re.escape(package_version)}[\"\']?\s*$', skill):
+        fail("SKILL.md metadata version differs")
+    if "name: humanizer-os" not in skill:
+        fail("SKILL.md is missing the canonical humanizer-os name")
+
     registry = RuleRegistry()
     all_rule_ids = {rule.id for rule in registry.list()}
     expected_in_evals: set[str] = set()
@@ -104,6 +110,7 @@ def main() -> int:
         "LICENSE",
         "README.md",
         "README.ru.md",
+        "SKILL.md",
         "SECURITY.md",
         "SUPPORT.md",
         "THIRD_PARTY_NOTICES.md",
@@ -118,10 +125,8 @@ def main() -> int:
         "schemas/profile-output.schema.json",
         "schemas/rewrite-output.schema.json",
         "schemas/rule.schema.json",
-        "schemas/rule.schema.json",
         "schemas/rules-output.schema.json",
         "schemas/verification-output.schema.json",
-        "skills/humanizer-os/SKILL.md",
         "skills/humanizer-os-en/SKILL.md",
         "skills/humanizer-os-ru/SKILL.md",
     ]
