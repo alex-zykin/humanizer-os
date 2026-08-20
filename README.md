@@ -14,13 +14,55 @@
 
 English is the default product experience. Russian is available as an optional language switch.
 
-[Before & after](#before--after) · [Use with Claude or Codex](#use-it-with-claude-or-codex) · [How it works](#how-it-works) · [Russian support](#russian-when-you-need-it) · [CLI & API](#cli-and-python)
+[Install](#install-in-10-seconds) · [Before & after](#before--after) · [Use with Claude or Codex](#use-it-with-claude-or-codex) · [How it works](#how-it-works) · [Russian support](#russian-when-you-need-it) · [CLI & API](#cli-and-python)
 
 </div>
 
 HumanizerOS is an English-first, local-first text-humanization platform for agents, editors, and CI. It is more than a prompt: it combines an Agent Skill with deterministic analysis, explainable rules, conservative safe fixes, Fact Guard, JSON/SARIF contracts, and a tested runtime.
 
 It does **not** claim to prove whether a human or a model wrote a text. It finds concrete editorial patterns, shows the exact span, and gives the agent evidence to rewrite only what needs work.
+
+## Install in 10 seconds
+
+Install the HumanizerOS Agent Skill globally with the open [`skills`](https://github.com/vercel-labs/skills) CLI:
+
+```bash
+npx skills add alex-zykin/humanizer-os --skill humanizer-os -g -y
+```
+
+The installer supports Claude Code, Codex, Cursor, OpenCode, and many other agents. To target Claude Code and Codex explicitly:
+
+```bash
+npx skills add alex-zykin/humanizer-os --skill humanizer-os -g -a claude-code -a codex -y
+```
+
+Install only for Codex:
+
+```bash
+npx skills add alex-zykin/humanizer-os --skill humanizer-os -g -a codex -y
+```
+
+Install only for Claude Code:
+
+```bash
+npx skills add alex-zykin/humanizer-os --skill humanizer-os -g -a claude-code -y
+```
+
+Then reload the agent and ask normally:
+
+```text
+Humanize this. Keep every name, number, date, URL, citation and code block unchanged.
+
+[paste text]
+```
+
+Want the deterministic audit and Fact Guard too? Add the CLI:
+
+```bash
+pipx install git+https://github.com/alex-zykin/humanizer-os.git
+```
+
+The Skill works without the CLI. The strongest workflow uses both.
 
 ## Before → after
 
@@ -65,18 +107,12 @@ A good prompt can improve prose. HumanizerOS adds a control layer around the pro
 
 HumanizerOS works best as **Agent Skill + CLI**.
 
-Install `skills/humanizer-os/` in a skills-compatible agent such as Claude Code or Codex. Install the CLI in the same environment when you want deterministic auditing and Fact Guard.
+The one-command install above places the canonical root [`SKILL.md`](SKILL.md) into the selected agent. You can also install it only in the current project by leaving off `-g`.
 
-```bash
-git clone https://github.com/alex-zykin/humanizer-os.git
-cd humanizer-os
-python -m pip install -e .
-```
-
-Then ask the agent normally:
+Ask the agent normally:
 
 ```text
-Humanize this. Keep every name, number, date, URL, citation and code block unchanged.
+Humanize this product launch post. Keep the claims and technical details, but remove generic AI phrasing.
 
 [paste text]
 ```
@@ -244,12 +280,13 @@ assert verify_texts("Price: $49", "The price is $49").ok
 
 ## What ships today
 
+- one canonical root `SKILL.md` for the open Agent Skills ecosystem;
 - 31 English rules in the default language pack;
 - 34 Russian rules in the optional Russian pack;
 - checks for artifacts, content, language, rhetoric, formatting, and structure;
 - genre profiles for `general`, `social`, `email`, `landing`, `article`, `docs`, `fiction`, `academic`, and `legal`;
 - text, versioned JSON, and SARIF 2.1.0 output;
-- CLI, Python API, and Agent Skills;
+- CLI, Python API, and locale-specific Agent Skills;
 - 164 automated tests and 57 bilingual eval cases;
 - a local runtime with no runtime dependencies or network requests.
 
@@ -259,16 +296,19 @@ The generated rule catalog is in [docs/RULE_CATALOG.md](docs/RULE_CATALOG.md).
 
 ```text
 humanizer-os/
-├── src/humanizer_os/          dependency-free runtime
+├── SKILL.md                  canonical English-first Agent Skill
+├── src/humanizer_os/         dependency-free runtime
 │   └── data/rules/
-│       ├── en/                default English catalog
-│       └── ru/                optional Russian catalog
-├── schemas/                   public JSON contracts
-├── skills/                    Agent Skills
-├── evals/                     regression fixtures
-├── tests/                     unit, CLI, schema, and eval tests
-├── docs/                      methodology and platform docs
-└── .github/workflows/         CI, dependency review, releases
+│       ├── en/               default English catalog
+│       └── ru/               optional Russian catalog
+├── skills/
+│   ├── humanizer-os-en/      explicit English-only skill
+│   └── humanizer-os-ru/      explicit Russian-only skill
+├── schemas/                  public JSON contracts
+├── evals/                    regression fixtures
+├── tests/                    unit, CLI, schema, and eval tests
+├── docs/                     methodology and platform docs
+└── .github/workflows/        CI, dependency review, releases
 ```
 
 Read [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md), [docs/METHODOLOGY.md](docs/METHODOLOGY.md), and [docs/PLATFORM.md](docs/PLATFORM.md).
