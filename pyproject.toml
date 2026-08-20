@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "humanizer-os"
 version = "0.1.0"
-description = "Open-source multilingual text humanization platform with explainable audits and fact-safe fixes."
+description = "English-first text humanization platform with explainable audits, Fact Guard, and optional Russian support."
 readme = "README.md"
 requires-python = ">=3.11"
 license = "MIT"
@@ -13,16 +13,17 @@ authors = [
   { name = "Alex Zykin" },
 ]
 keywords = [
-  "writing",
-  "linting",
-  "editing",
-  "russian",
-  "english",
-  "nlp",
-  "ai-writing",
   "humanizer",
   "text-humanization",
+  "ai-writing",
+  "writing",
+  "editing",
+  "english",
+  "fact-preservation",
   "agent-skills",
+  "nlp",
+  "cli",
+  "russian",
 ]
 classifiers = [
   "Development Status :: 3 - Alpha",
