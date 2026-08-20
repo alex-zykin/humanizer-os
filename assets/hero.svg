@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="420" viewBox="0 0 1200 420" role="img" aria-labelledby="title desc">
   <title id="title">HumanizerOS</title>
-  <desc id="desc">The open platform for humanizing text. English and Russian, fact-safe and explainable.</desc>
+  <desc id="desc">Humanize the writing. Verify the facts. English-first text humanization with optional Russian support.</desc>
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0" stop-color="#0b1020"/>
@@ -25,16 +25,16 @@
     <path d="M16 89c15-3 27-1 38 7 11-8 23-10 38-7" fill="none" stroke="#07111d" stroke-width="7" stroke-linecap="round" opacity="0.9"/>
   </g>
   <text x="214" y="133" fill="#f8fafc" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="70" font-weight="750" letter-spacing="-2">HumanizerOS</text>
-  <text x="74" y="234" fill="#e2e8f0" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="33" font-weight="600">The open platform for humanizing text.</text>
-  <text x="74" y="286" fill="#94a3b8" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="23">Natural language. Preserved facts. Your voice.</text>
+  <text x="74" y="234" fill="#e2e8f0" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="33" font-weight="600">Humanize the writing. Verify the facts.</text>
+  <text x="74" y="286" fill="#94a3b8" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="23">English-first. Russian when you need it.</text>
   <g transform="translate(74 329)" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="17" font-weight="650">
-    <rect width="116" height="38" rx="19" fill="#7c3aed" opacity="0.22" stroke="#a78bfa"/>
-    <text x="58" y="25" text-anchor="middle" fill="#ddd6fe">RU + EN</text>
-    <rect x="132" width="142" height="38" rx="19" fill="#0891b2" opacity="0.22" stroke="#67e8f9"/>
-    <text x="203" y="25" text-anchor="middle" fill="#cffafe">Fact Guard</text>
-    <rect x="290" width="190" height="38" rx="19" fill="#059669" opacity="0.22" stroke="#6ee7b7"/>
-    <text x="385" y="25" text-anchor="middle" fill="#d1fae5">Explainable rules</text>
-    <rect x="496" width="144" height="38" rx="19" fill="#475569" opacity="0.28" stroke="#94a3b8"/>
-    <text x="568" y="25" text-anchor="middle" fill="#e2e8f0">Local-first</text>
+    <rect width="126" height="38" rx="19" fill="#7c3aed" opacity="0.22" stroke="#a78bfa"/>
+    <text x="63" y="25" text-anchor="middle" fill="#ddd6fe">EN default</text>
+    <rect x="142" width="142" height="38" rx="19" fill="#0891b2" opacity="0.22" stroke="#67e8f9"/>
+    <text x="213" y="25" text-anchor="middle" fill="#cffafe">Fact Guard</text>
+    <rect x="300" width="190" height="38" rx="19" fill="#059669" opacity="0.22" stroke="#6ee7b7"/>
+    <text x="395" y="25" text-anchor="middle" fill="#d1fae5">Explainable rules</text>
+    <rect x="506" width="144" height="38" rx="19" fill="#475569" opacity="0.28" stroke="#94a3b8"/>
+    <text x="578" y="25" text-anchor="middle" fill="#e2e8f0">Local-first</text>
   </g>
 </svg>
