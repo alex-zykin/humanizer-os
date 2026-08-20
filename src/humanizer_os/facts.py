@@ -6,13 +6,30 @@ from collections.abc import Iterable
 from dataclasses import replace
 
 from .models import Fact, VerificationReport
-from .text import Span, find_code_spans, overlaps
+from .text import Span, find_code_spans, find_quote_spans, overlaps
 
 _MONTHS = (
     "january|february|march|april|may|june|july|august|september|october|november|december|"
     "январ(?:я|ь)|феврал(?:я|ь)|март(?:а)?|апрел(?:я|ь)|ма[йя]|июн(?:я|ь)|июл(?:я|ь)|"
     "август(?:а)?|сентябр(?:я|ь)|октябр(?:я|ь)|ноябр(?:я|ь)|декабр(?:я|ь)"
 )
+
+_PROPER_NAME_LEADING_STOPWORDS = {
+    "A",
+    "An",
+    "As",
+    "At",
+    "By",
+    "For",
+    "From",
+    "In",
+    "On",
+    "The",
+    "This",
+    "To",
+    "With",
+}
+_PROPER_NAME_TITLES = {"Dr", "Mr", "Mrs", "Ms", "Prof"}
 
 _FACT_PATTERNS: tuple[tuple[str, re.Pattern[str]], ...] = (
     (
@@ -79,11 +96,24 @@ _FACT_PATTERNS: tuple[tuple[str, re.Pattern[str]], ...] = (
 )
 
 
+def _is_plausible_proper_name(value: str) -> bool:
+    tokens = value.replace("–", " ").replace("—", " ").replace("-", " ").split()
+    if len(tokens) < 2:
+        return False
+    if tokens[0] in _PROPER_NAME_LEADING_STOPWORDS:
+        return False
+    return not any(token in _PROPER_NAME_TITLES for token in tokens)
+
+
 def normalize_fact(kind: str, value: str) -> str:
     value = value.strip()
     if kind == "url":
         value = value.rstrip('.,;:!?)]}»”"')
     value = re.sub(r"\s+", " ", value)
+    if kind == "quote":
+        value = value.translate(
+            str.maketrans({"“": '"', "”": '"', "„": '"', "‘": "'", "’": "'"})
+        )
     if kind in {"email", "url", "handle", "hashtag", "date", "uuid", "version", "commit"}:
         value = value.casefold()
     return value
@@ -110,11 +140,28 @@ def extract_facts(text: str) -> list[Fact]:
         facts.append(Fact("code", value, value, code_span.start, code_span.end))
         occupied.append(code_span)
 
+    for quote_span in find_quote_spans(text):
+        if overlaps(quote_span.start, quote_span.end, occupied):
+            continue
+        value = text[quote_span.start : quote_span.end]
+        facts.append(
+            Fact(
+                "quote",
+                value,
+                normalize_fact("quote", value),
+                quote_span.start,
+                quote_span.end,
+            )
+        )
+        occupied.append(quote_span)
+
     for kind, pattern in _FACT_PATTERNS:
         for match in pattern.finditer(text):
             if overlaps(match.start(), match.end(), occupied):
                 continue
             value = match.group(0)
+            if kind == "proper_name" and not _is_plausible_proper_name(value):
+                continue
             fact = Fact(kind, value, normalize_fact(kind, value), match.start(), match.end())
             if kind == "url":
                 fact = _trim_url_fact(fact)
