@@ -14,13 +14,13 @@
 
 English is the default experience. Russian is available as an optional language switch.
 
-[Install](#install-in-10-seconds) · [Verified demo](#a-rewrite-you-can-verify) · [Claude / Codex](#use-it-with-claude-or-codex) · [How it works](#how-it-works) · [Russian](#russian-when-you-need-it) · [CLI / API](#cli-and-python)
+[Install](#install-in-10-seconds) · [Verified demo](#a-rewrite-you-can-verify) · [Real-world demo](#real-world-ai-copy-not-a-made-up-demo) · [Claude / Codex](#use-it-with-claude-or-codex) · [How it works](#how-it-works) · [Russian](#russian-when-you-need-it)
 
 </div>
 
-HumanizerOS is an English-first text-humanization platform for agents, editors, and CI. The project combines an Agent Skill with deterministic analysis, explainable rules, conservative safe fixes, Fact Guard, JSON/SARIF contracts, and a tested local runtime.
+HumanizerOS is an English-first text-humanization platform for agents, editors, and CI. It combines an Agent Skill with deterministic analysis, explainable rules, conservative safe fixes, Fact Guard, JSON/SARIF contracts, and a tested local runtime.
 
-It does not claim to prove whether a human or a model wrote a text. It reports observable editorial patterns and gives the agent a safer way to rewrite them.
+It does **not** claim to prove whether a human or a model wrote a text. It reports observable editorial patterns and gives the agent a safer way to rewrite them.
 
 ## Install in 10 seconds
 
@@ -30,25 +30,25 @@ Install the HumanizerOS skill with the open [`skills`](https://github.com/vercel
 npx skills add alex-zykin/humanizer-os --skill humanizer-os -g -y
 ```
 
-Target Codex only:
+Codex only:
 
 ```bash
 npx skills add alex-zykin/humanizer-os --skill humanizer-os -g -a codex -y
 ```
 
-Target Claude Code only:
+Claude Code only:
 
 ```bash
 npx skills add alex-zykin/humanizer-os --skill humanizer-os -g -a claude-code -y
 ```
 
-Target both:
+Both:
 
 ```bash
 npx skills add alex-zykin/humanizer-os --skill humanizer-os -g -a claude-code -a codex -y
 ```
 
-Then reload the agent and ask normally:
+Reload the agent, then ask normally:
 
 ```text
 Humanize this product announcement. Keep every name, number, date, URL, citation and code block unchanged.
@@ -68,7 +68,7 @@ Most humanizers show only the new wording. HumanizerOS can also show what it fou
 
 <img src="assets/verified-rewrite.svg" alt="HumanizerOS verified rewrite example with findings and Fact Guard" width="100%">
 
-The source below is intentionally formulaic while carrying real-looking product facts that the rewrite must keep.
+The source below is intentionally formulaic while carrying concrete product facts the rewrite must keep.
 
 **Before**
 
@@ -78,7 +78,7 @@ The source below is intentionally formulaic while carrying real-looking product 
 >
 > In conclusion, the future looks bright.
 
-The deterministic audit returns **10 findings across 8 rules**. It catches the generic opening, stock contrast, two inflated-importance matches, two meta/hedging matches, the adjective stack, vague attribution, the formulaic conclusion, and the generic positive ending.
+The deterministic audit returns **10 findings across 8 rules**.
 
 **After**
 
@@ -88,7 +88,7 @@ The deterministic audit returns **10 findings across 8 rules**. It catches the g
 >
 > The copy now explains the product directly instead of relying on inflated claims or unnamed experts.
 
-Run Fact Guard on the two files:
+Verify it:
 
 ```bash
 humanizer-os verify \
@@ -96,19 +96,70 @@ humanizer-os verify \
   examples/product-launch-after.md
 ```
 
-Expected result:
-
 ```text
 OK  Protected facts match (6 checked).
 ```
 
-Those six protected facts are two occurrences of `Acme Cloud Pro`, `September 15, 2026`, `$49`, `25`, and `https://example.com/pro`.
+The demo is reproducible from [`examples/`](examples/), and a regression test locks these claims to the current engine.
 
-The demo is reproducible from [`examples/`](examples/), and a regression test locks the README claims to the current engine.
+## Real-world AI copy, not a made-up demo
+
+The Acme example above is deliberately controlled. This second demo comes from the **Human Detectors** research dataset by Jenna Russell, Marzena Karpinska, and Mohit Iyyer. The released record is labeled `AI-generated`, lists `gpt-4o` as the generation model, and its majority and expert-majority annotations classify it as `Machine-Generated`.
+
+The dataset pairs the generated sample with reference metadata for an Associated Press article titled *When the first warm-blooded dinosaurs roamed Earth*. The text below is the **machine-generated research sample**, not the AP journalist's writing. Full provenance is documented in [`examples/real-world-ai-source.md`](examples/real-world-ai-source.md).
+
+### Original AI-generated sample
+
+> A groundbreaking study has unveiled that the first warm-blooded dinosaurs may have roamed the Earth approximately 180 million years ago, reshaping our understanding of these ancient creatures. This discovery, published in the journal Nature, challenges the long-held belief that all dinosaurs were cold-blooded like modern reptiles.
+>
+> The research team, led by Dr. Emily Sanders from the University of Cambridge, analyzed fossilized bone structures from various dinosaur species. By examining the microscopic details of these bones, the scientists were able to infer the metabolic rates of these prehistoric animals. "Our findings suggest that some dinosaurs had metabolic rates similar to modern birds and mammals, indicating they were warm-blooded," Dr. Sanders explained.
+>
+> ...
+>
+> In conclusion, the revelation that some dinosaurs were warm-blooded marks a significant milestone in paleontology. As Dr. Thompson aptly put it, "This study opens a new chapter in our understanding of dinosaur biology and evolution, offering a glimpse into the dynamic world of these fascinating creatures."
+
+On this full 348-word sample, HumanizerOS reports **5 findings**:
+
+- 4 × `EN-LANG-001` — inflated significance: `groundbreaking study`, `reshaping our understanding`, `significant advantage`, `significant milestone`;
+- 1 × `EN-RHET-003` — formulaic `In conclusion`.
+
+The released human annotations independently call out the same family of problems: generic introduction/conclusion, words such as `groundbreaking`, `crucial`, and `key`, inflated significance, rigid textbook structure, and polished attribution that deserves scrutiny.
+
+### HumanizerOS-guided rewrite
+
+> Some dinosaurs may have been warm-blooded about 180 million years ago, according to a study the article describes as published in Nature. A team led by Dr. Emily Sanders at the University of Cambridge examined fossilized bone structures to estimate the animals’ metabolic rates. “Our findings suggest that some dinosaurs had metabolic rates similar to modern birds and mammals, indicating they were warm-blooded,” Dr. Sanders explained.
+>
+> Warm-blooded, or endothermic, animals regulate body temperature internally instead of relying on the surrounding environment. That ability could have kept dinosaurs active across a wider range of climates and helped them compete with cold-blooded animals.
+>
+> ...
+>
+> Dr. Thompson closes with a broader interpretation: “This study opens a new chapter in our understanding of dinosaur biology and evolution, offering a glimpse into the dynamic world of these fascinating creatures.”
+
+The full rewrite cuts the passage from **348 to 251 words**, drops the current deterministic findings from **5 to 0**, and keeps all five direct quotations unchanged apart from quote typography.
+
+Reproduce it locally:
+
+```bash
+humanizer-os audit examples/real-world-ai-before.md --lang en --genre article
+humanizer-os audit examples/real-world-ai-after.md --lang en --genre article
+humanizer-os verify examples/real-world-ai-before.md examples/real-world-ai-after.md
+```
+
+Expected Fact Guard result:
+
+```text
+OK  Protected facts match (8 checked).
+```
+
+Those eight protected items are the numeric claim `180`, two detected proper names, and the sample's five direct quotations.
+
+**Important:** Fact Guard checks consistency between the source and rewrite. It does not certify that a model-generated claim or quotation is true. The real-world sample is useful precisely because it shows why humanization should preserve source material while keeping factual verification as a separate responsibility.
+
+Source and license notes: [`examples/real-world-ai-source.md`](examples/real-world-ai-source.md) · [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md)
 
 ## Why HumanizerOS
 
-A prompt can produce a better rewrite. HumanizerOS adds a control layer around that rewrite.
+A good prompt can produce a better rewrite. HumanizerOS adds a control layer around it.
 
 | Prompt-only humanizer | HumanizerOS |
 |---|---|
@@ -119,7 +170,7 @@ A prompt can produce a better rewrite. HumanizerOS adds a control layer around t
 | Hard to use in CI | CLI exit codes, SARIF, schemas, tests, and Python API |
 | Other languages often inherit translated English rules | Russian is an optional language-native pack with its own catalog |
 
-The goal is simple: let the model handle semantic editing while the engine handles evidence, boundaries, and verification.
+The goal is simple: **let the model handle semantic editing while HumanizerOS handles evidence, boundaries, and verification.**
 
 ## Use it with Claude or Codex
 
@@ -141,7 +192,7 @@ Humanize the prose in docs/launch-post.md. Keep code blocks and link targets unt
 
 Installing the Skill does **not** rewrite every message automatically. It is meant to activate when you ask to humanize, de-template, rewrite, or review prose. Clean text should stay clean.
 
-A full semantic rewrite is performed by the agent. The deterministic CLI only applies replacements that are explicitly marked safe.
+A full semantic rewrite is performed by the agent. The deterministic CLI only applies replacements explicitly marked safe.
 
 The strongest workflow uses both layers:
 
@@ -173,13 +224,14 @@ Semantic editing stays with the model because whole-paragraph rewriting is not a
 
 ### 3. Verify
 
-Fact Guard compares protected values between original and revised text. It currently covers:
+Fact Guard compares protected values between original and revised text. It covers:
 
+- direct quotations, while allowing straight/curly quote typography changes;
 - numbers, percentages, prices, and common units;
 - dates and times;
 - URLs, email addresses, handles, and hashtags;
 - semantic versions, UUIDs, and commit-like hashes;
-- uppercase identifiers;
+- uppercase identifiers and detected proper names;
 - inline, fenced, and indented code.
 
 Facts are compared as a multiset, so deleting one of two identical values still counts as a change.
@@ -212,8 +264,6 @@ $ humanizer-os fix draft.md --diff
 
 English is the default public experience. Russian is available as a supported locale and localized workflow.
 
-Switch the CLI explicitly:
-
 ```bash
 humanizer-os audit post.md --lang ru --genre social
 humanizer-os fix post.md --lang ru --diff
@@ -238,26 +288,14 @@ humanizer-os --version
 ### Core commands
 
 ```bash
-# Audit English prose
 humanizer-os audit article.md --lang en --genre article
-
-# Safe deterministic fixes
 humanizer-os fix article.md --lang en --diff
 humanizer-os fix article.md --lang en --check
-humanizer-os fix article.md --lang en --write
-
-# Verify protected facts after any rewrite
 humanizer-os verify original.md revised.md
-
-# Machine-readable reports
 humanizer-os audit article.md --lang en --format json > audit.json
 humanizer-os audit docs/ --lang en --format sarif > humanizer-os.sarif
-
-# Explore the catalog
 humanizer-os rules --lang en --genre article
 humanizer-os explain EN-LANG-004
-
-# Measure observable writing characteristics
 humanizer-os profile samples/ --lang en --format json
 ```
 
@@ -301,7 +339,7 @@ The generated catalog is in [docs/RULE_CATALOG.md](docs/RULE_CATALOG.md).
 ```text
 humanizer-os/
 ├── SKILL.md                  canonical English-first Agent Skill
-├── examples/                 reproducible before/after demos
+├── examples/                 reproducible synthetic + real-world demos
 ├── src/humanizer_os/         dependency-free runtime
 │   └── data/rules/
 │       ├── en/               default English catalog
@@ -325,7 +363,7 @@ python -m pip install -e ".[dev]"
 make all
 ```
 
-The suite checks tests, branch-aware coverage, evals, JSON Schema, documentation links, Ruff, mypy, packaging smoke tests, and a self-audit of public documentation. The verified demo is also tested so the numbers shown above cannot drift silently.
+The suite checks tests, branch-aware coverage, evals, JSON Schema, documentation links, Ruff, mypy, packaging smoke tests, and self-audits of public documentation. Both README demos are covered by regression tests so their numbers cannot drift silently.
 
 ## Roadmap
 
