@@ -10,13 +10,101 @@
 
 **[Русская версия](README.ru.md)**
 
+### AI drafts are fast. The problem is they often sound the same.
+
+**HumanizerOS finds formulaic writing, helps your agent rewrite only what needs work, and checks that the facts survive.**
+
+English and Russian are first-class languages. Names, numbers, dates, prices, links, citations, and code stay protected.
+
+[Before & after](#before--after) · [Use with Claude or Codex](#use-it-with-an-agent) · [How it works](#how-it-works) · [CLI](#cli-and-python) · [Roadmap](#roadmap)
+
 </div>
 
-HumanizerOS is a local-first, explainable platform for making English and Russian prose less formulaic without changing its facts. It combines language-native rule packs, deterministic diagnostics, conservative safe fixes, Fact Guard, JSON/SARIF contracts, and Agent Skills.
+HumanizerOS is a local-first, explainable text-humanization platform for agents, editors, and CI. It is more than a prompt: the project combines language-native rule packs, deterministic diagnostics, conservative safe fixes, Fact Guard, JSON/SARIF contracts, and Agent Skills.
 
 It does **not** claim to prove whether a human or a model wrote a text. It reports concrete editorial patterns, shows the exact span, and explains what deserves review.
 
-## See it work
+## Before → after
+
+### English
+
+**Before**
+
+> In today's fast-paced digital landscape, clear communication is not just helpful, but absolutely essential. It is important to note that concise writing can significantly enhance the reader experience and unlock the full potential of your message.
+
+**After**
+
+> Clear writing helps readers understand the point faster. Concise sentences usually work better than generic introductions, inflated claims, and phrases that announce the point before making it.
+
+HumanizerOS can flag the generic opening, the `not just X but Y` contrast, the meta phrase `it is important to note`, and inflated wording before the agent rewrites the passage.
+
+### Russian
+
+**До**
+
+> В современном мире качественный текст является не просто инструментом, а ключевым фактором эффективной коммуникации. Важно отметить, что ясная формулировка позволяет раскрыть потенциал сообщения и значительно улучшить взаимодействие с читателем.
+
+**После**
+
+> Ясный текст помогает читателю быстрее понять мысль. Универсальные вступления, канцелярские связки и фразы вроде «важно отметить» часто можно убрать без потери смысла.
+
+The Russian pack detects its own constructions rather than translating English rules word-for-word.
+
+## Use it with an agent
+
+HumanizerOS works best as **Agent Skill + CLI**.
+
+Install the `skills/humanizer-os/` folder in a skills-compatible agent such as Claude Code or Codex, then install the CLI in the same environment when you want deterministic auditing and Fact Guard.
+
+```bash
+git clone https://github.com/alex-zykin/humanizer-os.git
+cd humanizer-os
+python -m pip install -e .
+```
+
+Then ask the agent normally:
+
+```text
+Humanize this in Russian. Keep all numbers, links, names and code unchanged.
+
+[paste text]
+```
+
+Or point it at a file:
+
+```text
+Humanize the prose in docs/launch-post.md. Keep code blocks and link targets untouched.
+```
+
+The preferred agent workflow is:
+
+```text
+your draft
+   ↓
+HumanizerOS audit (RU or EN + genre)
+   ↓
+agent rewrites the prose semantically
+   ↓
+Fact Guard verifies protected values
+   ↓
+final text + explainable changes
+```
+
+**Installing the skill does not rewrite every message automatically.** The skill is used when you ask to humanize, de-template, rewrite, or review prose. A full semantic rewrite is performed by the agent. The deterministic CLI alone only applies fixes that are explicitly marked safe.
+
+If the CLI is not installed, the skill can still guide the agent, but you lose the strongest deterministic audit and fact-verification layer.
+
+## How it works
+
+HumanizerOS separates the job into three layers:
+
+1. **Detect.** Language-native rules find assistant artifacts, stock language, weak rhetoric, formatting habits, and contextual structural signals.
+2. **Rewrite.** A skills-compatible agent uses those findings to rewrite the prose without treating the original paragraph structure as sacred.
+3. **Verify.** Fact Guard compares protected values before and after the rewrite and rejects deterministic changes that drift.
+
+That separation is deliberate. A regex can safely shorten `in order to` to `to`, but it should not decide how an entire paragraph should sound. The agent handles semantic editing; the engine handles evidence, boundaries, and verification.
+
+## See the engine work
 
 ```bash
 $ humanizer-os audit launch.md --lang en --genre landing
@@ -50,6 +138,7 @@ OK  Protected facts match (7 checked).
 | **Explainable** | Every finding has a stable rule ID, confidence, exact source span, suggestion, genre scope, and provenance. |
 | **Conservative** | Only replacements explicitly marked safe are applied automatically. Everything else remains a review finding. |
 | **Local-first** | The core has no runtime dependencies and performs no network requests. |
+| **Agent-ready** | The skill gives the model a rewrite workflow while the engine supplies deterministic checks before and after it. |
 | **Platform-shaped** | CLI, Python API, JSON, SARIF, schemas, language packs, Agent Skills, and future Studio modules share contracts. |
 
 ## Included in 0.1
@@ -63,7 +152,7 @@ OK  Protected facts match (7 checked).
 - Python API and three Agent Skills;
 - 164 automated tests and 57 bilingual eval cases.
 
-## Installation
+## CLI and Python
 
 HumanizerOS requires Python 3.11 or newer.
 
@@ -80,7 +169,7 @@ For an isolated CLI installation:
 pipx install git+https://github.com/alex-zykin/humanizer-os.git
 ```
 
-## Quick start
+### Quick start
 
 ```bash
 # Audit a file or directory
@@ -107,7 +196,7 @@ humanizer-os explain RU-LANG-002
 humanizer-os profile samples/ --lang auto --format json
 ```
 
-## Python API
+### Python API
 
 ```python
 from humanizer_os import Analyzer, Rewriter, verify_texts
