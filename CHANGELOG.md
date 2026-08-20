@@ -4,6 +4,14 @@ All notable changes are documented here. The project follows Semantic Versioning
 
 ## [Unreleased]
 
+### Changed
+
+- Repositioned HumanizerOS as an English-first product with Russian available as an optional language-native locale.
+- Reworked the main README around outcome, Before → After proof, Agent Skill installation, and Fact Guard rather than multilingual implementation details.
+- Promoted `SKILL.md` at the repository root as the canonical default Agent Skill for the open skills ecosystem.
+- Added one-command installation examples for Claude Code and Codex through `npx skills`.
+- Removed the duplicate nested default skill so the canonical `humanizer-os` skill has a single discovery target.
+
 ### Planned
 
 - Expressive RU foundation for opt-in detection, preservation, normalization, and censorship.
