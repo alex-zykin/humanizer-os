@@ -1,11 +1,11 @@
 ---
 name: humanizer-os
-description: Audits and safely edits English or Russian prose for formulaic writing, assistant artifacts, weak rhetoric, and fact drift. Use when the user asks to humanize, de-template, audit, or make prose sound less formulaic while preserving meaning and facts.
+description: Rewrite English or Russian AI-assisted prose so it reads naturally without changing facts, code, links, or the writer's voice. Use when the user asks to humanize, de-template, rewrite, or review prose; audit first and use HumanizerOS Fact Guard when available.
 ---
 
-# HumanizerOS
+# HumanizerOS: make AI-assisted writing sound human
 
-Use this skill for English or Russian prose. Detect the language first unless the user specifies it.
+Rewrite English or Russian prose so it reads like a person wrote it, not like a generic chatbot. Preserve what the text says, keep the writer's deliberate voice, and change only what needs work.
 
 ## Non-negotiable rules
 
