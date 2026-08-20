@@ -9,8 +9,11 @@ HumanizerOS uses public research and open projects to discover ideas, then write
 ### Primary research
 
 - StoryScope: Jenna Russell, Rishanth Rajendhran, Chau Minh Pham, Mohit Iyyer, and John Wieting, 2026, arXiv:2604.03136.
+- Human Detectors: Jenna Russell, Marzena Karpinska, and Mohit Iyyer, 2025, arXiv:2501.15654; code/data at `jenna-russell/human_detectors`, MIT at time of review.
 
 StoryScope informs the separation between surface and discourse signals. Its long-fiction findings are not applied as universal short-form rules.
+
+Human Detectors provides labeled nonfiction samples plus human annotations. HumanizerOS uses one released machine-generated sample as a real-world demo and as evidence for refining an existing English significance rule. The paired human reference article is not copied into this repository.
 
 ### Open catalogs and implementations
 
@@ -22,6 +25,17 @@ StoryScope informs the separation between surface and discourse signals. Its lon
 - Wikipedia's English and Russian AI-writing signal pages, used as research pointers.
 
 When code or substantial expression is copied from an MIT project, its notice must appear in `THIRD_PARTY_NOTICES.md`. The initial implementation re-authors rule descriptions, examples, detectors, and tests instead of copying substantial source files.
+
+## Real-world demo policy
+
+A research sample may be included only when its publication terms permit redistribution and its provenance is explicit. For `examples/real-world-ai-*`:
+
+- the source is a machine-generated record from the Human Detectors repository;
+- its ground-truth label and generation-model metadata come from the released dataset;
+- the rewrite is authored for HumanizerOS;
+- the paired human-written reference article is not reproduced;
+- direct quotations and claims are preserved for editorial comparison, not endorsed as factually true;
+- Fact Guard checks consistency only.
 
 ## Unlicensed sources
 
