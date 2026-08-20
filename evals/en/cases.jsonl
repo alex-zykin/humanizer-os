@@ -25,3 +25,5 @@
 {"id": "en-quoted-formula", "genre": "article", "text": "The reviewer asked us to remove the phrase “In conclusion”. We removed it.", "forbid": ["EN-RHET-003"]}
 {"id": "en-legal-filler-exempt", "genre": "legal", "text": "In order to comply with this clause, the processor shall retain the record.", "forbid": ["EN-LANG-004"]}
 {"id": "en-clean-markdown-source-link", "genre": "docs", "text": "Read the [source](https://example.com) before editing the rule.", "clean": true}
+{"id": "en-inflated-significance-real-world", "genre": "article", "text": "A groundbreaking study is reshaping our understanding of the field and marks a significant milestone.", "expect": ["EN-LANG-001"]}
+{"id": "en-clean-groundbreaking-ceremony", "genre": "article", "text": "The museum held a groundbreaking ceremony on Tuesday before construction began.", "forbid": ["EN-LANG-001"]}
