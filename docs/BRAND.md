@@ -7,7 +7,8 @@ Russian is a supported locale and localized experience, not a co-primary marketi
 The repository ships with reusable first-party visual assets:
 
 - `assets/hero.svg` — README hero;
-- `assets/terminal-demo.svg` — English-first product walkthrough;
+- `assets/verified-rewrite.svg` — primary proof-of-value demo showing findings plus Fact Guard;
+- `assets/terminal-demo.svg` — English-first engine walkthrough;
 - `assets/social-preview.png` — 1280×640 image for GitHub's social preview setting.
 
 ## Naming
@@ -30,6 +31,18 @@ Optional locale line:
 
 **Russian available when you need it.**
 
+## Proof hierarchy
+
+The main product story should show evidence in this order:
+
+1. before/after writing quality;
+2. exact findings from the deterministic audit;
+3. protected facts verified after the rewrite;
+4. one-command Agent Skill installation;
+5. deeper engine and CI capabilities.
+
+The reproducible `examples/product-launch-*` pair and `assets/verified-rewrite.svg` are the canonical public demo.
+
 ## Marketing order
 
 Primary public surfaces should communicate value in this order:
@@ -45,7 +58,7 @@ Do not lead with "multilingual platform", rule counts, or implementation details
 
 ## Asset policy
 
-Keep the primary visual system in English. The hero and social preview should work for the English-speaking audience without requiring Russian context.
+Keep the primary visual system in English. The hero, verified rewrite demo, and social preview should work for the English-speaking audience without requiring Russian context.
 
 Localized Russian surfaces may use Russian copy and examples.
 
