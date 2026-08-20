@@ -6,6 +6,7 @@ include .github/CODEOWNERS
 include LICENSE
 include README.md
 include README.ru.md
+include SKILL.md
 include CHANGELOG.md
 include CITATION.cff
 include CODE_OF_CONDUCT.md
@@ -23,5 +24,4 @@ recursive-include skills *.md
 recursive-include scripts *.py
 recursive-include tests *.py
 recursive-include .github *.yml *.md
-
 recursive-include assets *.svg *.png
