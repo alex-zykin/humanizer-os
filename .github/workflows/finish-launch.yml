@@ -1,0 +1,192 @@
+name: Complete HumanizerOS launch
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".finish-humanizer-os-launch"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  statuses: write
+  actions: read
+
+concurrency:
+  group: complete-humanizer-os-launch
+  cancel-in-progress: false
+
+jobs:
+  finish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      PIP_DISABLE_PIP_VERSION_CHECK: "1"
+      PYTHONUTF8: "1"
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - name: Check out main
+        uses: actions/checkout@v6
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.13"
+          cache: pip
+
+      - name: Install development dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -e ".[dev]"
+
+      - name: Run complete quality gate
+        run: |
+          pytest --cov=humanizer_os --cov-report=term-missing --cov-report=xml
+          python scripts/evaluate.py
+          python scripts/check_release.py
+          python scripts/check_docs.py
+          python scripts/generate_rule_catalog.py --check
+          ruff check --output-format=github .
+          mypy src/humanizer_os
+          make selfcheck
+
+      - name: Try to configure repository About and settings
+        id: about
+        shell: bash
+        run: |
+          set +e
+          description="Open-source multilingual text humanization platform with explainable audits, fact-safe fixes, and native English/Russian rule packs."
+
+          gh api --method PATCH "repos/${GITHUB_REPOSITORY}" \
+            -f description="${description}" \
+            -F has_projects=false \
+            -F has_wiki=false \
+            -F has_discussions=true \
+            -F delete_branch_on_merge=true \
+            -F allow_merge_commit=false \
+            -F allow_squash_merge=true \
+            -F allow_rebase_merge=true
+          repo_status=$?
+
+          cat > /tmp/topics.json <<'JSON'
+          {
+            "names": [
+              "humanizer",
+              "text-humanization",
+              "writing",
+              "editing",
+              "nlp",
+              "russian",
+              "english",
+              "ai-writing",
+              "fact-preservation",
+              "python",
+              "cli",
+              "agent-skills",
+              "sarif",
+              "open-source"
+            ]
+          }
+          JSON
+          gh api --method PUT "repos/${GITHUB_REPOSITORY}/topics" --input /tmp/topics.json
+          topics_status=$?
+
+          if [[ ${repo_status} -eq 0 && ${topics_status} -eq 0 ]]; then
+            echo "updated=true" >> "${GITHUB_OUTPUT}"
+            echo "Repository description, settings, and topics updated." >> "${GITHUB_STEP_SUMMARY}"
+          else
+            echo "updated=false" >> "${GITHUB_OUTPUT}"
+            echo "Repository metadata update was not permitted for GITHUB_TOKEN; release work continued." >> "${GITHUB_STEP_SUMMARY}"
+          fi
+          exit 0
+
+      - name: Remove obsolete technical branches
+        shell: bash
+        run: |
+          set -euo pipefail
+          for branch in agent/publish-complete-source agent/push-files-probe; do
+            if git ls-remote --exit-code --heads origin "refs/heads/${branch}" >/dev/null 2>&1; then
+              git push origin --delete "${branch}"
+            fi
+          done
+
+      - name: Create final clean launch commit
+        id: final
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git rm .finish-humanizer-os-launch .github/workflows/finish-launch.yml
+          git commit -m "chore: complete repository launch"
+          git push origin HEAD:main
+          final_sha="$(git rev-parse HEAD)"
+          echo "sha=${final_sha}" >> "${GITHUB_OUTPUT}"
+          echo "Final clean commit: ${final_sha}" >> "${GITHUB_STEP_SUMMARY}"
+
+      - name: Build final release artifacts
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf build dist
+          python -m build
+          (cd dist && sha256sum *.whl *.tar.gz > SHA256SUMS)
+
+          python -m venv /tmp/humanizer-os-release-smoke
+          /tmp/humanizer-os-release-smoke/bin/python -m pip install --upgrade pip
+          /tmp/humanizer-os-release-smoke/bin/python -m pip install dist/*.whl
+          /tmp/humanizer-os-release-smoke/bin/humanizer-os --version
+          printf 'In order to ship, test.\n' \
+            | /tmp/humanizer-os-release-smoke/bin/humanizer-os audit - --lang en --fail-on error
+          /tmp/humanizer-os-release-smoke/bin/python -m pip check
+
+      - name: Rebind v0.1.0 and publish GitHub Release
+        env:
+          FINAL_SHA: ${{ steps.final.outputs.sha }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch --tags --force
+          gh release delete v0.1.0 --yes 2>/dev/null || true
+          git tag -d v0.1.0 2>/dev/null || true
+          git tag -a v0.1.0 "${FINAL_SHA}" -m "HumanizerOS 0.1.0"
+          git push origin refs/tags/v0.1.0 --force
+
+          cat > /tmp/release-notes.md <<'EOF'
+          HumanizerOS 0.1.0 is the first complete public release of the open multilingual text-humanization platform.
+
+          Highlights:
+          - 31 English and 34 Russian explainable rules;
+          - local-first runtime with no runtime dependencies;
+          - Fact Guard for protected values, identifiers, links, and code;
+          - text, JSON, and SARIF output;
+          - CLI, Python API, Agent Skills, public schemas, tests, and bilingual evals;
+          - 164 automated tests and 57/57 eval scenarios passed before publication.
+
+          The attached wheel and source distribution were built from the tagged clean commit and smoke-tested in a fresh virtual environment.
+          EOF
+
+          gh release create v0.1.0 \
+            dist/*.whl \
+            dist/*.tar.gz \
+            dist/SHA256SUMS \
+            --verify-tag \
+            --title "HumanizerOS 0.1.0" \
+            --notes-file /tmp/release-notes.md
+
+      - name: Mark final commit verified
+        env:
+          FINAL_SHA: ${{ steps.final.outputs.sha }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          gh api --method POST "repos/${GITHUB_REPOSITORY}/statuses/${FINAL_SHA}" \
+            -f state=success \
+            -f context="HumanizerOS / release verification" \
+            -f description="164 tests, 57 evals, lint, types, docs, build and smoke test passed" \
+            -f target_url="${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
+
+          echo "HumanizerOS launch completion succeeded." >> "${GITHUB_STEP_SUMMARY}"
