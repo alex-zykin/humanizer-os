@@ -1,11 +1,11 @@
 ---
 name: humanizer-os-en
-description: Audits and safely edits English prose for formulaic language, chatbot artifacts, unsupported attribution, templated rhetoric, and fact drift.
+description: Rewrite AI-assisted English prose so it reads naturally without changing facts, code, links, or the writer's voice. Use when the user asks to humanize, de-template, rewrite, or review English text for chatbot artifacts and formulaic patterns.
 ---
 
 # HumanizerOS English
 
-Use for English prose when the user asks to humanize, edit, de-template, audit, or remove formulaic AI-style writing.
+Rewrite English prose so it reads like a person wrote it, not like a generic chatbot. Preserve what the text says and keep deliberate voice and genre choices.
 
 ## Guardrails
 
