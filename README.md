@@ -1,32 +1,28 @@
 <div align="center">
 
-<img src="assets/hero.svg" alt="HumanizerOS — the open platform for humanizing text" width="100%">
+<img src="assets/hero.svg" alt="HumanizerOS — humanize the writing, verify the facts" width="100%">
 
 [![CI](https://github.com/alex-zykin/humanizer-os/actions/workflows/ci.yml/badge.svg)](https://github.com/alex-zykin/humanizer-os/actions/workflows/ci.yml)
 [![Python](https://img.shields.io/badge/python-3.11%E2%80%933.14-3776AB?logo=python&logoColor=white)](https://www.python.org/)
 [![License: MIT](https://img.shields.io/badge/license-MIT-1F6FEB.svg)](LICENSE)
-[![Languages](https://img.shields.io/badge/languages-English%20%7C%20Russian-0EA5E9.svg)](#language-native-by-design)
 [![Runtime dependencies](https://img.shields.io/badge/runtime%20dependencies-0-059669.svg)](pyproject.toml)
+[![Russian available](https://img.shields.io/badge/locale-Russian%20available-7C3AED.svg)](README.ru.md)
 
-**[Русская версия](README.ru.md)**
+### AI drafts are fast. Generic writing is expensive.
 
-### AI drafts are fast. The problem is they often sound the same.
+**HumanizerOS helps your agent rewrite AI-assisted English so it sounds natural, while Fact Guard checks that names, numbers, dates, links, citations, and code survive the edit.**
 
-**HumanizerOS finds formulaic writing, helps your agent rewrite only what needs work, and checks that the facts survive.**
+English is the default product experience. Russian is available as an optional language switch.
 
-English and Russian are first-class languages. Names, numbers, dates, prices, links, citations, and code stay protected.
-
-[Before & after](#before--after) · [Use with Claude or Codex](#use-it-with-an-agent) · [How it works](#how-it-works) · [CLI](#cli-and-python) · [Roadmap](#roadmap)
+[Before & after](#before--after) · [Use with Claude or Codex](#use-it-with-claude-or-codex) · [How it works](#how-it-works) · [Russian support](#russian-when-you-need-it) · [CLI & API](#cli-and-python)
 
 </div>
 
-HumanizerOS is a local-first, explainable text-humanization platform for agents, editors, and CI. It is more than a prompt: the project combines language-native rule packs, deterministic diagnostics, conservative safe fixes, Fact Guard, JSON/SARIF contracts, and Agent Skills.
+HumanizerOS is an English-first, local-first text-humanization platform for agents, editors, and CI. It is more than a prompt: it combines an Agent Skill with deterministic analysis, explainable rules, conservative safe fixes, Fact Guard, JSON/SARIF contracts, and a tested runtime.
 
-It does **not** claim to prove whether a human or a model wrote a text. It reports concrete editorial patterns, shows the exact span, and explains what deserves review.
+It does **not** claim to prove whether a human or a model wrote a text. It finds concrete editorial patterns, shows the exact span, and gives the agent evidence to rewrite only what needs work.
 
 ## Before → after
-
-### English
 
 **Before**
 
@@ -38,23 +34,38 @@ It does **not** claim to prove whether a human or a model wrote a text. It repor
 
 HumanizerOS can flag the generic opening, the `not just X but Y` contrast, the meta phrase `it is important to note`, and inflated wording before the agent rewrites the passage.
 
-### Russian
+The important part is not just the rewrite. The same workflow can also verify that protected facts did not drift.
 
-**До**
+```text
+AI-assisted draft
+      ↓
+HumanizerOS audit
+      ↓
+Claude / Codex rewrites the prose
+      ↓
+Fact Guard verifies protected values
+      ↓
+final text + explainable changes
+```
 
-> В современном мире качественный текст является не просто инструментом, а ключевым фактором эффективной коммуникации. Важно отметить, что ясная формулировка позволяет раскрыть потенциал сообщения и значительно улучшить взаимодействие с читателем.
+## Why not just use a prompt?
 
-**После**
+A good prompt can improve prose. HumanizerOS adds a control layer around the prompt.
 
-> Ясный текст помогает читателю быстрее понять мысль. Универсальные вступления, канцелярские связки и фразы вроде «важно отметить» часто можно убрать без потери смысла.
+| Prompt-only humanizer | HumanizerOS |
+|---|---|
+| The model decides what looks artificial | Deterministic rules produce stable findings with rule IDs and source spans |
+| Facts are preserved by instruction | Fact Guard compares protected values before and after editing |
+| Behavior depends heavily on the model | Auditing, safe fixes, verification, JSON, and SARIF are model-independent |
+| Usually one generic style policy | Genre-aware rules and false-positive boundaries |
+| Hard to use in CI | CLI exit codes, SARIF, schemas, tests, and Python API |
+| English patterns often get translated to other languages | Russian is a separate optional language pack with its own rules |
 
-The Russian pack detects its own constructions rather than translating English rules word-for-word.
-
-## Use it with an agent
+## Use it with Claude or Codex
 
 HumanizerOS works best as **Agent Skill + CLI**.
 
-Install the `skills/humanizer-os/` folder in a skills-compatible agent such as Claude Code or Codex, then install the CLI in the same environment when you want deterministic auditing and Fact Guard.
+Install `skills/humanizer-os/` in a skills-compatible agent such as Claude Code or Codex. Install the CLI in the same environment when you want deterministic auditing and Fact Guard.
 
 ```bash
 git clone https://github.com/alex-zykin/humanizer-os.git
@@ -65,7 +76,7 @@ python -m pip install -e .
 Then ask the agent normally:
 
 ```text
-Humanize this in Russian. Keep all numbers, links, names and code unchanged.
+Humanize this. Keep every name, number, date, URL, citation and code block unchanged.
 
 [paste text]
 ```
@@ -76,33 +87,51 @@ Or point it at a file:
 Humanize the prose in docs/launch-post.md. Keep code blocks and link targets untouched.
 ```
 
-The preferred agent workflow is:
+**Installing the skill does not rewrite every message automatically.** The skill is meant to activate when you ask to humanize, de-template, rewrite, or review prose. Clean text should stay clean.
 
-```text
-your draft
-   ↓
-HumanizerOS audit (RU or EN + genre)
-   ↓
-agent rewrites the prose semantically
-   ↓
-Fact Guard verifies protected values
-   ↓
-final text + explainable changes
-```
+A full semantic rewrite is performed by the agent. The deterministic CLI alone only applies replacements explicitly marked safe.
 
-**Installing the skill does not rewrite every message automatically.** The skill is used when you ask to humanize, de-template, rewrite, or review prose. A full semantic rewrite is performed by the agent. The deterministic CLI alone only applies fixes that are explicitly marked safe.
-
-If the CLI is not installed, the skill can still guide the agent, but you lose the strongest deterministic audit and fact-verification layer.
+If the CLI is unavailable, the Skill can still guide the agent, but you lose the strongest deterministic audit and fact-verification layer.
 
 ## How it works
 
-HumanizerOS separates the job into three layers:
+HumanizerOS separates the job into three layers.
 
-1. **Detect.** Language-native rules find assistant artifacts, stock language, weak rhetoric, formatting habits, and contextual structural signals.
-2. **Rewrite.** A skills-compatible agent uses those findings to rewrite the prose without treating the original paragraph structure as sacred.
-3. **Verify.** Fact Guard compares protected values before and after the rewrite and rejects deterministic changes that drift.
+### 1. Detect
 
-That separation is deliberate. A regex can safely shorten `in order to` to `to`, but it should not decide how an entire paragraph should sound. The agent handles semantic editing; the engine handles evidence, boundaries, and verification.
+The engine finds observable patterns such as:
+
+- assistant wrappers and chatbot residue;
+- vague attribution;
+- inflated importance and sales language;
+- `not just X but Y` framing;
+- filler and hedging;
+- repeated openings and clipped punchlines;
+- formatting habits that often make AI-assisted prose feel templated;
+- contextual structural signals such as overly uniform rhythm.
+
+Every finding has a stable rule ID, confidence level, exact source span, review advice, genre scope, and provenance.
+
+### 2. Rewrite
+
+The Agent Skill uses those findings as editorial evidence. The model can restructure a paragraph, merge or split sentences, remove formulaic framing, and preserve deliberate voice.
+
+This is intentionally not done by regex. A regex can safely shorten `in order to` to `to`; it should not decide how an entire paragraph should sound.
+
+### 3. Verify
+
+Fact Guard compares protected values between the original and revised text. It currently covers deterministic surface facts such as:
+
+- numbers, percentages, prices, and common units;
+- dates and times;
+- URLs, email addresses, handles, and hashtags;
+- semantic versions, UUIDs, and commit-like hashes;
+- uppercase identifiers;
+- inline, fenced, and indented code.
+
+Facts are compared as a multiset, so deleting one of two identical values still counts as a change.
+
+Fact Guard does not prove factual truth or full semantic equivalence. It protects values that should not silently drift during editing.
 
 ## See the engine work
 
@@ -124,33 +153,30 @@ Safe replacements are opt-in:
 $ humanizer-os fix draft.md --diff
 -In order to publish, test the release.
 +To publish, test the release.
+```
 
+Fact verification is separate:
+
+```bash
 $ humanizer-os verify original.md revised.md
 OK  Protected facts match (7 checked).
 ```
 
-## Why HumanizerOS is different
+## Russian when you need it
 
-| Principle | In practice |
-|---|---|
-| **Language-native** | English and Russian use separate catalogs, examples, thresholds, genre limits, and evals. |
-| **Fact-safe** | Names, numbers, dates, prices, units, URLs, versions, identifiers, and code are compared before and after a rewrite. |
-| **Explainable** | Every finding has a stable rule ID, confidence, exact source span, suggestion, genre scope, and provenance. |
-| **Conservative** | Only replacements explicitly marked safe are applied automatically. Everything else remains a review finding. |
-| **Local-first** | The core has no runtime dependencies and performs no network requests. |
-| **Agent-ready** | The skill gives the model a rewrite workflow while the engine supplies deterministic checks before and after it. |
-| **Platform-shaped** | CLI, Python API, JSON, SARIF, schemas, language packs, Agent Skills, and future Studio modules share contracts. |
+English is the default experience. Russian is a supported locale, not a second marketing surface competing for attention on the main page.
 
-## Included in 0.1
+Switch the CLI explicitly:
 
-- 65 built-in rules: 31 English and 34 Russian;
-- artifact, content, language, rhetoric, formatting, and structure checks;
-- profiles for `general`, `social`, `email`, `landing`, `article`, `docs`, `fiction`, `academic`, and `legal`;
-- Fact Guard for protected values and code;
-- text, versioned JSON, and SARIF 2.1.0 output;
-- `audit`, `fix`, `verify`, `rules`, `explain`, and `profile` commands;
-- Python API and three Agent Skills;
-- 164 automated tests and 57 bilingual eval cases.
+```bash
+humanizer-os audit post.md --lang ru --genre social
+humanizer-os fix post.md --lang ru --diff
+```
+
+The root Agent Skill switches to Russian when the source is clearly Russian or the user asks for Russian. The Russian pack is not an English prompt translated word-for-word: it has its own rules for bureaucratic nominalization, `является`, translationese, `не просто X, а Y`, impersonal passive phrasing, templated therapeutic tone, and Russian-specific discourse patterns.
+
+Russian documentation: **[README.ru.md](README.ru.md)**  
+Russian-only skill: **[`skills/humanizer-os-ru/`](skills/humanizer-os-ru/)**
 
 ## CLI and Python
 
@@ -169,31 +195,30 @@ For an isolated CLI installation:
 pipx install git+https://github.com/alex-zykin/humanizer-os.git
 ```
 
-### Quick start
+### Core commands
 
 ```bash
-# Audit a file or directory
-humanizer-os audit article.md --lang auto --genre article
-humanizer-os audit docs/ --lang en --genre docs --fail-on warning
-
-# Machine-readable reports
-humanizer-os audit article.md --format json > audit.json
-humanizer-os audit docs/ --format sarif > humanizer-os.sarif
+# Audit English by default in product workflows
+humanizer-os audit article.md --lang en --genre article
 
 # Safe deterministic fixes
-humanizer-os fix article.md --diff
-humanizer-os fix article.md --check
-humanizer-os fix article.md --write
+humanizer-os fix article.md --lang en --diff
+humanizer-os fix article.md --lang en --check
+humanizer-os fix article.md --lang en --write
 
-# Fact verification
+# Verify protected facts after any rewrite
 humanizer-os verify original.md revised.md
 
-# Explore rules
-humanizer-os rules --lang ru --genre social
-humanizer-os explain RU-LANG-002
+# Machine-readable reports
+humanizer-os audit article.md --lang en --format json > audit.json
+humanizer-os audit docs/ --lang en --format sarif > humanizer-os.sarif
+
+# Explore the rule catalog
+humanizer-os rules --lang en --genre article
+humanizer-os explain EN-LANG-004
 
 # Measure observable writing characteristics
-humanizer-os profile samples/ --lang auto --format json
+humanizer-os profile samples/ --lang en --format json
 ```
 
 ### Python API
@@ -217,29 +242,30 @@ assert rewrite.verification.ok
 assert verify_texts("Price: $49", "The price is $49").ok
 ```
 
-## Language-native by design
+## What ships today
 
-The English pack focuses on vague attribution, inflated importance, generic openings, `not just X but Y`, filler connectives, assistant wrappers, title-case headings, and mechanically even rhythm.
+- 31 English rules in the default language pack;
+- 34 Russian rules in the optional Russian pack;
+- checks for artifacts, content, language, rhetoric, formatting, and structure;
+- genre profiles for `general`, `social`, `email`, `landing`, `article`, `docs`, `fiction`, `academic`, and `legal`;
+- text, versioned JSON, and SARIF 2.1.0 output;
+- CLI, Python API, and Agent Skills;
+- 164 automated tests and 57 bilingual eval cases;
+- a local runtime with no runtime dependencies or network requests.
 
-The Russian pack separately checks bureaucratic nominalization, `является`, translationese, `не просто X, а Y`, vague modal claims, impersonal passive phrasing, templated therapeutic tone, assistant artifacts, and discourse uniformity.
-
-The generated catalog is available in [docs/RULE_CATALOG.md](docs/RULE_CATALOG.md). Use `humanizer-os explain RULE_ID` for a rule's full rationale and provenance.
-
-## Fact Guard
-
-Fact Guard protects deterministic surface facts including numbers, percentages, prices, common units, dates, times, URLs, email addresses, handles, hashtags, semantic versions, UUIDs, commit-like hashes, uppercase identifiers, and code.
-
-Facts are compared as a multiset, so removing one of two identical values still counts as a change. Fact Guard does not establish truth or full semantic equivalence; see [docs/LIMITATIONS.md](docs/LIMITATIONS.md).
+The generated rule catalog is in [docs/RULE_CATALOG.md](docs/RULE_CATALOG.md).
 
 ## Repository layout
 
 ```text
 humanizer-os/
 ├── src/humanizer_os/          dependency-free runtime
-│   └── data/rules/{en,ru}/    language-native catalogs
+│   └── data/rules/
+│       ├── en/                default English catalog
+│       └── ru/                optional Russian catalog
 ├── schemas/                   public JSON contracts
 ├── skills/                    Agent Skills
-├── evals/{en,ru}/             bilingual regression fixtures
+├── evals/                     regression fixtures
 ├── tests/                     unit, CLI, schema, and eval tests
 ├── docs/                      methodology and platform docs
 └── .github/workflows/         CI, dependency review, releases
@@ -254,19 +280,20 @@ python -m pip install -e ".[dev]"
 make all
 ```
 
-The suite includes tests, branch-aware coverage, bilingual evals, schema validation, documentation link checks, Ruff, mypy, packaging smoke tests, and a self-audit of public documentation.
+The suite checks tests, branch-aware coverage, evals, JSON Schema, documentation links, Ruff, mypy, packaging smoke tests, and a self-audit of public documentation.
 
 ## Roadmap
 
-HumanizerOS is designed as a system rather than one prompt:
+HumanizerOS is designed as a platform rather than one prompt:
 
 - **Core** — analysis, safe fixes, contracts, and Fact Guard;
-- **RU / EN** — independent language packs;
+- **English** — the default product language and primary public experience;
+- **Russian** — an optional language-native pack and localized documentation;
 - **Voice** — consented author-sample matching;
-- **Expressive RU** — opt-in preservation, normalization, masking, and later controlled Russian expression;
 - **Providers** — explicit local or hosted model adapters;
 - **Studio** — visual audit, diff, profiles, policy, and team workflows;
-- **Integrations** — editors, CI, Creator Content OS, and external packs.
+- **Integrations** — editors, CI, and external products;
+- **Expressive RU** — opt-in Russian expression support behind the Russian locale.
 
 See [docs/ROADMAP.md](docs/ROADMAP.md).
 
@@ -274,6 +301,6 @@ See [docs/ROADMAP.md](docs/ROADMAP.md).
 
 Start with [CONTRIBUTING.md](CONTRIBUTING.md) and [docs/RULE_AUTHORING.md](docs/RULE_AUTHORING.md). Do not submit private user text, proprietary corpora, or unlicensed dictionaries.
 
-HumanizerOS 0.1 executes none of the analyzed text and makes no network requests. Security reporting is documented in [SECURITY.md](SECURITY.md).
+HumanizerOS executes none of the analyzed text and makes no network requests in the deterministic core. Security reporting is documented in [SECURITY.md](SECURITY.md).
 
 [MIT](LICENSE) © 2026 Alex Zykin.
