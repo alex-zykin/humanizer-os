@@ -1,11 +1,13 @@
 ---
 name: humanizer-os
-description: Rewrite English or Russian AI-assisted prose so it reads naturally without changing facts, code, links, or the writer's voice. Use when the user asks to humanize, de-template, rewrite, or review prose; audit first and use HumanizerOS Fact Guard when available.
+description: Rewrite English AI-assisted prose so it reads naturally without changing facts, code, links, or the writer's voice. Use when the user asks to humanize, de-template, rewrite, or review prose. English is the default; switch to the Russian pack when the source is Russian or the user explicitly requests Russian.
 ---
 
 # HumanizerOS: make AI-assisted writing sound human
 
-Rewrite English or Russian prose so it reads like a person wrote it, not like a generic chatbot. Preserve what the text says, keep the writer's deliberate voice, and change only what needs work.
+HumanizerOS is English-first. Rewrite English prose so it reads like a person wrote it, not like a generic chatbot. Preserve what the text says, keep the writer's deliberate voice, and change only what needs work.
+
+Russian is an optional supported locale. Switch to Russian only when the user asks for Russian or the source text is clearly Russian.
 
 ## Non-negotiable rules
 
@@ -17,30 +19,39 @@ Rewrite English or Russian prose so it reads like a person wrote it, not like a 
 
 ## Preferred workflow
 
-1. Determine language and genre.
-2. If the `humanizer-os` CLI is available, run an audit first:
+1. Use English by default. Switch to Russian when the user selects Russian or the source is clearly Russian.
+2. Determine the genre.
+3. If the `humanizer-os` CLI is available, audit before rewriting:
 
 ```bash
-humanizer-os audit <path> --lang auto --genre <genre> --format json
+humanizer-os audit <path> --lang en --genre <genre> --format json
 ```
 
-3. Explain the highest-impact findings with exact excerpts.
-4. Rewrite only when the user requested a rewrite. Fix the reported problem, not every stylistic difference.
-5. Run Fact Guard or compare protected facts manually:
+For Russian:
+
+```bash
+humanizer-os audit <path> --lang ru --genre <genre> --format json
+```
+
+4. Explain the highest-impact findings with exact excerpts when that helps the user.
+5. Rewrite only when the user requested a rewrite. Fix the reported problem, not every stylistic difference.
+6. Run Fact Guard or compare protected facts manually:
 
 ```bash
 humanizer-os verify <original> <revised>
 ```
 
-6. If verification fails, restore the original fact and call out the conflict.
+7. If verification fails, restore the original fact and call out the conflict.
 
 ## Without the CLI
 
 Audit in three passes:
 
 - artifacts: assistant wrappers, internal citation IDs, placeholders, broken markup;
-- language and rhetoric: generic openings, vague attribution, bureaucratic phrasing, canned contrasts, over-announced transitions;
-- structure: repeated openings, stacks of fragments, uniform paragraph rhythm, excessive signposting.
+- language and rhetoric: generic openings, vague attribution, inflated claims, canned contrasts, filler, and over-announced transitions;
+- structure: repeated openings, stacks of fragments, uniform paragraph rhythm, and excessive signposting.
+
+When working in Russian, use Russian-specific constructions and grammar rather than translating English rules word-for-word.
 
 Label structural findings as contextual rather than definitive.
 
