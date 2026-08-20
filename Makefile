@@ -28,8 +28,8 @@ docs:
 
 selfcheck:
 	humanizer-os audit \
-		README.md CHANGELOG.md CODE_OF_CONDUCT.md CONTRIBUTING.md SECURITY.md SUPPORT.md \
-		THIRD_PARTY_NOTICES.md docs skills/humanizer-os/SKILL.md skills/humanizer-os-en/SKILL.md \
+		README.md SKILL.md CHANGELOG.md CODE_OF_CONDUCT.md CONTRIBUTING.md SECURITY.md SUPPORT.md \
+		THIRD_PARTY_NOTICES.md docs skills/humanizer-os-en/SKILL.md \
 		--lang en --genre docs --fail-on warning
 	humanizer-os audit README.ru.md skills/humanizer-os-ru/SKILL.md \
 		--lang ru --genre docs --fail-on warning
