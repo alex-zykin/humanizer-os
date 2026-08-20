@@ -7,12 +7,16 @@ All notable changes are documented here. The project follows Semantic Versioning
 ### Changed
 
 - Repositioned HumanizerOS as an English-first product with Russian available as an optional language-native locale.
-- Reworked the main README around outcome, a reproducible verified rewrite demo, Agent Skill installation, and Fact Guard rather than multilingual implementation details.
+- Reworked the main README around outcome, reproducible verified rewrites, Agent Skill installation, and Fact Guard rather than multilingual implementation details.
 - Promoted `SKILL.md` at the repository root as the canonical default Agent Skill for the open skills ecosystem.
 - Expanded the standalone root Skill with an English review map so it remains useful when the CLI is unavailable.
 - Added one-command installation examples for Claude Code and Codex through `npx skills`.
 - Removed the duplicate nested default skill so the canonical `humanizer-os` skill has a single discovery target.
 - Added a regression-tested product-launch demo with 10 findings across 8 rules and 6 protected facts preserved.
+- Added a real-world long-form demo from the MIT-licensed Human Detectors research dataset, using a released `gpt-4o` sample labeled `AI-generated` and a HumanizerOS-authored rewrite.
+- Expanded `EN-LANG-001` with inflated-significance patterns surfaced by the real-world sample and its human annotations, with clean counterexamples in the eval suite.
+- Extended Fact Guard to preserve direct quotations while allowing straight/curly quote typography changes.
+- Reduced proper-name false positives from sentence scaffolding such as `As Dr.`.
 
 ### Planned
 
