@@ -1,21 +1,22 @@
 # HumanizerOS platform
 
-HumanizerOS is an open platform for humanizing text across languages, genres, author voices, agents, and products. Version 0.1 ships the deterministic kernel: analysis, safe local fixes, fact verification, stable JSON/SARIF contracts, English and Russian language packs, CLI/API integration, and Agent Skills.
+HumanizerOS is an open platform for humanizing AI-assisted writing across genres, author voices, agents, and products. The public product experience is English-first. Version 0.1 ships the deterministic kernel for English by default, with Russian available as an optional language-native locale.
 
-The platform grows through modules. The core remains a usable product rather than a thin launcher for remote models.
+The core provides analysis, safe local fixes, fact verification, stable JSON/SARIF contracts, CLI/API integration, and Agent Skills. Optional modules extend the platform without turning the core into a thin launcher for remote models.
 
 ## Product layers
 
 | Layer | Responsibility | Network |
 |---|---|---|
 | **HumanizerOS Core** | analysis, protected spans, metrics, safe replacements, Fact Guard, contracts | never |
-| **HumanizerOS RU / EN** | language-native rules, examples, boundaries, evals | never |
+| **HumanizerOS English** | default language rules, examples, boundaries, and evals | never |
+| **HumanizerOS Russian** | optional Russian-specific rules, examples, boundaries, and localized docs | never |
 | **HumanizerOS Skills** | Agent Skills that call the same core contracts | never by default |
 | **HumanizerOS Voice** | opt-in author samples and measurable voice constraints | local by default |
-| **Expressive RU** | opt-in Russian expression, including contextual profanity controls | local catalog; generation optional |
 | **HumanizerOS Providers** | semantic rewrite adapters for hosted or local models | explicit |
 | **HumanizerOS Studio** | visual review, diff, profiles, policy, and team workflows | deployment-dependent |
 | **Integrations** | editor plugins, CI, Content OS, batch pipelines | deployment-dependent |
+| **Expressive RU** | optional Russian expression support behind the Russian locale | local catalog; generation optional |
 
 ## Shared contracts
 
@@ -32,9 +33,13 @@ Every module must respect:
 
 A provider may propose a semantic rewrite, but Core verifies it. A voice profile may constrain tone, but it may not invent personal history. An expression module may preserve or normalize profanity, but adding it requires an explicit request.
 
-## Language packs
+## Language model
 
-A language pack is a product, not a translation file. It contains:
+English is the default product language for public messaging, examples, Agent Skill behavior, and future Studio onboarding.
+
+Russian is an optional supported locale. It is selected explicitly with `--lang ru`, through a Russian-only skill, or when the source text is clearly Russian and the root skill switches locale.
+
+A language pack is a product module, not a translation file. Each pack contains:
 
 - curated rules;
 - detector parameters;
@@ -46,9 +51,11 @@ A language pack is a product, not a translation file. It contains:
 
 Shared detectors reduce implementation duplication. Independent catalogs prevent English syntax from being projected onto Russian.
 
+This architecture leaves room for future locale packs without forcing multilingual marketing onto the primary English product surface.
+
 ## Expressive RU
 
-Expressive RU is planned as an installable, disabled-by-default module. Its first release covers:
+Expressive RU is planned as an installable, disabled-by-default module behind the Russian locale. Its first release covers:
 
 - detection and preservation;
 - functional classes such as frustration, emphasis, humor, admiration, and self-irony;
@@ -66,14 +73,15 @@ A future adapter receives a structured request rather than a monolithic prompt:
 ```json
 {
   "text": "...",
-  "language": "ru",
-  "genre": "social",
+  "language": "en",
+  "genre": "article",
   "findings": [],
   "protected_facts": [],
-  "voice_profile": null,
-  "expression_policy": {"mode": "preserve"}
+  "voice_profile": null
 }
 ```
+
+A Russian request uses `"language": "ru"` and may attach a locale-specific expression policy.
 
 The response passes through Fact Guard, policy checks, and a second audit. The original is returned if the contract fails.
 
@@ -83,6 +91,7 @@ Studio is the planned visual surface for:
 
 - side-by-side source, revised text, and diff;
 - per-finding accept/reject;
+- English-first onboarding with optional locale switching;
 - language and genre profiles;
 - rule explanations and provenance;
 - Fact Guard changes;
