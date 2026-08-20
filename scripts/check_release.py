@@ -118,6 +118,9 @@ def main() -> int:
         "examples/README.md",
         "examples/product-launch-before.md",
         "examples/product-launch-after.md",
+        "examples/real-world-ai-before.md",
+        "examples/real-world-ai-after.md",
+        "examples/real-world-ai-source.md",
         "docs/CLI.md",
         "docs/EVALUATION.md",
         "docs/JSON_API.md",
@@ -134,6 +137,7 @@ def main() -> int:
         "skills/humanizer-os-en/SKILL.md",
         "skills/humanizer-os-ru/SKILL.md",
         "tests/test_readme_demo.py",
+        "tests/test_real_world_demo.py",
     ]
     missing = [item for item in required_files if not (ROOT / item).is_file()]
     if missing:
