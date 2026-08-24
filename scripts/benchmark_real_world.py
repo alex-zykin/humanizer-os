@@ -12,7 +12,7 @@ from typing import Any
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
-from humanizer_os import Analyzer, verify_texts  # noqa: E402
+from humanizer_os import Analyzer, AuditReport, verify_texts  # noqa: E402
 
 DEFAULT_MANIFEST = ROOT / "benchmarks" / "real-world-v1" / "manifest.jsonl"
 DEFAULT_RESULTS = ROOT / "benchmarks" / "real-world-v1" / "results.json"
@@ -97,9 +97,8 @@ def load_manifest(path: Path = DEFAULT_MANIFEST) -> list[dict[str, Any]]:
     return samples
 
 
-def _rule_counts(report: object) -> dict[str, int]:
-    findings = getattr(report, "findings")
-    return dict(sorted(Counter(item.rule_id for item in findings).items()))
+def _rule_counts(report: AuditReport) -> dict[str, int]:
+    return dict(sorted(Counter(item.rule_id for item in report.findings).items()))
 
 
 def _expected_rule_counts(expected: dict[str, Any], sample_id: str) -> dict[str, int]:
@@ -260,7 +259,7 @@ def main() -> int:
     if args.write:
         args.results.parent.mkdir(parents=True, exist_ok=True)
         args.results.write_text(rendered, encoding="utf-8")
-        print(f"Wrote {args.results.relative_to(ROOT)}")
+        print(f"Wrote {args.results}")
     elif args.check:
         if not args.results.is_file():
             print(f"benchmark results are missing: {args.results}", file=sys.stderr)
