@@ -1,0 +1,176 @@
+name: Apply self-audit fix
+
+on:
+  push:
+    branches:
+      - fix-self-audit-markdown
+
+permissions:
+  contents: write
+
+jobs:
+  patch-and-verify:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: ${{ github.ref_name }}
+          fetch-depth: 0
+          persist-credentials: true
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.13'
+          cache: pip
+
+      - name: Patch Markdown-aware detectors and regression tests
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+
+          detectors_path = Path('src/humanizer_os/detectors.py')
+          detectors = detectors_path.read_text(encoding='utf-8')
+
+          html_guard = '''    if re.match(r"\\s*(?:</?[A-Za-z][^>]*>|<!--|!\\[|\\[!\\[)", line):
+              return True
+          '''
+          line_marker = '    line = text[line_start:line_end]\n'
+          if html_guard not in detectors:
+              if line_marker not in detectors:
+                  raise SystemExit('could not find Markdown structure line marker')
+              detectors = detectors.replace(line_marker, line_marker + html_guard, 1)
+
+          old_regex = '''            start, end = match.span()
+                      if start < end:
+                          findings.append(Detection(start, end))
+          '''
+          new_regex = '''            start, end = match.span()
+                      if start >= end:
+                          continue
+                      line_start = text.rfind("\\n", 0, start) + 1
+                      line_end = text.find("\\n", start)
+                      if line_end == -1:
+                          line_end = len(text)
+                      if re.match(r"\\s*>", text[line_start:line_end]):
+                          continue
+                      findings.append(Detection(start, end))
+          '''
+          if new_regex not in detectors:
+              if old_regex not in detectors:
+                  raise SystemExit('could not find regex detection block')
+              detectors = detectors.replace(old_regex, new_regex, 1)
+
+          new_repeated = '''def detect_repeated_starts(rule: Rule, text: str) -> list[Detection]:
+              params = rule.detector.params
+              prefix_words = int(params.get("prefix_words", 2))
+              min_count = int(params.get("min_count", 3))
+              min_sentences = int(params.get("min_sentences", 5))
+              items = sentences(text)
+              if len(items) < min_sentences:
+                  return []
+
+              findings: list[Detection] = []
+              for paragraph in paragraphs(text):
+                  groups: dict[str, list] = collections.defaultdict(list)
+                  for item in items:
+                      if item.start < paragraph.start or item.end > paragraph.end:
+                          continue
+                      if _starts_in_markdown_structure(text, item.start, item.text):
+                          continue
+                      key = normalized_start(item.text, prefix_words)
+                      if key and len(key) >= 3:
+                          groups[key].append(item)
+
+                  for group in groups.values():
+                      if len(group) >= min_count:
+                          findings.append(Detection(group[0].start, group[-1].end))
+              return _deduplicate(findings)
+          '''
+          pattern = re.compile(
+              r'def detect_repeated_starts\(rule: Rule, text: str\) -> list\[Detection\]:.*?'
+              r'(?=\n\ndef detect_transition_density)',
+              re.DOTALL,
+          )
+          if new_repeated not in detectors:
+              detectors, count = pattern.subn(lambda _: new_repeated.rstrip(), detectors, count=1)
+              if count != 1:
+                  raise SystemExit('could not replace repeated-start detector')
+
+          detectors_path.write_text(detectors, encoding='utf-8')
+
+          tests_path = Path('tests/test_detectors.py')
+          tests = tests_path.read_text(encoding='utf-8')
+          additions = '''
+
+          def test_repeated_starts_do_not_cross_paragraph_boundaries() -> None:
+              text = "\\n\\n".join(
+                  [
+                      "Teams ship the parser. Reviewers inspect the result.",
+                      "Teams ship the CLI. Maintainers document the command.",
+                      "Teams ship the tests. Users report the outcome.",
+                  ]
+              )
+              assert "EN-STRUCT-003" not in finding_ids(text)
+
+
+          def test_repeated_starts_ignore_html_and_badge_lines() -> None:
+              text = "\\n".join(
+                  [
+                      '<div align="center">',
+                      '<img src="hero.svg" alt="Hero">',
+                      '[![CI](badge.svg)](workflow)',
+                      '[![Python](python.svg)](python)',
+                      '[![License](license.svg)](license)',
+                      "</div>",
+                      "The parser reports a result. Reviewers inspect it carefully.",
+                  ]
+              )
+              assert "EN-STRUCT-003" not in finding_ids(text, genre="docs")
+
+
+          def test_regex_rules_ignore_markdown_blockquote_lines() -> None:
+              text = "\\n".join(
+                  [
+                      "The following passage is an intentionally bad example:",
+                      "> A groundbreaking study reshapes our understanding.",
+                      ">",
+                      "> In conclusion, it marks a significant milestone.",
+                      "The surrounding explanation remains ordinary prose.",
+                  ]
+              )
+              found = finding_ids(text, genre="docs")
+              assert "EN-LANG-001" not in found
+              assert "EN-RHET-003" not in found
+          '''
+          marker = 'def test_repeated_starts_do_not_cross_paragraph_boundaries'
+          if marker not in tests:
+              tests_path.write_text(tests.rstrip() + additions + '\n', encoding='utf-8')
+          PY
+
+      - name: Install development dependencies
+        run: python -m pip install -e ".[dev]"
+
+      - name: Run focused and full checks
+        run: |
+          pytest -q tests/test_detectors.py
+          pytest -q
+          python scripts/evaluate.py
+          python scripts/check_release.py
+          ruff check .
+          mypy src/humanizer_os
+          make selfcheck
+
+      - name: Commit verified fix
+        shell: bash
+        run: |
+          rm -f .github/workflows/apply-self-audit-fix.yml
+          rm -f notes/self-audit-plan.md
+          rmdir notes 2>/dev/null || true
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "fix: make self-audit markdown-aware"
+          git push origin "HEAD:${GITHUB_REF_NAME}"
