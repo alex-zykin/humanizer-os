@@ -59,7 +59,7 @@ def find_url_spans(text: str) -> list[Span]:
     spans: list[Span] = []
     for match in re.finditer(r"https?://[^\s<>()]+", text, re.IGNORECASE):
         end = match.end()
-        while end > match.start() and text[end - 1] in ".,;:!?)]}»”":
+        while end > match.start() and text[end - 1] in ".,;:!?)]}»”\"":
             end -= 1
         spans.append(Span(match.start(), end, "url"))
     for match in re.finditer(r"\[[^\]]+\]\(([^)\s]+)(?:\s+\"[^\"]*\")?\)", text):
@@ -70,14 +70,21 @@ def find_url_spans(text: str) -> list[Span]:
 
 def find_quote_spans(text: str) -> list[Span]:
     spans: list[Span] = []
-    patterns = (
+
+    # Protect Markdown blockquotes before looking for nested quotation marks.
+    # Otherwise a direct quote inside a blockquote can claim the overlap first,
+    # leaving the surrounding attributed passage exposed to prose rules.
+    blockquote_pattern = r"(?m)^(?:[ \t]*>[^\n]*(?:\n|$))+"
+    for match in re.finditer(blockquote_pattern, text):
+        spans.append(Span(match.start(), match.end(), "quote"))
+
+    inline_patterns = (
         r"«[^»\n]{1,1000}»",
         r"“[^”\n]{1,1000}”",
         r"„[^“\n]{1,1000}“",
         r"(?<!\w)\"[^\"\n]{1,500}\"(?!\w)",
-        r"(?m)^(?:[ \t]*>[^\n]*(?:\n|$))+",
     )
-    for pattern in patterns:
+    for pattern in inline_patterns:
         for match in re.finditer(pattern, text):
             if not overlaps(match.start(), match.end(), spans):
                 spans.append(Span(match.start(), match.end(), "quote"))
