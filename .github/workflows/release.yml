@@ -62,7 +62,7 @@ jobs:
           /tmp/humanizer-os-release/bin/python -m pip check
 
           mkdir -p /tmp/humanizer-os-sdist-wheel
-          python -m pip wheel --no-build-isolation --no-deps \
+          python -m pip wheel --no-deps \
             dist/*.tar.gz -w /tmp/humanizer-os-sdist-wheel
           python -m venv /tmp/humanizer-os-sdist-release
           /tmp/humanizer-os-sdist-release/bin/python -m pip install \
