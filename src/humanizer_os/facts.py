@@ -111,9 +111,7 @@ def normalize_fact(kind: str, value: str) -> str:
         value = value.rstrip('.,;:!?)]}»”"')
     value = re.sub(r"\s+", " ", value)
     if kind == "quote":
-        value = value.translate(
-            str.maketrans({"“": '"', "”": '"', "„": '"', "‘": "'", "’": "'"})
-        )
+        value = value.translate(str.maketrans("“”„‘’", "\"\"\"''"))
     if kind in {"email", "url", "handle", "hashtag", "date", "uuid", "version", "commit"}:
         value = value.casefold()
     return value
