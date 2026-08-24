@@ -1,65 +1,76 @@
-# HumanizerOS brand assets
+# HumanizerOS brand guide
 
-HumanizerOS is marketed to an English-speaking audience first. English is the default product language across the repository, social copy, screenshots, examples, Agent Skill descriptions, and future product surfaces.
+HumanizerOS is marketed to an English-speaking audience first. English is the default language across the repository, social copy, screenshots, examples, Agent Skill descriptions, and future product surfaces.
 
-Russian is a supported locale and localized experience, not a co-primary marketing language. Russian copy belongs in `README.ru.md`, `skills/humanizer-os-ru/`, Russian examples, and locale-specific product views.
-
-The repository ships with reusable first-party visual assets:
-
-- `assets/hero.svg` — README hero;
-- `assets/verified-rewrite.svg` — primary proof-of-value demo showing findings plus Fact Guard;
-- `assets/terminal-demo.svg` — English-first engine walkthrough;
-- `assets/social-preview.png` — 1280×640 image for GitHub's social preview setting.
+Russian is a supported locale and localized experience, not a co-primary marketing language. Russian copy belongs in `README.ru.md`, `skills/humanizer-os-ru/`, locale-specific examples, and translated product views.
 
 ## Naming
 
-Use `HumanizerOS` for the product, `humanizer-os` for the repository, distribution, CLI, and default Agent Skill, and `humanizer_os` only for Python imports.
+Use `HumanizerOS` for the product.
 
-Use `HumanizerOS Russian` or `Russian support` for the optional Russian locale. Do not present `RU / EN` as two equal top-level products in primary marketing copy.
+Use `humanizer-os` for the repository, Python distribution, CLI, and canonical Agent Skill.
 
-## Primary positioning
+Reserve `humanizer_os` for Python imports.
 
-Primary headline:
+Refer to the optional locale as `Russian support` or `HumanizerOS Russian`. Avoid presenting `RU / EN` as two equal top-level products in primary marketing copy.
+
+## Positioning
+
+Headline:
 
 **Humanize the writing. Verify the facts.**
 
-Primary supporting line:
+Supporting line:
 
 **Make AI-assisted English sound natural with explainable edits and Fact Guard.**
 
-Optional locale line:
+Locale note:
 
 **Russian available when you need it.**
 
 ## Proof hierarchy
 
-The main product story should show evidence in this order:
+Public product surfaces should show value in this order:
 
-1. before/after writing quality;
-2. exact findings from the deterministic audit;
-3. protected facts verified after the rewrite;
-4. one-command Agent Skill installation;
-5. deeper engine and CI capabilities.
+1. a clear before-and-after result;
+2. the findings that informed the rewrite;
+3. Fact Guard verification;
+4. installation for agents;
+5. the deterministic runtime and integrations;
+6. optional Russian support;
+7. deeper architecture and methodology.
 
-The reproducible `examples/product-launch-*` pair and `assets/verified-rewrite.svg` are the canonical public demo.
+Do not lead with rule counts, `multilingual platform`, or internal module names before the user has seen the outcome.
 
-## Marketing order
+## Visual assets
 
-Primary public surfaces should communicate value in this order:
+The repository includes:
 
-1. the outcome: natural, less formulaic English;
-2. fact preservation through Fact Guard;
-3. explainable editing rather than black-box rewriting;
-4. Agent Skill + deterministic runtime;
-5. Russian as an optional language switch;
-6. deeper architecture, APIs, CI, and platform modules.
+- `assets/hero.svg` for the README header;
+- `assets/verified-rewrite.svg` for the primary proof-of-value demo;
+- `assets/terminal-demo.svg` for the engine walkthrough;
+- `assets/social-preview.png` for GitHub social sharing when that asset is available.
 
-Do not lead with "multilingual platform", rule counts, or implementation details when a user has not yet seen the outcome.
+Keep the main visual system in English. Localized Russian pages may use Russian copy and examples.
 
-## Asset policy
+## Tone
 
-Keep the primary visual system in English. The hero, verified rewrite demo, and social preview should work for the English-speaking audience without requiring Russian context.
+Product writing should be direct, evidence-led, and calm. Show what changed instead of declaring that the product is revolutionary, magical, undetectable, or universally human.
 
-Localized Russian surfaces may use Russian copy and examples.
+Recommended vocabulary:
 
-Do not frame HumanizerOS as an AI-detector bypass tool. The product humanizes prose, preserves facts, and gives users explainable control over edits.
+- humanize;
+- explainable editing;
+- Fact Guard;
+- protected values;
+- language-native rules;
+- agent workflow;
+- local-first core.
+
+Avoid claims about bypassing detectors or proving authorship. HumanizerOS improves prose and verifies preserved values; it does not certify who wrote a document.
+
+## Demo policy
+
+A public demo should include source provenance, a complete or reproducible input, the revision, current findings, and a Fact Guard result. Synthetic examples must be labeled as synthetic. Real-world samples require compatible publication terms and explicit source notes.
+
+Marketing numbers belong in regression tests whenever possible. A README claim should fail CI if the underlying engine behavior changes.
