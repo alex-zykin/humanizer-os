@@ -12,6 +12,7 @@ Update:
 
 - `pyproject.toml`;
 - `src/humanizer_os/_version.py`;
+- `SKILL.md` and locale-specific Skill metadata;
 - `CHANGELOG.md`;
 - `CITATION.cff`;
 - README version-specific examples when necessary.
@@ -24,11 +25,12 @@ python scripts/check_release.py
 
 ## Tag
 
-Use an annotated tag:
+Use an annotated tag. For example:
 
 ```bash
-git tag -a v0.1.0 -m "HumanizerOS 0.1.0"
-git push origin v0.1.0
+VERSION=0.1.1
+git tag -a "v${VERSION}" -m "HumanizerOS ${VERSION}"
+git push origin "v${VERSION}"
 ```
 
 The release workflow validates the tag against the package version, reruns the complete gate, builds the wheel and source distribution, smoke-tests both paths, creates SHA-256 sums, uploads an Actions artifact, and publishes a GitHub Release.

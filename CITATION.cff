@@ -5,15 +5,15 @@ type: software
 authors:
   - family-names: "Zykin"
     given-names: "Alex"
-version: 0.1.0
-date-released: 2026-08-19
+version: 0.1.1
+date-released: 2026-08-25
 license: MIT
 repository-code: "https://github.com/alex-zykin/humanizer-os"
 url: "https://github.com/alex-zykin/humanizer-os"
 keywords:
   - writing quality
   - text humanization
-  - multilingual editing
-  - Russian
+  - explainable editing
   - English
+  - Russian
   - fact preservation

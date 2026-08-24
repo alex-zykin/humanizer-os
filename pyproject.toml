@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "humanizer-os"
-version = "0.1.0"
+version = "0.1.1"
 description = "English-first text humanization platform with explainable audits, Fact Guard, and optional Russian support."
 readme = "README.md"
 requires-python = ">=3.11"

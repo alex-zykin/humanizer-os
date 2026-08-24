@@ -4,26 +4,38 @@ All notable changes are documented here. The project follows Semantic Versioning
 
 ## [Unreleased]
 
-### Changed
-
-- Repositioned HumanizerOS as an English-first product with Russian available as an optional language-native locale.
-- Reworked the main README around outcome, reproducible verified rewrites, Agent Skill installation, and Fact Guard rather than multilingual implementation details.
-- Promoted `SKILL.md` at the repository root as the canonical default Agent Skill for the open skills ecosystem.
-- Expanded the standalone root Skill with an English review map so it remains useful when the CLI is unavailable.
-- Added one-command installation examples for Claude Code and Codex through `npx skills`.
-- Removed the duplicate nested default skill so the canonical `humanizer-os` skill has a single discovery target.
-- Added a regression-tested product-launch demo with 10 findings across 8 rules and 6 protected facts preserved.
-- Added a real-world long-form demo from the MIT-licensed Human Detectors research dataset, using a released `gpt-4o` sample labeled `AI-generated` and a HumanizerOS-authored rewrite.
-- Expanded `EN-LANG-001` with inflated-significance patterns surfaced by the real-world sample and its human annotations, with clean counterexamples in the eval suite.
-- Extended Fact Guard to preserve direct quotations while allowing straight/curly quote typography changes.
-- Reduced proper-name false positives from sentence scaffolding such as `As Dr.`.
-
 ### Planned
 
+- Real-World Benchmark v1 across a larger, provenance-tracked sample set.
 - Expressive RU foundation for opt-in detection, preservation, normalization, and censorship.
 - Optional LLM adapters with provider-neutral interfaces and local Fact Guard verification.
 - Author voice matching with explicit sample consent.
 - HumanizerOS Studio and plugin packages for editors and content systems.
+
+## [0.1.1] - 2026-08-25
+
+### Added
+
+- A provenance-tracked long-form demo from the MIT-licensed Human Detectors dataset, using a released `gpt-4o` sample labeled `AI-generated` and a HumanizerOS-authored rewrite.
+- Regression coverage for the real-world demo, blockquotes containing nested direct quotations, Markdown/HTML README markup, and local repeated-opening clusters.
+- Two English eval cases grounded in the real-world sample, including a clean counterexample for `groundbreaking ceremony`.
+
+### Changed
+
+- Repositioned HumanizerOS as an English-first product with Russian available as an optional language-native locale.
+- Promoted the root `SKILL.md` as the canonical Agent Skill and added one-command installation examples for Claude Code and Codex through `npx skills`.
+- Reworked the main README around reproducible before/after evidence, real-world material, and Fact Guard.
+- Expanded `EN-LANG-001` with inflated-significance patterns surfaced by the real-world sample and its human annotations.
+- Extended Fact Guard to preserve direct quotations while allowing straight/curly quote typography changes.
+- Reduced proper-name false positives from sentence scaffolding such as `As Dr.`.
+- Made structural repeated-opening checks local rather than document-global and taught them to ignore common Markdown/HTML presentation lines.
+- Protected complete Markdown blockquotes before nested quotation marks are scanned, so attributed source excerpts remain outside normal prose linting.
+
+### Quality
+
+- 175 automated tests pass with 92.14% branch-aware coverage.
+- 59 bilingual eval cases pass at 100%.
+- Ruff, mypy, documentation checks, self-audit, wheel/sdist builds, and clean-environment smoke tests pass in CI.
 
 ## [0.1.0] - 2026-08-19
 
@@ -41,3 +53,7 @@ All notable changes are documented here. The project follows Semantic Versioning
 - Voice-profile measurements without identity inference.
 - 57 bilingual eval cases and 164 automated tests with a 90% coverage gate.
 - Agent Skills for automatic, English, and Russian workflows.
+
+[Unreleased]: https://github.com/alex-zykin/humanizer-os/compare/v0.1.1...HEAD
+[0.1.1]: https://github.com/alex-zykin/humanizer-os/compare/v0.1.0...v0.1.1
+[0.1.0]: https://github.com/alex-zykin/humanizer-os/releases/tag/v0.1.0

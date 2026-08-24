@@ -3,7 +3,7 @@ name: humanizer-os-en
 description: Rewrite AI-assisted English prose so it reads naturally without changing facts, code, links, or the writer's voice. Use when the user asks to humanize, de-template, rewrite, or review English text for chatbot artifacts and formulaic patterns.
 license: MIT
 metadata:
-  version: "0.1.0"
+  version: "0.1.1"
 ---
 
 # HumanizerOS English

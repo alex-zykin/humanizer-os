@@ -3,7 +3,7 @@ name: humanizer-os
 description: Rewrite English AI-assisted prose so it reads naturally without changing facts, code, links, or the writer's voice. Use when the user asks to humanize, de-template, rewrite, or review prose. English is the default; switch to Russian when the source is Russian or the user explicitly requests Russian.
 license: MIT
 metadata:
-  version: "0.1.0"
+  version: "0.1.1"
 ---
 
 # HumanizerOS: humanize the writing, verify the facts
