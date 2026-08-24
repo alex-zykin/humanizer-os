@@ -1,9 +1,15 @@
 import json
+import sys
 from pathlib import Path
 
-from scripts.benchmark_real_world import DEFAULT_MANIFEST, DEFAULT_RESULTS, build_results
-
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT))
+
+from scripts.benchmark_real_world import (  # noqa: E402
+    DEFAULT_MANIFEST,
+    DEFAULT_RESULTS,
+    build_results,
+)
 
 
 def test_real_world_benchmark_seed_metrics() -> None:
