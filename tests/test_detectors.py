@@ -85,6 +85,42 @@ def test_repeated_starts_ignore_markdown_list_items() -> None:
     assert "EN-STRUCT-003" not in {item.rule_id for item in report.findings}
 
 
+def test_repeated_starts_ignore_html_and_badge_lines() -> None:
+    text = "\n".join(
+        [
+            '<div align="center">',
+            '<img src="assets/hero.svg" alt="HumanizerOS">',
+            "[![CI](https://example.com/ci.svg)](https://example.com/ci)",
+            "[![Python](https://example.com/python.svg)](https://example.com/python)",
+            "[![License](https://example.com/license.svg)](https://example.com/license)",
+            "</div>",
+            "The release is ready. The package installs locally. The guide explains the workflow.",
+        ]
+    )
+    assert "EN-STRUCT-003" not in finding_ids(text, genre="docs")
+
+
+def test_repeated_starts_require_a_local_cluster() -> None:
+    text = " ".join(
+        [
+            "The team shipped the parser.",
+            "Reviewers checked the output.",
+            "A maintainer updated the guide.",
+            "Tests covered the change.",
+            "CI recorded the result.",
+            "Users received the package.",
+            "The team documented the release.",
+            "Editors reviewed the wording.",
+            "A contributor opened an issue.",
+            "Benchmarks captured the baseline.",
+            "Maintainers approved the plan.",
+            "Readers tested the examples.",
+            "The team published the notes.",
+        ]
+    )
+    assert "EN-STRUCT-003" not in finding_ids(text, genre="docs")
+
+
 def test_short_sentence_stack_ignores_markdown_list_items() -> None:
     text = "\n".join(["- Fast.", "- Local.", "- Explainable.", "- Tested."])
     report = Analyzer().audit(text, locale="en", genre="docs")
