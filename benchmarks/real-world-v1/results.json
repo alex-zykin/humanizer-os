@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "benchmark": "real-world-v1",
+  "status": "seed",
+  "summary": {
+    "samples": 1,
+    "source_words": 348,
+    "rewrite_words": 251,
+    "word_reduction": 97,
+    "compression_ratio": 0.7213,
+    "source_findings": 5,
+    "rewrite_findings": 0,
+    "finding_reduction": 5,
+    "finding_reduction_rate": 1.0,
+    "fact_guard_passed": 1,
+    "fact_guard_pass_rate": 1.0,
+    "protected_facts": 8,
+    "regression_checks_passed": 1,
+    "regression_checks_failed": 0
+  },
+  "samples": [
+    {
+      "id": "human-detectors-dinosaur-gpt4o",
+      "locale": "en",
+      "genre": "article",
+      "ground_truth": "AI-generated",
+      "model": "gpt-4o",
+      "license": "MIT",
+      "source_path": "examples/real-world-ai-before.md",
+      "rewrite_path": "examples/real-world-ai-after.md",
+      "provenance_path": "examples/real-world-ai-source.md",
+      "human_annotation_signals": [
+        "generic introduction and conclusion",
+        "inflated significance language",
+        "rigid textbook structure",
+        "polished attribution that deserves verification"
+      ],
+      "source_words": 348,
+      "rewrite_words": 251,
+      "word_reduction": 97,
+      "compression_ratio": 0.7213,
+      "source_findings": 5,
+      "rewrite_findings": 0,
+      "finding_reduction": 5,
+      "source_rule_counts": {
+        "EN-LANG-001": 4,
+        "EN-RHET-003": 1
+      },
+      "rewrite_rule_counts": {},
+      "fact_guard": {
+        "ok": true,
+        "protected_facts": 8,
+        "lost": 0,
+        "added": 0
+      },
+      "checks": {
+        "source_rule_counts": true,
+        "rewrite_findings": true,
+        "protected_facts": true,
+        "verification_ok": true
+      },
+      "passed": true
+    }
+  ]
+}

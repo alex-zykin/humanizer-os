@@ -46,6 +46,7 @@ jobs:
           PY
       - run: pytest -q
       - run: python scripts/evaluate.py
+      - run: python scripts/benchmark_real_world.py --check
       - run: python scripts/check_release.py
       - run: python scripts/check_docs.py
       - run: python scripts/generate_rule_catalog.py --check

@@ -56,6 +56,7 @@ jobs:
       - run: python -m pip install -e ".[dev]"
       - run: ruff check --output-format=github .
       - run: mypy src/humanizer_os
+      - run: python scripts/benchmark_real_world.py --check
       - run: python scripts/check_docs.py
       - run: python scripts/generate_rule_catalog.py --check
       - name: Self-audit project prose

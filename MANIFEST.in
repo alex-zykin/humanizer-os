@@ -19,6 +19,7 @@ recursive-include src/humanizer_os/data/rules *.json
 include src/humanizer_os/py.typed
 recursive-include docs *.md
 recursive-include examples *.md
+recursive-include benchmarks *.md *.json *.jsonl
 recursive-include schemas *.json
 recursive-include evals *.md *.jsonl
 recursive-include skills *.md

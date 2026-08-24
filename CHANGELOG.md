@@ -4,9 +4,13 @@ All notable changes are documented here. The project follows Semantic Versioning
 
 ## [Unreleased]
 
+### Added
+
+- Real-World Benchmark v1 seed framework with a versioned manifest, deterministic results, provenance fields, regression checks, CI integration, and a reproducible command-line runner.
+
 ### Planned
 
-- Real-World Benchmark v1 across a larger, provenance-tracked sample set.
+- Expand Real-World Benchmark v1 to 30–50 provenance-tracked samples across topics, genres, and generation models.
 - Expressive RU foundation for opt-in detection, preservation, normalization, and censorship.
 - Optional LLM adapters with provider-neutral interfaces and local Fact Guard verification.
 - Author voice matching with explicit sample consent.
