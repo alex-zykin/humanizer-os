@@ -49,6 +49,17 @@ def test_markdown_blockquotes_are_quote_spans() -> None:
     )
 
 
+def test_blockquote_owns_nested_direct_quotes() -> None:
+    text = '> A groundbreaking study said "In conclusion, this changes everything."\n\nOwn text.'
+    spans = find_quote_spans(text)
+    blockquote = next(span for span in spans if text[span.start : span.end].startswith(">"))
+    assert '"In conclusion' in text[blockquote.start : blockquote.end]
+    masked = mask_spans(text, spans)
+    assert "groundbreaking" not in masked
+    assert "In conclusion" not in masked
+    assert "Own text" in masked
+
+
 def test_unclosed_fenced_code_is_protected_through_eof() -> None:
     text = "Before\n\n```python\nprint('in order to')\n"
     spans = find_code_spans(text)
