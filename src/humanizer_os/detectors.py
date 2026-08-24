@@ -7,7 +7,7 @@ from collections.abc import Callable
 from dataclasses import dataclass
 
 from .models import Rule
-from .text import normalized_start, paragraphs, sentences, word_count
+from .text import TextSegment, normalized_start, paragraphs, sentences, word_count
 
 
 @dataclass(frozen=True, slots=True)
@@ -25,7 +25,11 @@ def _starts_in_markdown_structure(text: str, start: int, segment: str = "") -> b
     if line_end == -1:
         line_end = len(text)
     line = text[line_start:line_end]
-    if re.match(r"\s*(?:[-*+] |\d+[.)]\s+|#{1,6}\s+|>\s*|\|)", line):
+    if re.match(
+        r"\s*(?:[-*+] |\d+[.)]\s+|#{1,6}\s+|>\s*|\||"
+        r"<[/!?]?[A-Za-z]|<!--|!\[|\[!\[)",
+        line,
+    ):
         return True
     return bool(re.match(r"\s*\*\*[^*\n]{1,80}:?\*\*\s+", segment))
 
@@ -56,7 +60,7 @@ def detect_short_sentence_stack(rule: Rule, text: str) -> list[Detection]:
     min_run = int(params.get("min_run", 3))
     candidates = sentences(text)
     findings: list[Detection] = []
-    run: list = []
+    run: list[TextSegment] = []
 
     def flush() -> None:
         nonlocal run
@@ -116,22 +120,30 @@ def detect_repeated_starts(rule: Rule, text: str) -> list[Detection]:
     prefix_words = int(params.get("prefix_words", 2))
     min_count = int(params.get("min_count", 3))
     min_sentences = int(params.get("min_sentences", 5))
+    window_sentences = int(params.get("window_sentences", max(6, min_count * 2)))
     items = sentences(text)
     if len(items) < min_sentences:
         return []
 
-    groups: dict[str, list] = collections.defaultdict(list)
-    for item in items:
+    groups: dict[str, list[tuple[int, TextSegment]]] = collections.defaultdict(list)
+    for sentence_index, item in enumerate(items):
         if _starts_in_markdown_structure(text, item.start, item.text):
             continue
         key = normalized_start(item.text, prefix_words)
         if key and len(key) >= 3:
-            groups[key].append(item)
+            groups[key].append((sentence_index, item))
 
     findings: list[Detection] = []
     for group in groups.values():
-        if len(group) >= min_count:
-            findings.append(Detection(group[0].start, group[-1].end))
+        if len(group) < min_count:
+            continue
+        for start_index in range(len(group) - min_count + 1):
+            cluster = group[start_index : start_index + min_count]
+            first_position = cluster[0][0]
+            last_position = cluster[-1][0]
+            if last_position - first_position < window_sentences:
+                findings.append(Detection(cluster[0][1].start, cluster[-1][1].end))
+                break
     return _deduplicate(findings)
 
 
