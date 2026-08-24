@@ -11,7 +11,13 @@ def test_english_surface_rules() -> None:
         "In conclusion, the possibilities are endless."
     )
     found = ids(text, locale="en", genre="landing")
-    assert {"EN-OPEN-001", "EN-RHET-001", "EN-LANG-001", "EN-RHET-003", "EN-CONTENT-001"} <= found
+    assert {
+        "EN-OPEN-001",
+        "EN-RHET-001",
+        "EN-LANG-001",
+        "EN-RHET-003",
+        "EN-CONTENT-001",
+    } <= found
 
 
 def test_russian_surface_rules() -> None:
@@ -20,13 +26,29 @@ def test_russian_surface_rules() -> None:
         "Таким образом, возможности безграничны."
     )
     found = ids(text, locale="ru", genre="landing")
-    assert {"RU-OPEN-001", "RU-RHET-001", "RU-LANG-006", "RU-RHET-004", "RU-CONTENT-001"} <= found
+    assert {
+        "RU-OPEN-001",
+        "RU-RHET-001",
+        "RU-LANG-006",
+        "RU-RHET-004",
+        "RU-CONTENT-001",
+    } <= found
 
 
 def test_code_and_quotes_are_ignored() -> None:
     text = "Use `in order to` in the exact parser test. The customer said “In conclusion”."
     found = ids(text, locale="en")
     assert "EN-LANG-004" not in found
+    assert "EN-RHET-003" not in found
+
+
+def test_blockquote_with_nested_quote_is_ignored() -> None:
+    text = (
+        '> A groundbreaking study said "In conclusion, this marks a significant milestone."\n\n'
+        "The paragraph above is a source sample for editorial review."
+    )
+    found = ids(text, locale="en", genre="docs")
+    assert "EN-LANG-001" not in found
     assert "EN-RHET-003" not in found
 
 
