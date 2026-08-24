@@ -28,5 +28,5 @@ jobs:
             echo "enabled=false" >> "${GITHUB_OUTPUT}"
             echo "::warning::Dependency graph is disabled; enable it in Settings → Code security and analysis to enforce dependency review."
           fi
-      - uses: actions/dependency-review-action@v4
+      - uses: actions/dependency-review-action@v5
         if: steps.dependency-graph.outputs.enabled == 'true'
