@@ -1,0 +1,111 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/alex-zykin/humanizer-os/benchmarks/real-world-v1/manifest.schema.json",
+  "title": "HumanizerOS Real-World Benchmark v1 record",
+  "type": "object",
+  "required": [
+    "id",
+    "locale",
+    "genre",
+    "source_file",
+    "rewrite_file",
+    "provenance_file",
+    "dataset",
+    "dataset_label",
+    "generation_model",
+    "redistribution_basis",
+    "expected"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "locale": {
+      "enum": ["en", "ru"]
+    },
+    "genre": {
+      "enum": [
+        "general",
+        "social",
+        "email",
+        "landing",
+        "article",
+        "docs",
+        "fiction",
+        "academic",
+        "legal"
+      ]
+    },
+    "source_file": {
+      "type": "string",
+      "minLength": 1
+    },
+    "rewrite_file": {
+      "type": "string",
+      "minLength": 1
+    },
+    "provenance_file": {
+      "type": "string",
+      "minLength": 1
+    },
+    "dataset": {
+      "type": "object",
+      "required": ["name", "repository"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "repository": {
+          "type": "string",
+          "format": "uri"
+        },
+        "record_id": {
+          "type": ["string", "integer"]
+        }
+      },
+      "additionalProperties": false
+    },
+    "dataset_label": {
+      "type": "string",
+      "minLength": 1
+    },
+    "generation_model": {
+      "type": "string",
+      "minLength": 1
+    },
+    "redistribution_basis": {
+      "type": "string",
+      "minLength": 1
+    },
+    "expected": {
+      "type": "object",
+      "required": [
+        "source_findings",
+        "rewrite_findings",
+        "protected_facts",
+        "fact_guard_ok"
+      ],
+      "properties": {
+        "source_findings": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "rewrite_findings": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "protected_facts": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "fact_guard_ok": {
+          "const": true
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}
