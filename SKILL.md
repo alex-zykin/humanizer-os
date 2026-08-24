@@ -1,168 +1,109 @@
 ---
 name: humanizer-os
-description: Rewrite English AI-assisted prose so it reads naturally without changing facts, code, links, or the writer's voice. Use when the user asks to humanize, de-template, rewrite, or review prose. English is the default; switch to Russian when the source is Russian or the user explicitly requests Russian.
+description: Rewrite English AI-assisted prose so it reads naturally without changing facts, code, links, quotations, or the writer's voice. Use for humanizing, de-templating, rewriting, or reviewing prose. English is the default; switch to Russian for clearly Russian source text or an explicit Russian request.
 license: MIT
 metadata:
   version: "0.1.1"
 ---
 
-# HumanizerOS: humanize the writing, verify the facts
+# HumanizerOS
 
-Rewrite AI-assisted English so it reads like deliberate human prose rather than a generic chatbot answer. Preserve what the text says, keep the writer's useful quirks, and change only what needs work.
+Make AI-assisted English read like deliberate human prose. Preserve the source meaning, retain useful quirks, and change only the passages that need editorial work.
 
 English is the default. Russian is an optional supported locale.
 
-## Non-negotiable rules
+## Guardrails
 
-- Preserve names, numbers, dates, prices, units, URLs, email addresses, citations, quotes, code, deadlines, product terms, and calls to action.
-- Do not invent personal experience, emotions, sensory details, mistakes, evidence, sources, customer claims, or product facts.
-- Do not remove a real limitation, objection, contrast, attribution, or technical term simply because it resembles a common AI-writing pattern.
-- Do not rewrite clean prose merely to make it different.
-- Respect genre. Legal, academic, technical, reference, fictional, marketing, and personal prose need different levels of intervention.
-- Never claim that a pattern proves human or AI authorship.
+- Preserve names, numbers, dates, prices, units, URLs, email addresses, citations, direct quotations, code, deadlines, product terms, and calls to action.
+- Never invent personal experience, emotions, sensory detail, mistakes, evidence, sources, customer claims, or product facts.
+- Keep genuine limitations, objections, contrasts, attribution, and technical terminology even when their wording resembles a common pattern.
+- Leave clean prose alone instead of rewriting it for novelty.
+- Adapt the intervention to the genre. Legal, academic, technical, reference, fictional, marketing, and personal prose have different boundaries.
+- Treat findings as editorial evidence, not proof of human or model authorship.
 
-## Preferred workflow
+## Workflow
 
-1. Determine the genre and the user's requested outcome.
-2. Use English unless the source is clearly Russian or the user explicitly selects Russian.
+1. Identify the requested outcome and genre.
+2. Select English unless the source is clearly Russian or the user asks for Russian.
 3. Protect facts and non-prose spans before editing.
-4. Audit the draft for concrete patterns.
-5. Rewrite semantically. Paragraph boundaries and sentence order may change when clarity improves.
-6. Re-read the revision for remaining formulaic patterns.
-7. Verify protected facts before returning the result.
+4. Audit for concrete patterns rather than a vague sense of artificiality.
+5. Rewrite semantically where clarity, rhythm, or specificity improves.
+6. Review the revision for residual formulaic language and accidental over-editing.
+7. Verify protected values before returning the result.
 
-When the HumanizerOS CLI is available, use it as the deterministic control layer:
+Use the CLI as a deterministic control layer when it is installed:
 
 ```bash
 humanizer-os audit <path> --lang en --genre <genre> --format json
 humanizer-os verify <original> <revised>
 ```
 
-For Russian, switch the locale:
+Russian mode changes the locale rather than translating English rules word for word:
 
 ```bash
 humanizer-os audit <path> --lang ru --genre <genre> --format json
 ```
 
-If Fact Guard reports a difference, restore the original protected value unless the user explicitly requested that factual change.
+A failed Fact Guard check means the original protected value should be restored unless the user explicitly requested that factual change.
 
 ## English review map
 
-When the CLI is unavailable, scan the text with this checklist before rewriting.
+### Assistant residue
 
-### Artifacts
+Look for wrappers such as `Here is the revised version`, internal citation identifiers, unresolved placeholders, fake links, and closing offers that belong to the chat rather than the document.
 
-Remove assistant residue that does not belong in the document:
+### Claims and attribution
 
-- chatbot prefaces and sign-offs;
-- internal citation markers;
-- unresolved placeholders;
-- excessive agreement or praise before the answer.
+Question importance language that exceeds the evidence. Replace vague phrases such as `experts believe` with a named source, a precise limitation, or no attribution when none exists.
 
-### Claims and content
-
-Review:
-
-- vague attribution to unnamed experts, studies, researchers, or industry leaders;
-- inflated importance that is not supported by an observable consequence;
-- generic positive endings;
-- abstract deeper-meaning statements that repeat the previous point;
-- objections or alternatives that the reader never raised.
-
-Never invent a source to repair vague attribution. Narrow or remove the unsupported claim when no source exists.
+Do not weaken a supported claim merely because it sounds confident. The problem is unsupported emphasis, not confidence itself.
 
 ### Language
 
-Look for:
+Common review targets include:
 
-- ceremonial alternatives to plain `is`, `has`, or a concrete action verb;
-- long connectives that can be shortened safely;
-- stacked hedging or meta-instructions about what the reader should notice;
-- promotional adjective stacks that do not describe measurable behavior;
-- stock importance language that announces significance instead of showing it.
+- ceremonial alternatives to `is` and `has`;
+- verbose connectives such as `in order to`;
+- stacked hedging and meta-instructions;
+- generic product adjectives;
+- filler that announces the point before making it.
 
 ### Rhetoric
 
-Review:
+Check generic openings, stock `not just X but Y` contrasts, announced transitions, formulaic conclusions, fake-candid framing, and canned question-answer fragments.
 
-- generic scene-setting openings;
-- canned contrast structures;
-- sentences that announce the next section instead of starting it;
-- labeled conclusions that repeat the point;
-- fake-candid framing;
-- tiny question-and-answer pairs used only for conversational rhythm.
+A real contrast or useful transition should stay. Revise the formula only when it carries emphasis without content.
 
-A real contrast or real question can stay. Fix the formula, not the existence of contrast or dialogue.
+### Structure and formatting
 
-### Formatting
+Review repeated sentence openings, stacks of tiny fragments, mechanically uniform rhythm, transition-heavy paragraphs, title-case headings, bold mini-headings, emoji bullets, and excessive list density.
 
-Check whether the text overuses:
+Structural findings have lower certainty than assistant artifacts. Use them as prompts for editorial review rather than automatic deletion.
 
-- bold emphasis;
-- bold mini-headings inside lists;
-- Title Case headings;
-- decorative emoji bullets;
-- lists where prose or a table would show relationships better;
-- em dashes at an unusually high rate.
+## Rewriting principles
 
-Do not enforce a house style the writer did not ask for. If a supplied writing sample uses these features deliberately, match the sample.
+- Lead with the subject, event, decision, or example.
+- Prefer concrete verbs and observable consequences.
+- Vary sentence length for meaning, not randomness.
+- Merge fragments that imitate punchiness without adding precision.
+- Remove generic praise unless the source supports it.
+- Preserve deliberate humor, bluntness, uncertainty, and technical register.
+- Avoid invented anecdotes or artificial mistakes.
 
-### Structure
+## Voice matching
 
-For longer prose, review:
+Use author samples only when the user provides them. Match observable traits such as sentence length, paragraph rhythm, punctuation, directness, use of lists, and degree of formality.
 
-- stacks of tiny fragments;
-- repeated sentence openings;
-- nearly identical paragraph sizes;
-- unusually even sentence rhythm;
-- explicit transition phrases at the start of most paragraphs.
+Do not infer identity, biography, personality, demographics, or private experience from writing samples.
 
-Treat structural signals as contextual. They are weaker evidence than obvious artifacts or unsupported claims.
+## Output modes
 
-## Rewrite policy
+**Audit** reports findings without changing the source.
 
-A strong rewrite should keep the information while changing the delivery where needed.
+**Rewrite** returns improved prose while preserving protected values.
 
-Prefer:
+**Safe fix** applies only unambiguous local replacements.
 
-- concrete subjects and verbs;
-- specific claims over importance language;
-- varied sentence length driven by meaning;
-- paragraph sizes driven by the amount of information;
-- direct transitions when the relationship is already obvious;
-- useful uncertainty instead of stacked qualifiers;
-- the writer's real humor, preferences, mixed feelings, and deliberate quirks when they already exist.
+**Voice-aware rewrite** follows supplied samples without inventing personal detail.
 
-Avoid adding artificial imperfections just to make the text appear human.
-
-## Match the writer's voice
-
-If the user provides their own writing sample, analyze observable features before rewriting:
-
-- sentence and paragraph length;
-- vocabulary and formality;
-- punctuation habits;
-- use of contractions, asides, questions, lists, and headings;
-- repeated phrases and transitions;
-- amount of first- or second-person language.
-
-Use the sample as a constraint on style. Do not infer biography, identity, demographics, personality, or experiences that are not present in the sample.
-
-## Russian switch
-
-When the source is Russian or the user asks for Russian, switch language logic rather than translating the English checklist word-for-word.
-
-Pay particular attention to Russian-specific bureaucracy, nominalization, heavy copula constructions, translationese, impersonal passive phrasing, modal hedging, canned therapeutic tone, generic openings, and formulaic conclusions. Preserve Russian punctuation and deliberate colloquial voice when appropriate to the genre.
-
-If the dedicated `humanizer-os-ru` skill is installed, prefer it for Russian-only workflows.
-
-## Return modes
-
-Follow the user's request:
-
-- **Rewrite** — return the revised text. Add a short note only when a fact conflict or meaningful ambiguity needs attention.
-- **Audit** — return findings with excerpts and suggestions; do not rewrite.
-- **Safe fix** — apply only unambiguous local replacements.
-- **Voice-aware rewrite** — match a supplied author sample while preserving facts.
-
-When the user asks for a normal humanization, do the audit internally, rewrite the prose, verify protected facts, and return the clean final version without making the user read the whole checklist.
+For a requested rewrite, return the revised text first. Add a compact change summary only when it helps the user understand a meaningful editorial decision or a Fact Guard conflict.
