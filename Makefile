@@ -1,4 +1,4 @@
-.PHONY: install test coverage lint format typecheck eval docs selfcheck release-check build smoke clean all
+.PHONY: install test coverage lint format typecheck eval benchmark docs selfcheck release-check build smoke clean all
 
 install:
 	python -m pip install -e ".[dev]"
@@ -22,6 +22,9 @@ typecheck:
 eval:
 	python scripts/evaluate.py
 
+benchmark:
+	python scripts/benchmark_real_world.py --check
+
 docs:
 	python scripts/check_docs.py
 	python scripts/generate_rule_catalog.py --check
@@ -29,7 +32,8 @@ docs:
 selfcheck:
 	humanizer-os audit \
 		README.md SKILL.md CHANGELOG.md CODE_OF_CONDUCT.md CONTRIBUTING.md SECURITY.md SUPPORT.md \
-		THIRD_PARTY_NOTICES.md docs skills/humanizer-os-en/SKILL.md \
+		THIRD_PARTY_NOTICES.md docs benchmarks/real-world-v1/README.md \
+		skills/humanizer-os-en/SKILL.md \
 		--lang en --genre docs --fail-on warning
 	humanizer-os audit README.ru.md skills/humanizer-os-ru/SKILL.md \
 		--lang ru --genre docs --fail-on warning
@@ -49,4 +53,4 @@ smoke: build
 clean:
 	rm -rf build dist .pytest_cache .mypy_cache .ruff_cache htmlcov coverage.xml .coverage
 
-all: lint typecheck coverage eval docs selfcheck release-check build
+all: lint typecheck coverage eval benchmark docs selfcheck release-check build
