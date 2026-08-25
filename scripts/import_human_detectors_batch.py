@@ -10,6 +10,7 @@ import urllib.request
 from collections import defaultdict
 from pathlib import Path
 from typing import Any
+from urllib.parse import urlsplit
 
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_OUTPUT = ROOT / "benchmarks" / "real-world-v1" / "candidates"
@@ -45,12 +46,17 @@ class ImportError(RuntimeError):
 
 
 def _download_json(url: str) -> Any:
-    request = urllib.request.Request(
+    parsed = urlsplit(url)
+    if parsed.scheme != "https" or parsed.netloc != "raw.githubusercontent.com":
+        raise ImportError(f"refusing unsupported dataset URL: {url}")
+
+    # The pinned HTTPS host is checked above; noqa records that boundary.
+    request = urllib.request.Request(  # noqa: S310
         url,
         headers={"User-Agent": "HumanizerOS benchmark importer"},
     )
     try:
-        with urllib.request.urlopen(request, timeout=120) as response:
+        with urllib.request.urlopen(request, timeout=120) as response:  # noqa: S310
             payload = response.read()
     except OSError as exc:
         raise ImportError(f"failed to download {url}: {exc}") from exc

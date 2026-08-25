@@ -1,21 +1,21 @@
 {
   "schema_version": 1,
   "benchmark": "real-world-v1",
-  "status": "seed",
+  "status": "pilot",
   "summary": {
-    "samples": 1,
-    "source_words": 348,
-    "rewrite_words": 251,
-    "word_reduction": 97,
-    "compression_ratio": 0.7213,
-    "source_findings": 5,
+    "samples": 10,
+    "source_words": 5017,
+    "rewrite_words": 4822,
+    "word_reduction": 195,
+    "compression_ratio": 0.9611,
+    "source_findings": 13,
     "rewrite_findings": 0,
-    "finding_reduction": 5,
+    "finding_reduction": 13,
     "finding_reduction_rate": 1.0,
-    "fact_guard_passed": 1,
+    "fact_guard_passed": 10,
     "fact_guard_pass_rate": 1.0,
-    "protected_facts": 8,
-    "regression_checks_passed": 1,
+    "protected_facts": 189,
+    "regression_checks_passed": 10,
     "regression_checks_failed": 0
   },
   "samples": [
@@ -50,6 +50,362 @@
       "fact_guard": {
         "ok": true,
         "protected_facts": 8,
+        "lost": 0,
+        "added": 0
+      },
+      "checks": {
+        "source_rule_counts": true,
+        "rewrite_findings": true,
+        "protected_facts": true,
+        "verification_ok": true
+      },
+      "passed": true
+    },
+    {
+      "id": "human-detectors-gpt-4o-record-46",
+      "locale": "en",
+      "genre": "article",
+      "ground_truth": "AI-generated",
+      "model": "gpt-4o",
+      "license": "MIT",
+      "source_path": "benchmarks/real-world-v1/samples/human-detectors-gpt-4o-record-46/source.md",
+      "rewrite_path": "benchmarks/real-world-v1/samples/human-detectors-gpt-4o-record-46/rewrite.md",
+      "provenance_path": "benchmarks/real-world-v1/samples/human-detectors-gpt-4o-record-46/provenance.md",
+      "human_annotation_signals": [
+        "The opening sentence feels very AI-generated, especially the first half, which immediately sets the scene and is quite descriptive.",
+        "It's difficult to tell.",
+        "There's nothing glaringly wrong with this text and it's structured well."
+      ],
+      "source_words": 431,
+      "rewrite_words": 431,
+      "word_reduction": 0,
+      "compression_ratio": 1.0,
+      "source_findings": 0,
+      "rewrite_findings": 0,
+      "finding_reduction": 0,
+      "source_rule_counts": {},
+      "rewrite_rule_counts": {},
+      "fact_guard": {
+        "ok": true,
+        "protected_facts": 12,
+        "lost": 0,
+        "added": 0
+      },
+      "checks": {
+        "source_rule_counts": true,
+        "rewrite_findings": true,
+        "protected_facts": true,
+        "verification_ok": true
+      },
+      "passed": true
+    },
+    {
+      "id": "human-detectors-paraphrased-gpt-4o-record-52",
+      "locale": "en",
+      "genre": "article",
+      "ground_truth": "AI-generated",
+      "model": "paraphrased_gpt-4o",
+      "license": "MIT",
+      "source_path": "benchmarks/real-world-v1/samples/human-detectors-paraphrased-gpt-4o-record-52/source.md",
+      "rewrite_path": "benchmarks/real-world-v1/samples/human-detectors-paraphrased-gpt-4o-record-52/rewrite.md",
+      "provenance_path": "benchmarks/real-world-v1/samples/human-detectors-paraphrased-gpt-4o-record-52/provenance.md",
+      "human_annotation_signals": [
+        "There were a few parts that seemed like they could be human but there were far too many AI words/phrases like \"insights\", \"enhances\", and \"delve into\".",
+        "Some of the usual metaphors used by AI are present: \"symphony\"; \"illuminates\"; \"delve deeper\".",
+        "Whenever I see the word 'crucial' or the phrase 'vital role', I know the text has been written by AI."
+      ],
+      "source_words": 452,
+      "rewrite_words": 438,
+      "word_reduction": 14,
+      "compression_ratio": 0.969,
+      "source_findings": 1,
+      "rewrite_findings": 0,
+      "finding_reduction": 1,
+      "source_rule_counts": {
+        "EN-STRUCT-003": 1
+      },
+      "rewrite_rule_counts": {},
+      "fact_guard": {
+        "ok": true,
+        "protected_facts": 11,
+        "lost": 0,
+        "added": 0
+      },
+      "checks": {
+        "source_rule_counts": true,
+        "rewrite_findings": true,
+        "protected_facts": true,
+        "verification_ok": true
+      },
+      "passed": true
+    },
+    {
+      "id": "human-detectors-paraphrased-gpt-4o-record-35",
+      "locale": "en",
+      "genre": "article",
+      "ground_truth": "AI-generated",
+      "model": "paraphrased_gpt-4o",
+      "license": "MIT",
+      "source_path": "benchmarks/real-world-v1/samples/human-detectors-paraphrased-gpt-4o-record-35/source.md",
+      "rewrite_path": "benchmarks/real-world-v1/samples/human-detectors-paraphrased-gpt-4o-record-35/rewrite.md",
+      "provenance_path": "benchmarks/real-world-v1/samples/human-detectors-paraphrased-gpt-4o-record-35/provenance.md",
+      "human_annotation_signals": [
+        "The opening sentence was interesting as it was very generic and immediately gave almost everything the article was about, but also contained the specific length of the prison…",
+        "The use of the AI-favored words \"crucial\", \"critical\" and \"both\" hint at an AI author.",
+        "Here's why I think it's machine-generated: nominalisations; phrases like 'delve deeper' and 'highlights the critical need'; speech tags are varied but the norm for AI (someone…"
+      ],
+      "source_words": 483,
+      "rewrite_words": 469,
+      "word_reduction": 14,
+      "compression_ratio": 0.971,
+      "source_findings": 1,
+      "rewrite_findings": 0,
+      "finding_reduction": 1,
+      "source_rule_counts": {
+        "EN-STRUCT-003": 1
+      },
+      "rewrite_rule_counts": {},
+      "fact_guard": {
+        "ok": true,
+        "protected_facts": 14,
+        "lost": 0,
+        "added": 0
+      },
+      "checks": {
+        "source_rule_counts": true,
+        "rewrite_findings": true,
+        "protected_facts": true,
+        "verification_ok": true
+      },
+      "passed": true
+    },
+    {
+      "id": "human-detectors-gpt-4o-record-40",
+      "locale": "en",
+      "genre": "article",
+      "ground_truth": "AI-generated",
+      "model": "gpt-4o",
+      "license": "MIT",
+      "source_path": "benchmarks/real-world-v1/samples/human-detectors-gpt-4o-record-40/source.md",
+      "rewrite_path": "benchmarks/real-world-v1/samples/human-detectors-gpt-4o-record-40/rewrite.md",
+      "provenance_path": "benchmarks/real-world-v1/samples/human-detectors-gpt-4o-record-40/provenance.md",
+      "human_annotation_signals": [
+        "The conclusion and introduction are both very generic, which points towards AI.",
+        "The words \"crucial\", \"not only...but also\" lead me to believe this is AI generated.",
+        "I'm on the fence about this one."
+      ],
+      "source_words": 498,
+      "rewrite_words": 497,
+      "word_reduction": 1,
+      "compression_ratio": 0.998,
+      "source_findings": 1,
+      "rewrite_findings": 0,
+      "finding_reduction": 1,
+      "source_rule_counts": {
+        "EN-LANG-003": 1
+      },
+      "rewrite_rule_counts": {},
+      "fact_guard": {
+        "ok": true,
+        "protected_facts": 15,
+        "lost": 0,
+        "added": 0
+      },
+      "checks": {
+        "source_rule_counts": true,
+        "rewrite_findings": true,
+        "protected_facts": true,
+        "verification_ok": true
+      },
+      "passed": true
+    },
+    {
+      "id": "human-detectors-humanized-o1-pro-record-47",
+      "locale": "en",
+      "genre": "article",
+      "ground_truth": "AI-generated",
+      "model": "humanized_o1-pro",
+      "license": "MIT",
+      "source_path": "benchmarks/real-world-v1/samples/human-detectors-humanized-o1-pro-record-47/source.md",
+      "rewrite_path": "benchmarks/real-world-v1/samples/human-detectors-humanized-o1-pro-record-47/rewrite.md",
+      "provenance_path": "benchmarks/real-world-v1/samples/human-detectors-humanized-o1-pro-record-47/provenance.md",
+      "human_annotation_signals": [
+        "The part where a participant asks for their last name to be used to preserve mystique but instead the article provides their full name, seems exactly like the kind of mistake AI…",
+        "The phrase \"isn't just...it's...\" is often used by AI.",
+        "Book titles should be in italics."
+      ],
+      "source_words": 535,
+      "rewrite_words": 535,
+      "word_reduction": 0,
+      "compression_ratio": 1.0,
+      "source_findings": 0,
+      "rewrite_findings": 0,
+      "finding_reduction": 0,
+      "source_rule_counts": {},
+      "rewrite_rule_counts": {},
+      "fact_guard": {
+        "ok": true,
+        "protected_facts": 16,
+        "lost": 0,
+        "added": 0
+      },
+      "checks": {
+        "source_rule_counts": true,
+        "rewrite_findings": true,
+        "protected_facts": true,
+        "verification_ok": true
+      },
+      "passed": true
+    },
+    {
+      "id": "human-detectors-claude-record-0",
+      "locale": "en",
+      "genre": "article",
+      "ground_truth": "AI-generated",
+      "model": "claude",
+      "license": "MIT",
+      "source_path": "benchmarks/real-world-v1/samples/human-detectors-claude-record-0/source.md",
+      "rewrite_path": "benchmarks/real-world-v1/samples/human-detectors-claude-record-0/rewrite.md",
+      "provenance_path": "benchmarks/real-world-v1/samples/human-detectors-claude-record-0/provenance.md",
+      "human_annotation_signals": [
+        "There's a very long generic introduction that explains the entire point of the article.",
+        "The lack of paragraphing at first made me think this was a human-generated text and that this was an error.",
+        "I tripped up on a couple of the sentences towards the beginning of this text, but then I started seeing all the usual hallmarks of AI: someone 'explaining' then 'noting' something…"
+      ],
+      "source_words": 547,
+      "rewrite_words": 523,
+      "word_reduction": 24,
+      "compression_ratio": 0.9561,
+      "source_findings": 1,
+      "rewrite_findings": 0,
+      "finding_reduction": 1,
+      "source_rule_counts": {
+        "EN-STRUCT-003": 1
+      },
+      "rewrite_rule_counts": {},
+      "fact_guard": {
+        "ok": true,
+        "protected_facts": 28,
+        "lost": 0,
+        "added": 0
+      },
+      "checks": {
+        "source_rule_counts": true,
+        "rewrite_findings": true,
+        "protected_facts": true,
+        "verification_ok": true
+      },
+      "passed": true
+    },
+    {
+      "id": "human-detectors-o1-pro-record-46",
+      "locale": "en",
+      "genre": "article",
+      "ground_truth": "AI-generated",
+      "model": "o1-pro",
+      "license": "MIT",
+      "source_path": "benchmarks/real-world-v1/samples/human-detectors-o1-pro-record-46/source.md",
+      "rewrite_path": "benchmarks/real-world-v1/samples/human-detectors-o1-pro-record-46/rewrite.md",
+      "provenance_path": "benchmarks/real-world-v1/samples/human-detectors-o1-pro-record-46/provenance.md",
+      "human_annotation_signals": [
+        "This article had quite a few points that made me think it could be either.",
+        "The 2 lists may suggest AI generation.",
+        "Contractions and 'you' language usually suggest it's been human-generated, and there's a 'you've' in the first paragraph."
+      ],
+      "source_words": 547,
+      "rewrite_words": 547,
+      "word_reduction": 0,
+      "compression_ratio": 1.0,
+      "source_findings": 0,
+      "rewrite_findings": 0,
+      "finding_reduction": 0,
+      "source_rule_counts": {},
+      "rewrite_rule_counts": {},
+      "fact_guard": {
+        "ok": true,
+        "protected_facts": 36,
+        "lost": 0,
+        "added": 0
+      },
+      "checks": {
+        "source_rule_counts": true,
+        "rewrite_findings": true,
+        "protected_facts": true,
+        "verification_ok": true
+      },
+      "passed": true
+    },
+    {
+      "id": "human-detectors-claude-record-27",
+      "locale": "en",
+      "genre": "article",
+      "ground_truth": "AI-generated",
+      "model": "claude",
+      "license": "MIT",
+      "source_path": "benchmarks/real-world-v1/samples/human-detectors-claude-record-27/source.md",
+      "rewrite_path": "benchmarks/real-world-v1/samples/human-detectors-claude-record-27/rewrite.md",
+      "provenance_path": "benchmarks/real-world-v1/samples/human-detectors-claude-record-27/provenance.md",
+      "human_annotation_signals": [
+        "Common AI names used, especially \"Dr.",
+        "This one was difficult because while there are no obvious signs of AI, there are also no obvious signs of human writing.",
+        "Although there aren't numerous instances of the usual words, it's structure is pretty similar to AI."
+      ],
+      "source_words": 577,
+      "rewrite_words": 550,
+      "word_reduction": 27,
+      "compression_ratio": 0.9532,
+      "source_findings": 2,
+      "rewrite_findings": 0,
+      "finding_reduction": 2,
+      "source_rule_counts": {
+        "EN-LANG-002": 1,
+        "EN-STRUCT-003": 1
+      },
+      "rewrite_rule_counts": {},
+      "fact_guard": {
+        "ok": true,
+        "protected_facts": 20,
+        "lost": 0,
+        "added": 0
+      },
+      "checks": {
+        "source_rule_counts": true,
+        "rewrite_findings": true,
+        "protected_facts": true,
+        "verification_ok": true
+      },
+      "passed": true
+    },
+    {
+      "id": "human-detectors-paraphrased-gpt-4o-record-50",
+      "locale": "en",
+      "genre": "article",
+      "ground_truth": "AI-generated",
+      "model": "paraphrased_gpt-4o",
+      "license": "MIT",
+      "source_path": "benchmarks/real-world-v1/samples/human-detectors-paraphrased-gpt-4o-record-50/source.md",
+      "rewrite_path": "benchmarks/real-world-v1/samples/human-detectors-paraphrased-gpt-4o-record-50/rewrite.md",
+      "provenance_path": "benchmarks/real-world-v1/samples/human-detectors-paraphrased-gpt-4o-record-50/provenance.md",
+      "human_annotation_signals": [
+        "The article is filled with AI words like \"fostering\", \"streamline\", and \"intricate\".",
+        "There's the use of AI-favored words like \"fostering\" and \"crucial.\" There are several uses of AI's favored sentence structure, which involves an independent clause followed by a…",
+        "Here's why I know it's machine-generated: the word 'crucial' popping up all over the place."
+      ],
+      "source_words": 599,
+      "rewrite_words": 581,
+      "word_reduction": 18,
+      "compression_ratio": 0.9699,
+      "source_findings": 2,
+      "rewrite_findings": 0,
+      "finding_reduction": 2,
+      "source_rule_counts": {
+        "EN-RHET-003": 1,
+        "EN-STRUCT-003": 1
+      },
+      "rewrite_rule_counts": {},
+      "fact_guard": {
+        "ok": true,
+        "protected_facts": 29,
         "lost": 0,
         "added": 0
       },

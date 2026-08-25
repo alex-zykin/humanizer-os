@@ -6,7 +6,7 @@
 
 English is the default product experience. Russian is available as an optional language-native pack.
 
-[Install](#install-in-10-seconds) · [Verified demo](#a-rewrite-you-can-verify) · [Real-world sample](#real-world-ai-sample) · [Claude and Codex](#claude-and-codex-setup) · [CLI and API](#cli-and-python-api) · [Russian](README.ru.md)
+[Install](#install-in-10-seconds) · [Verified demo](#a-rewrite-you-can-verify) · [Real-world sample](#real-world-ai-sample) · [Benchmark](#ten-sample-real-world-pilot) · [Claude and Codex](#claude-and-codex-setup) · [CLI and API](#cli-and-python-api) · [Russian](README.ru.md)
 
 HumanizerOS combines an Agent Skill with a deterministic editing engine. The model handles semantic rewriting; the engine supplies explainable findings, conservative safe fixes, and Fact Guard verification.
 
@@ -98,6 +98,19 @@ OK  Protected facts match (8 checked).
 ```
 
 Fact Guard checks consistency between source and revision. It does not certify that a generated claim or quotation is true.
+
+## Ten-sample real-world pilot
+
+The committed [`Real-World Benchmark v1`](benchmarks/real-world-v1/) now contains 10 provenance-tracked machine-generated samples across 5 generation modes. The current deterministic baseline is:
+
+| Metric | Result |
+|---|---:|
+| Source findings | 13 |
+| Rewrite findings | 0 |
+| Protected facts checked | 189 |
+| Fact Guard passes | 10/10 |
+
+3 clean sources were left unchanged. The pilot validates the evaluation pipeline; it does not claim authorship detection or universal writing quality.
 
 ## Why HumanizerOS
 
