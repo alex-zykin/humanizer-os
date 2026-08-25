@@ -6,6 +6,10 @@ All notable changes are documented here. The project follows Semantic Versioning
 
 ### Added
 
+- A 10-sample Real-World Benchmark v1 pilot across 5 Human Detectors generation modes, with verified rewrites, 189 protected facts, and clean-text non-disturbance cases.
+
+### Added
+
 - Real-World Benchmark v1 seed framework with a versioned manifest, deterministic results, provenance fields, regression checks, CI integration, and a reproducible command-line runner.
 
 ### Planned

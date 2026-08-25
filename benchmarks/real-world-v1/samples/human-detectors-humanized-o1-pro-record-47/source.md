@@ -1,0 +1,15 @@
+Walk along St. Charles Avenue during Carnival season, and you’ll spot a series of towering floats with riders tossing beads and trinkets into the cheering crowd. You may also notice something else: every single person on those floats is masked. This isn’t just tradition—it’s actually required by city ordinance. For all the costumes, music, and king cakes floating around, the mask rule remains one of the few ironclad expectations placed on those who ride.
+
+“Mardi Gras has long been about stepping outside everyday rules,” says Arthur Hardy, publisher of **Arthur Hardy’s Mardi Gras Guide**, who has chronicled the season for decades. “When riders hide their faces, it helps break down social barriers. It’s not about who you are back at the office or how much money you make. Everyone on that float is an equal participant in the fun.”
+
+The masking custom dates back to the 19th century, when members of the earliest krewes—Rex, Proteus, Momus—sought ways to mingle with neighbors without being identified. Masking allowed a well-known judge to stand next to a dockworker without anyone gawking or drawing lines based on station. Today, city rules still demand that every float rider remain masked from start to finish. If you try to flout that requirement, you risk being removed before the parade even begins.
+
+“Mardi Gras was born out of old European masquerade traditions,” explains Dr. Kim Vaz-Deville, a New Orleans scholar who has written extensively about the city’s carnival heritage. “Wearing a mask means you’re free to interact with folks you might never speak to otherwise. It’s one reason the season still feels so refreshing—it shuffles the deck.”
+
+This sense of anonymity is part of what makes Mardi Gras different from other celebrations. In places like Rio de Janeiro or Venice, costumes might be dazzling, but the New Orleans approach makes face coverings a firm rule for those riding the floats. The city takes this seriously enough that officers have, on occasion, reminded krewes to check their riders’ masks before rolling.
+
+Local riders take the custom in stride. “I’ve been on a float in the Krewe of Muses for more than 15 years,” says Sandra Martin, a participant who asked that her last name be used to help preserve her mystique. “I love that no one knows it’s me under there. It’s wild—I can throw beads to my boss or my own cousin, and they have no idea. It levels the field and keeps the spirit of surprise alive.”
+
+The mask rule also helps maintain the carnival’s time-honored mystique. Without it, a parade might feel a bit like a corporate promo or a social club outing. Instead, you get something unpredictable, where everyone—from a local politician to a first-time visitor—stands side by side, catching beads from a stranger whose identity remains hidden behind bright feathers and sequins.
+
+If you find yourself along the parade route, gazing up at the color and chaos, don’t expect to recognize the faces grinning behind those masks. That’s the point. Mardi Gras, at its best, has always invited people to shake off their usual roles and just have a blast—anonymously. The mask keeps that spirit breathing, year after year.

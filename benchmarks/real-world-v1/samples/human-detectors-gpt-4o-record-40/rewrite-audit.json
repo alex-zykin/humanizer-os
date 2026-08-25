@@ -1,0 +1,15 @@
+{
+  "sample_id": "human-detectors-gpt-4o-record-40",
+  "source_words": 498,
+  "rewrite_words": 497,
+  "source_rule_counts": {
+    "EN-LANG-003": 1
+  },
+  "rewrite_rule_counts": {},
+  "fact_guard": {
+    "ok": true,
+    "protected_facts": 15,
+    "lost": [],
+    "added": []
+  }
+}

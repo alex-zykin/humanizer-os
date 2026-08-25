@@ -1,0 +1,16 @@
+{
+  "sample_id": "human-detectors-claude-record-27",
+  "source_words": 577,
+  "rewrite_words": 550,
+  "source_rule_counts": {
+    "EN-LANG-002": 1,
+    "EN-STRUCT-003": 1
+  },
+  "rewrite_rule_counts": {},
+  "fact_guard": {
+    "ok": true,
+    "protected_facts": 20,
+    "lost": [],
+    "added": []
+  }
+}

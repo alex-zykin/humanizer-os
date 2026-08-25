@@ -1,0 +1,41 @@
+{
+  "sample_id": "human-detectors-paraphrased-gpt-4o-record-52",
+  "source_path": "benchmarks/real-world-v1/candidates/human-detectors-paraphrased-gpt-4o-record-52/source.md",
+  "metrics": {
+    "characters": 2995,
+    "words": 452,
+    "sentences": 27,
+    "paragraphs": 1,
+    "findings": 1,
+    "categories": {
+      "structure": 1
+    },
+    "severities": {
+      "warning": 1
+    },
+    "review_priority": 8,
+    "review_priority_note": "Triage index only; not an AI-authorship score."
+  },
+  "rule_counts": {
+    "EN-STRUCT-003": 1
+  },
+  "protected_facts": 11,
+  "findings": [
+    {
+      "rule_id": "EN-STRUCT-003",
+      "rule_name": "Repeated sentence openings",
+      "category": "structure",
+      "severity": "warning",
+      "confidence": "medium",
+      "message": "Multiple sentences begin with the same words.",
+      "suggestion": "Merge parallel sentences or vary the syntax where the repetition is accidental.",
+      "start": 1698,
+      "end": 2560,
+      "line": 1,
+      "column": 1699,
+      "excerpt": "…ng their melodies.\" <br/><br/> The significance of this study reaches far beyond just birds. Gaining knowledge about how birds acquire and refine their songs ca",
+      "fixable": false,
+      "matched_text": "<br/><br/> The significance of this study reaches far beyond just birds. Gaining knowledge about how birds acquire and refine their songs can shed light on human language development and the importance of sleep in the learning process. \"Amador states that birdsong serves as an excellent model for examining the brain's learning processes.\" \"Researching birds can enhance our comprehension of the functioning of our own brains.\" <br/><br/> Additionally, this study underscores the critical role of sleep in cognitive functions among different species. \"Mindlin highlights that sleep is an active process.\" \"It's a dynamic phase during which the brain is actively engaged in processing data and refining abilities.\" <br/><br/> As researchers delve deeper into the enigmas of birdsong, the similarities between how birds and humans learn are becoming more evident."
+    }
+  ]
+}

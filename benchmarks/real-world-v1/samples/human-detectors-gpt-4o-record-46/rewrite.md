@@ -1,0 +1,13 @@
+As the leaves turn and the air grows crisp, children across the United States eagerly anticipate Halloween night, a time for costumes, candy, and the age-old tradition of trick-or-treating. But while this festive custom seems quintessentially American, its roots stretch back over two millennia to the ancient Celtic festival of Samhain.
+
+Samhain, pronounced "sow-in," marked the end of the harvest season and the beginning of winter, a time when the Celts believed the boundary between the living and the dead blurred. "Samhain was a liminal time, a period when the veil between worlds was thinnest," explains Dr. Fiona MacLeod, a historian specializing in Celtic traditions. "It was believed that spirits could cross over into our world, and people took measures to protect themselves from any malevolent forces."
+
+To ward off these spirits, the Celts would light bonfires and wear costumes, often made of animal skins, to disguise themselves. This practice of donning disguises to confuse or appease wandering spirits is a direct ancestor of today's Halloween costumes. "The idea was to blend in with the supernatural beings," says Dr. MacLeod. "If you looked like a spirit, you were less likely to be bothered by one."
+
+The tradition of going door-to-door also has its origins in Samhain. During the festival, people would visit neighbors to share food and drink, a practice that evolved over time. By the Middle Ages, this had transformed into "souling," where the poor would go from house to house offering prayers for the dead in exchange for food, particularly soul cakes. "This was a way to honor the dead and ensure their safe passage to the afterlife," notes Dr. Ewan O'Connor, an expert in medieval folklore.
+
+As these customs crossed the Atlantic with European immigrants, they mingled with other traditions to form the modern practice of trick-or-treating. By the early 20th century, Halloween in America had become a community-centered holiday, with parades and parties. However, it wasn't until the 1950s that trick-or-treating became widespread, fueled by the post-war baby boom and suburban expansion.
+
+Today, while the spiritual and protective elements of Samhain have largely faded, the essence of community and shared celebration remains. "Trick-or-treating is a way for communities to come together, to share in the joy of the season," says Dr. O'Connor. "It's a tradition that, despite its ancient origins, continues to evolve and bring people together."
+
+So, as you hand out candy this Halloween, remember that you're participating in a tradition that has been shaped by centuries of history, one that connects us to the ancient Celts and their understanding of the world beyond.

@@ -1,0 +1,15 @@
+{
+  "sample_id": "human-detectors-paraphrased-gpt-4o-record-52",
+  "source_words": 452,
+  "rewrite_words": 438,
+  "source_rule_counts": {
+    "EN-STRUCT-003": 1
+  },
+  "rewrite_rule_counts": {},
+  "fact_guard": {
+    "ok": true,
+    "protected_facts": 11,
+    "lost": [],
+    "added": []
+  }
+}

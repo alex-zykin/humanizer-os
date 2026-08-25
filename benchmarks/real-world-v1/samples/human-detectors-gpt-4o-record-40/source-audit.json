@@ -1,0 +1,41 @@
+{
+  "sample_id": "human-detectors-gpt-4o-record-40",
+  "source_path": "benchmarks/real-world-v1/candidates/human-detectors-gpt-4o-record-40/source.md",
+  "metrics": {
+    "characters": 3299,
+    "words": 498,
+    "sentences": 23,
+    "paragraphs": 9,
+    "findings": 1,
+    "categories": {
+      "language": 1
+    },
+    "severities": {
+      "info": 1
+    },
+    "review_priority": 4,
+    "review_priority_note": "Triage index only; not an AI-authorship score."
+  },
+  "rule_counts": {
+    "EN-LANG-003": 1
+  },
+  "protected_facts": 15,
+  "findings": [
+    {
+      "rule_id": "EN-LANG-003",
+      "rule_name": "Inflated copula alternative",
+      "category": "language",
+      "severity": "info",
+      "confidence": "medium",
+      "message": "A formal copula alternative may make the sentence heavier without adding meaning.",
+      "suggestion": "Try 'is', 'has', or a concrete action verb.",
+      "start": 3044,
+      "end": 3056,
+      "line": 17,
+      "column": 100,
+      "excerpt": "…explore the intersection of AI and biology, the creation of cyborg worms represents a fascinating glimpse into a future where technology and nature work hand i…",
+      "fixable": false,
+      "matched_text": "represents a"
+    }
+  ]
+}

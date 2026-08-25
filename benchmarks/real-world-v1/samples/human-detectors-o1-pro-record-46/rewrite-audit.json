@@ -1,0 +1,13 @@
+{
+  "sample_id": "human-detectors-o1-pro-record-46",
+  "source_words": 547,
+  "rewrite_words": 547,
+  "source_rule_counts": {},
+  "rewrite_rule_counts": {},
+  "fact_guard": {
+    "ok": true,
+    "protected_facts": 36,
+    "lost": [],
+    "added": []
+  }
+}

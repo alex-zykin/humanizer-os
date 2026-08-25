@@ -117,6 +117,12 @@ Blind human evaluation is required before semantic rewriting is called stable. A
 
 Do not commit private text, scraped proprietary corpora, Books3 passages, or copied source examples without compatible licensing. A real-world benchmark record needs explicit redistribution permission, provenance, and a separately authored rewrite. Human reference articles stay out of the repository unless their license permits redistribution.
 
+## Real-world pilot
+
+The committed pilot contains 10 provenance-tracked machine-generated samples across 5 released generation modes. It records 13 source findings, 0 rewrite findings, and 189 protected facts with 10/10 Fact Guard passes.
+
+Run `python scripts/benchmark_real_world.py --check` to verify that the manifest, rewrites, and committed result still match the current engine. The pilot is a regression and preservation benchmark, not an authorship detector or a representative quality study.
+
 ## Current limits
 
 The built-in fixture set and one-sample benchmark seed are regression tools, not representative corpora. They do not support an authorship claim or a global humanization score. See [LIMITATIONS.md](LIMITATIONS.md).

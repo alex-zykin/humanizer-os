@@ -193,7 +193,7 @@ def build_results(manifest: Path = DEFAULT_MANIFEST) -> dict[str, Any]:
     return {
         "schema_version": 1,
         "benchmark": "real-world-v1",
-        "status": "seed",
+        "status": "pilot" if len(samples) >= 10 else "seed",
         "summary": {
             "samples": len(samples),
             "source_words": source_words,
