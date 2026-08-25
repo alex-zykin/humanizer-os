@@ -1,0 +1,50 @@
+{
+  "sample_id": "human-detectors-o1-pro-record-46",
+  "record_id": 46,
+  "prompt_id": 17,
+  "model": "o1-pro",
+  "ground_truth": "AI-generated",
+  "expert_majority_vote": "Machine-Generated",
+  "title": "What Does the N95 Stand for in N95 Masks?",
+  "subtitle": "Who knew?",
+  "author": "Madeline Wahl",
+  "reference_source": "Readers Digest",
+  "publication_date": "-17954999",
+  "section": "Knowledge",
+  "reference_url": "https://www.rd.com/article/what-does-the-n95-stand-for-in-n95-masks/",
+  "words": 547,
+  "sha256": "3dd5cf8c26715b5e3b7c45b6f3af4c3889af08ee6771255dd30a4e4fda77ce9e",
+  "signal_score": 15,
+  "annotations": [
+    {
+      "annotator": 1,
+      "guess": "Machine-Generated",
+      "confidence": 3.0,
+      "comment": "This article had quite a few points that made me think it could be either. Ultimately the AI markers like using \"explains\" and \"emphasizes\" for speakers felt stronger than the markers for it being human-generated."
+    },
+    {
+      "annotator": 2,
+      "guess": "Machine-Generated",
+      "confidence": 2.0,
+      "comment": "The 2 lists may suggest AI generation. e.g. \"dust, smoke, or certain pathogens.\"\nThe word \"crucial\" may also suggest AI generation."
+    },
+    {
+      "annotator": 3,
+      "guess": "Human-Generated",
+      "confidence": 5.0,
+      "comment": "Contractions and 'you' language usually suggest it's been human-generated, and there's a 'you've' in the first paragraph. There are also instances of filler words like 'somewhat' and 'just' and some missing punctuation."
+    },
+    {
+      "annotator": 4,
+      "guess": "Machine-Generated",
+      "confidence": 5.0,
+      "comment": "I feel  confident this is AI-generated. There is a good use of those simplistic terms that help maintain a more conversational tone, but... the information being told repeats itself, especially when constantly quoting the \"95% efficacy\" of the mask's protection against airborne particles. That doesn't need to be repeated throughout the article if it doesn't add anything. It also devolves into its usual phrasings, such as with \"it's more than just a label\" or its three pattern listing such as with \"which helps protect against fine, airborne particles like dust, smoke, or certain pathogens.\""
+    },
+    {
+      "annotator": 5,
+      "guess": "Machine-Generated",
+      "confidence": 5.0,
+      "comment": "The facile introduction. \nThe vague reference to \"a medical center\" and \"a manufacturer\". \nThe text has no spark. Just plods along tediously."
+    }
+  ]
+}

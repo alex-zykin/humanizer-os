@@ -1,0 +1,50 @@
+{
+  "sample_id": "human-detectors-o1-pro-record-45",
+  "record_id": 45,
+  "prompt_id": 16,
+  "model": "o1-pro",
+  "ground_truth": "AI-generated",
+  "expert_majority_vote": "Machine-Generated",
+  "title": "Can Your Electric Vehicle Catch Fire During a Hurricane?",
+  "subtitle": "E.V. batteries that are submerged in saltwater can catch fire after the floods subside, but experts say it’s a rarity.",
+  "author": "Austyn Gaffney & Brad Plumer",
+  "reference_source": "New York Times",
+  "publication_date": "-17954426",
+  "section": "Automobiles",
+  "reference_url": "https://www.nytimes.com/2024/10/09/climate/electric-vehicles-fire-hurricanes.html",
+  "words": 947,
+  "sha256": "81e57215280ced9d43879354265adc4f4da6227e6596010d76491867e2fc632b",
+  "signal_score": 15,
+  "annotations": [
+    {
+      "annotator": 1,
+      "guess": "Machine-Generated",
+      "confidence": 5.0,
+      "comment": "The article has numerous AI markers like the use of pairs when describing things e.g. \"safely and efficiently\". It also has various other phrases that I recognise from different AI text that I've worked with before."
+    },
+    {
+      "annotator": 2,
+      "guess": "Machine-Generated",
+      "confidence": 3.0,
+      "comment": "The use of several lists suggests AI writing. E.g. \"engineers, scientists, and firefighters.\"\nAlso, the words \"critical\" and \"key\" are commonly used by AI."
+    },
+    {
+      "annotator": 3,
+      "guess": "Human-Generated",
+      "confidence": 4.0,
+      "comment": "This was a tough one. But I'm going to say human-generated, based on the fact that AI doesn't tend to use filler words like 'very' and 'even'. It also uses contractions and ends on a quote."
+    },
+    {
+      "annotator": 4,
+      "guess": "Machine-Generated",
+      "confidence": 5.0,
+      "comment": "I am confident this article is AI-generated. The article contains a lot of the common vocabulary (significant, understanding, represents, efficiently, etc.)  and sentence patterns that I see with AI, such as \"The car should be inspected by a qualified professional who can safely disconnect the battery and assess any damage.\" and \"With the proper precautions—such as moving your vehicle to safer ground before a storm and seeking professional help if it’s flooded—most risks can be minimized.\" It's formal, contains some sentimental tone to try and quickly summarize a sense of hope in the topic even though it's not needed, and moreover, the quotes aren't realistic to how most people would speak day-to-day."
+    },
+    {
+      "annotator": 5,
+      "guess": "Machine-Generated",
+      "confidence": 5.0,
+      "comment": "The rah-rah conclusion: not to worry folks, the clean, sustainable transportation system is still safe. AI forgot to add \"for future generations\".\nThe excessively dramatic introductory sentence."
+    }
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "sample_id": "human-detectors-gpt-4o-record-46",
+  "record_id": 46,
+  "prompt_id": 23,
+  "model": "gpt-4o",
+  "ground_truth": "AI-generated",
+  "expert_majority_vote": "Machine-Generated",
+  "title": "The Celtic Origins of Trick-or-Treating",
+  "subtitle": "The spine-tingling roots of a mischievous Halloween tradition",
+  "author": "Brandon Tensley",
+  "reference_source": "Smithsonian Magazine",
+  "publication_date": "September/October 2024",
+  "section": "History",
+  "reference_url": "https://www.smithsonianmag.com/history/celtic-origins-trick-treating-halloween-180984916/",
+  "words": 431,
+  "sha256": "745497890e87b8c999edf3873d0c55b6272858ded039c7ba7c7708cf79abad84",
+  "signal_score": 22,
+  "annotations": [
+    {
+      "annotator": 1,
+      "guess": "Machine-Generated",
+      "confidence": 4.0,
+      "comment": "The opening sentence feels very AI-generated, especially the first half, which immediately sets the scene and is quite descriptive. The article also feels quite happy and harmless. It seems suspicious that an ancient festival for quite a creepy holiday would have no sacrifices or less wholesome elements to it. It would be quite a generic AI thing to avoid any more harmful elements while happily talking about \"the joy of the season\". The way the names are mentioned for the experts also feels a bit forced, which is something AI tends to do."
+    },
+    {
+      "annotator": 2,
+      "guess": "Machine-Generated",
+      "confidence": 2.0,
+      "comment": "It's difficult to tell. The sentence structure leads me to think this is AI generated."
+    },
+    {
+      "annotator": 3,
+      "guess": "Machine-Generated",
+      "confidence": 4.0,
+      "comment": "There's nothing glaringly wrong with this text and it's structured well. Although there are a  few phrases that don't seem very 'AI' to me, the sentence formation feels very machine-generated. AI likes to write conclusions using 'so, ...' and the first speech tag is usually 'explains'. The writing is also very flat."
+    },
+    {
+      "annotator": 4,
+      "guess": "Machine-Generated",
+      "confidence": 5.0,
+      "comment": "This article appears AI-generated. Again, the sentence structure lacks variety and flow, and many of the sentences try to spoon-feed information with romantic, flowery summarizations. Sentences such as \"the essence of community and shared celebration remains.\" and  \"one that connects us to the ancient Celts and their understanding of the world beyond.\" try to bring out the flow of ideas together, but cut them short, leaving quotes hanging and other areas of information blurred. They're uniform in their structure, and string things together for efficiency without giving the article any ability to show the information presented. So, it's AI-generated."
+    },
+    {
+      "annotator": 5,
+      "guess": "Machine-Generated",
+      "confidence": 5.0,
+      "comment": "Other than the staid introduction and the reminder that we should \"remember\" the key takeaway AI considers important for us mere mortals, the text is free from the usual LLM stylistic markers that identify it as AI-generated. Unfortunately, the lengthy quotes that \"note\" and \"explain\" are still present."
+    }
+  ]
+}

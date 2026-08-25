@@ -1,0 +1,50 @@
+{
+  "sample_id": "human-detectors-paraphrased-gpt-4o-record-50",
+  "record_id": 50,
+  "prompt_id": 20,
+  "model": "paraphrased_gpt-4o",
+  "ground_truth": "AI-generated",
+  "expert_majority_vote": "Machine-Generated",
+  "title": "AI Agents Can Do More Than Answer Queries. That Raises a Few Questions.",
+  "subtitle": "A new generation of automation creates an opportunity to build a better economic model for business software users—but only if the technology lives up to its promise",
+  "author": "Steven Rosenbush",
+  "reference_source": "Wall Street Journal",
+  "publication_date": "10/16/24",
+  "section": "Tech",
+  "reference_url": "https://www.wsj.com/articles/ai-agents-can-do-more-than-answer-queries-that-raises-a-few-questions-15009853?mod=tech_feat1_ai_pos3",
+  "words": 599,
+  "sha256": "04d84f201c049d5fd4e1cef181f70bd2c1977e25bf620495ce01ba707c30b4b9",
+  "signal_score": 31,
+  "annotations": [
+    {
+      "annotator": 1,
+      "guess": "Machine-Generated",
+      "confidence": 5.0,
+      "comment": "The article is filled with AI words like \"fostering\", \"streamline\", and \"intricate\". Both the introduction and conclusion are very generic as you would expect from machine-generated text and the conclusion even starts with the phrase \"in summary\". Lastly, the quotations have the same overly wordy tone as the rest of the article and also contain some of the same AI words like \"crucial\"."
+    },
+    {
+      "annotator": 2,
+      "guess": "Machine-Generated",
+      "confidence": 4.0,
+      "comment": "There's the use of AI-favored words like \"fostering\" and \"crucial.\"\nThere are several uses of AI's favored sentence structure, which involves an independent clause followed by a comma and a dependent clause.\nThe last paragraph sums up the main points of the article in a way that AI usually does it. It again uses the words \"crucial\" and \"fostering.\""
+    },
+    {
+      "annotator": 3,
+      "guess": "Machine-Generated",
+      "confidence": 5.0,
+      "comment": "Here's why I know it's machine-generated: the word 'crucial' popping up all over the place. Same formulaic sentence length, paragraph length and structure. Conclusion starts with 'in summary'. Overuse of the word 'safeguard'."
+    },
+    {
+      "annotator": 4,
+      "guess": "Machine-Generated",
+      "confidence": 5.0,
+      "comment": "I'm confident this is AI-generated, and considering the topic, I also find it ironic. As one sentence in the article says, \"Their capacity to grasp context and make subtle decisions remains limited.\" and while this sentence is written by AI, that is exactly what's happening here in this article and any AI article I deem so. It's the only sentence that actually spoke to me throughout it, as every other sentence contains the limited interface of lengthy overviews of the article's topic, all the while lacking the subtly to make decisions about context, word choice, sentence structure, pacing, and tone. Sentences such as, \"the transformative impact of AI agents on business software is indisputable.\" and \"Achieving this vision necessitates a thoughtful approach to both the challenges and opportunities posed by AI agents.\" condenses everything with a higher vocabulary and repetitive sentence structure, but the ideas are conveyed with broad strokes, with constant remarks about the significance of something without truly understanding why it's important, why it's relevant to the reader."
+    },
+    {
+      "annotator": 5,
+      "guess": "Machine-Generated",
+      "confidence": 5.0,
+      "comment": "Repetitive and predictable word choices.\nPredilection for perfect and progressive verb forms.\nInability to use a word or phrase from a quote to avoid all these synonyms for \"say/said\".\nQuotes cannot be verified."
+    }
+  ]
+}

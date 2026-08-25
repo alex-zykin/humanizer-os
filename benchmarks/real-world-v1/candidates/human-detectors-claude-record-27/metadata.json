@@ -1,0 +1,50 @@
+{
+  "sample_id": "human-detectors-claude-record-27",
+  "record_id": 27,
+  "prompt_id": 28,
+  "model": "claude",
+  "ground_truth": "AI-generated",
+  "expert_majority_vote": "Machine-Generated",
+  "title": "TikTok Sued by Multiple States for Allegedly Harming Young People",
+  "subtitle": "The app has been sued by a number of attorneys general who cite the popular but dangerous challenges it serves up to young users",
+  "author": "Richard Vanderford",
+  "reference_source": "Wall Street Journal",
+  "publication_date": "-17954000",
+  "section": "Law",
+  "reference_url": "https://www.wsj.com/articles/tiktok-sued-by-multiple-states-for-allegedly-harming-young-people-77eb49d7?mod=law_more_article_pos41",
+  "words": 577,
+  "sha256": "4def774870316fd8b2e4252c2d5c3c7472e1eaa1515322890a701b6e01fe65c0",
+  "signal_score": 17,
+  "annotations": [
+    {
+      "annotator": 1,
+      "guess": "Machine-Generated",
+      "confidence": 5.0,
+      "comment": "Common AI names used, especially \"Dr. Sarah Thompson\". Combined with the generic introduction and artificial-sounding overly verbose quotes, it's clearly AI."
+    },
+    {
+      "annotator": 2,
+      "guess": "Machine-Generated",
+      "confidence": 2.0,
+      "comment": "This one was difficult because while there are no obvious signs of AI, there are also no obvious signs of human writing. However, the sentence style seems to be AI-generated, as it often uses sentences consisting of an independent clause followed by a comma then a dependent clause."
+    },
+    {
+      "annotator": 3,
+      "guess": "Machine-Generated",
+      "confidence": 4.0,
+      "comment": "Although there aren't numerous instances of the usual words, it's structure is pretty similar to AI. The sentences and paragraphs are all around the same length. There aren't any glaringly obvious grammatical errors. And it uses words like 'maintaining', 'employs' and 'implications'."
+    },
+    {
+      "annotator": 4,
+      "guess": "Machine-Generated",
+      "confidence": 5.0,
+      "comment": "Considering I encountered a different version of the same topic before, I believe this is AI-generated. So much of the information in this article is condensed, packed so tight with higher vocabulary words that it loses out on the potential to paint the picture, set the tone, and control the pacing of information. Phrases such as \"maximize user engagement, particularly among young people who are more susceptible to addictive behaviors.\" and \"amid growing concern over social media's impact on youth mental health.\" don't say anything about the details, but try to summarize it all in quick succession, which to me, is often what AI does."
+    },
+    {
+      "annotator": 5,
+      "guess": "Machine-Generated",
+      "confidence": 5.0,
+      "comment": "The piece is written in a neutral voice and has no glaring LLM idiosyncrasies. If I could verify one of the numerous quotes, I might have been convinced. Since I could not do that, the last sentence tipped the balance in favour of the machine."
+    }
+  ]
+}

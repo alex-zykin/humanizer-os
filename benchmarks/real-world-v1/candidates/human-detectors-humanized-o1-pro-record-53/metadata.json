@@ -1,0 +1,50 @@
+{
+  "sample_id": "human-detectors-humanized-o1-pro-record-53",
+  "record_id": 53,
+  "prompt_id": 24,
+  "model": "humanized_o1-pro",
+  "ground_truth": "AI-generated",
+  "expert_majority_vote": "Machine-Generated",
+  "title": "Eating Seaweed Could Make Cows Less Gassy, Slashing Methane Emissions From Grazing by Nearly 40 Percent",
+  "subtitle": "A new study finds that feeding seaweed pellets to grazing beef cattle dramatically reduces their greenhouse gas emissions",
+  "author": "Sarah Kuta",
+  "reference_source": "Smithsonian Magazine",
+  "publication_date": "1733184000000",
+  "section": "Smart News - Ideas & Innovation",
+  "reference_url": "https://www.smithsonianmag.com/smart-news/eating-seaweed-could-make-cows-less-gassy-slashing-methane-emissions-from-grazing-by-nearly-40-percent-180985575/",
+  "words": 862,
+  "sha256": "d9b56bc7377b628d5cabb86cf4aaee9e7f92fb71e3ddf15e2731e9f591a5b530",
+  "signal_score": 10,
+  "annotations": [
+    {
+      "annotator": 1,
+      "guess": "Human-Generated",
+      "confidence": 2.0,
+      "comment": "I wasn't too sure but I went with human-generated, partly because of a couple of words like \"hoofprint\" and \"literally\". The people interviewed were also all from the same university, which makes sense from a logistical standpoint."
+    },
+    {
+      "annotator": 2,
+      "guess": "Machine-Generated",
+      "confidence": 3.0,
+      "comment": "The word \"potent\" is often used by AI, as is the phrase \"pack a punch.\"\n\"Practical tool\" is commonly used by AI."
+    },
+    {
+      "annotator": 3,
+      "guess": "Human-Generated",
+      "confidence": 5.0,
+      "comment": "Again it has a voice and that voice isn't as stiff as AI's. It also uses colloquial language, contractions and filler words."
+    },
+    {
+      "annotator": 4,
+      "guess": "Machine-Generated",
+      "confidence": 5.0,
+      "comment": "I am pretty confident this is AI-generated. A lot of the similar writing patterns I've seen with AI are present here, and it also lacks explanations that are needed, such as how cows digest their food and produce methane, or why methane emission drops are being prioritized. Alongside that, the language is formal, using verbs and nouns in a constricted manner that's precise in getting ideas together, but when placed inside an article, these sentences need more explanation and variety to be understood, even with variances in some of its attempts at casual phrasings. Some examples include \"Reducing livestock methane offers a relatively quick win\" and \"If seaweed pellets give us a practical tool, that’s worth exploring.\""
+    },
+    {
+      "annotator": 5,
+      "guess": "Machine-Generated",
+      "confidence": 5.0,
+      "comment": "My confidence level doubled when I read the last paragraph. \nA few overused phrases and word choices indicative of AI-authored text but nothing that would upset the casual reader. Haven't checked the cited material, and this is where AI usually messes up completely."
+    }
+  ]
+}

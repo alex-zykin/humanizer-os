@@ -127,7 +127,7 @@ def _candidate(record: dict[str, Any]) -> dict[str, Any] | None:
     if not article or not model:
         return None
     words = _word_count(article)
-    if not 220 <= words <= 450:
+    if not 100 <= words <= 2000:
         return None
 
     annotations = _annotations(record)
@@ -298,7 +298,7 @@ def write_candidates(selected: list[dict[str, Any]], output: Path) -> None:
         "selection": {
             "ground_truth": "machine-generated only",
             "record_id_excluded": 4,
-            "word_range": [220, 450],
+            "word_range": [100, 2000],
             "strategy": "round-robin by generation model with section diversity",
         },
         "candidates": index,
@@ -313,7 +313,7 @@ def main() -> int:
     parser = argparse.ArgumentParser(
         description="Import a deterministic Human Detectors candidate batch."
     )
-    parser.add_argument("--limit", type=int, default=15)
+    parser.add_argument("--limit", type=int, default=20)
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
     args = parser.parse_args()
     if args.limit < 1:

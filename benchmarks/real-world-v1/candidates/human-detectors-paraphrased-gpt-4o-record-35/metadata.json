@@ -1,0 +1,50 @@
+{
+  "sample_id": "human-detectors-paraphrased-gpt-4o-record-35",
+  "record_id": 35,
+  "prompt_id": 5,
+  "model": "paraphrased_gpt-4o",
+  "ground_truth": "AI-generated",
+  "expert_majority_vote": "Machine-Generated",
+  "title": "Montana Rancher Who Created Giant, Hybrid Sheep Sentenced to Six Months in Prison",
+  "subtitle": "Arthur “Jack” Schubarth cloned illegally imported genetic material from the Marco Polo argali to create hybrid sheep that would draw higher prices from hunting preserves",
+  "author": "Alexa Robles-Gil",
+  "reference_source": "Smithsonian Magazine",
+  "publication_date": "10/3/24",
+  "section": "Smart News",
+  "reference_url": "https://www.smithsonianmag.com/smart-news/montana-rancher-who-created-giant-hybrid-sheep-sentenced-to-six-months-in-prison-180985194/",
+  "words": 483,
+  "sha256": "3d490b7f39dddce2ce84704b05d1572a0984e8fe1a75a12aa5c93d7b61f74ea7",
+  "signal_score": 24,
+  "annotations": [
+    {
+      "annotator": 1,
+      "guess": "Machine-Generated",
+      "confidence": 5.0,
+      "comment": "The opening sentence was interesting as it was very generic and immediately gave almost everything the article was about, but also contained the specific length of the prison sentence. This made which it was somewhat unclear. As I read further, there were various AI words and phrases as well as a conclusion that made the article a lesson for humanity in the future. The last 1/4 of the article was very clearly AI generated with \"crucial\", \"delve deeper\", and \"underscores\" all within a couple of sentences."
+    },
+    {
+      "annotator": 2,
+      "guess": "Machine-Generated",
+      "confidence": 3.0,
+      "comment": "The use of the AI-favored words \"crucial\", \"critical\" and \"both\" hint at an AI author. Also, the metaphor of \"delving deeper\" is one often used by AI."
+    },
+    {
+      "annotator": 3,
+      "guess": "Machine-Generated",
+      "confidence": 5.0,
+      "comment": "Here's why I think it's machine-generated: nominalisations; phrases like 'delve deeper' and 'highlights the critical need'; speech tags are varied but the norm for AI (someone 'explains' then 'notes' something); uses American English; doesn't contain any grammatical errors."
+    },
+    {
+      "annotator": 4,
+      "guess": "Machine-Generated",
+      "confidence": 5.0,
+      "comment": "I am confident this is AI-generated. The article contains a lot of the usual strict language that attempts to summarize and insert ideas within a languid sentence structure, and while the article briefly mentions the points made, it contain any way of describing the event as meaningful or impactful or important to the reader without blatantly stating \"this is important because of these ideals.\" Phrases, such as \"emphasized that this case highlights the critical need to safeguard wildlife\", \"stressed the importance of responsibility,\" and \" underscores the crucial importance of adhering to legal and ethical limits\" use commonly cited verbs and adjectives to condense ideas together, and the conclusion paragraph of the article also contains a lot of its romantic notions, such as with \"guiding us toward a future where innovation aligns with conservation efforts,\" leaving the details of the topic vague and broadly touched on."
+    },
+    {
+      "annotator": 5,
+      "guess": "Machine-Generated",
+      "confidence": 5.0,
+      "comment": "My suspicions were raised with the lack of specificity  in the text. When did this happen and where were the details of the case published?\nThe facts incorrectly reported are: the journalist did not write what AI quotes; the Laslovich paraphrase is fabricated; the defense \"claimed\" nothing of what AI writes here; and the only comment on the case Edward Grace (Assistant Director of the U.S. Fish and Wildlife Service’s Office of Law Enforcement, not only \"an expert in conservation) gave was about wildlife trafficking not any of the convenient hogwash given in the text. \nUsual LLM marker words and AI's elaborate turns of phrase are marked."
+    }
+  ]
+}

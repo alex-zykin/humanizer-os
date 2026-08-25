@@ -1,0 +1,50 @@
+{
+  "sample_id": "human-detectors-gpt-4o-record-32",
+  "record_id": 32,
+  "prompt_id": 16,
+  "model": "gpt-4o",
+  "ground_truth": "AI-generated",
+  "expert_majority_vote": "Machine-Generated",
+  "title": "This Chatbot Pulls People Away From Conspiracy Theories",
+  "subtitle": "In a new study, many people doubted or abandoned false beliefs after a short conversation with the DebunkBot.",
+  "author": "Teddy Rosenbluth",
+  "reference_source": "New York Times",
+  "publication_date": "9/12/24",
+  "section": "Health",
+  "reference_url": "https://www.nytimes.com/2024/09/12/health/chatbot-debunk-conspiracy-theories.html",
+  "words": 763,
+  "sha256": "ba56279684b62c7be52ff25111bc4c6df0d764ecc33254d42fe11fbedcb69d14",
+  "signal_score": 27,
+  "annotations": [
+    {
+      "annotator": 1,
+      "guess": "Machine-Generated",
+      "confidence": 5.0,
+      "comment": "Dr. Emily returns with a new surname and Dr. Mark Thompson makes a reappearance. The lack of name creativity is enough to tell that it's AI. The way it references \"harmful theories\" without ever going into detail about one, seems like something AI would do. People might use similar prompts to get around restrictions, so it can't actually talk about harmful theories. It also contains various generic AI phrases and an overly hopeful conclusion."
+    },
+    {
+      "annotator": 2,
+      "guess": "Machine-Generated",
+      "confidence": 5.0,
+      "comment": "The text contains typically AI-used words and phrases: \"leveraging\", \"powerful tool\", \"fostering\", and \"crucial\". It contains the typical \"imaging\" scenario. The last sentence is a generic conclusion style."
+    },
+    {
+      "annotator": 3,
+      "guess": "Machine-Generated",
+      "confidence": 5.0,
+      "comment": "I'm not used to reading informative articles of this kind written by AI; I tend to read marketing content. However, the more of these I read, the easier it's becoming to detect when the article is machine-generated. There's a certain rhythmical quality that AI favours. For example, the first sentence. I've also noticed it likes to begin sentences with the word 'by'. And there's nothing grammatically wrong with this text."
+    },
+    {
+      "annotator": 4,
+      "guess": "Machine-Generated",
+      "confidence": 3.0,
+      "comment": "Some parts of it are human-written, but I believe the base of the article is AI-generated. This, despite some of the flaws, feels like an article I'd write for a client, and the indicators to me that show it's AI-generated include \"a testament to the potential of innovative solutions.\" and \"bringing us one step closer to a more informed and discerning society.\" But beyond that, even the edits, such as \"a glimmer of hope,\" \"keeping pace is a constant battle\" and \"foster critical thinking and open dialogue\" feel like the base of the article was AI because that's how it'd write the topic - larger vocabulary of tight-knitted words, elegantly placed, but not strategically put. So, it's AI-generated."
+    },
+    {
+      "annotator": 5,
+      "guess": "Machine-Generated",
+      "confidence": 5.0,
+      "comment": "The moment I see text structured as uniformly as this I immediately think AI. The typical introduction and conclusion, subheadings, and evenly balanced sections are too characteristic of AI-generated text to ignore. And AI should really learn that \"problems\" and \"problematic\" are acceptable alternatives for its ubiquitous \"challenges\"."
+    }
+  ]
+}
