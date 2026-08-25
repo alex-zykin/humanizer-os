@@ -1,0 +1,13 @@
+{
+  "sample_id": "human-detectors-humanized-o1-pro-record-47",
+  "source_words": 535,
+  "rewrite_words": 535,
+  "source_rule_counts": {},
+  "rewrite_rule_counts": {},
+  "fact_guard": {
+    "ok": true,
+    "protected_facts": 16,
+    "lost": [],
+    "added": []
+  }
+}
