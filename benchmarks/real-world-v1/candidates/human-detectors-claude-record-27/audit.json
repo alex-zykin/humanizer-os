@@ -1,0 +1,60 @@
+{
+  "sample_id": "human-detectors-claude-record-27",
+  "source_path": "benchmarks/real-world-v1/candidates/human-detectors-claude-record-27/source.md",
+  "metrics": {
+    "characters": 4005,
+    "words": 577,
+    "sentences": 26,
+    "paragraphs": 1,
+    "findings": 2,
+    "categories": {
+      "content": 1,
+      "structure": 1
+    },
+    "severities": {
+      "error": 1,
+      "warning": 1
+    },
+    "review_priority": 19,
+    "review_priority_note": "Triage index only; not an AI-authorship score."
+  },
+  "rule_counts": {
+    "EN-LANG-002": 1,
+    "EN-STRUCT-003": 1
+  },
+  "protected_facts": 20,
+  "findings": [
+    {
+      "rule_id": "EN-STRUCT-003",
+      "rule_name": "Repeated sentence openings",
+      "category": "structure",
+      "severity": "warning",
+      "confidence": "medium",
+      "message": "Multiple sentences begin with the same words.",
+      "suggestion": "Merge parallel sentences or vary the syntax where the repetition is accidental.",
+      "start": 254,
+      "end": 1028,
+      "line": 1,
+      "column": 255,
+      "excerpt": "…cal and mental harm.<br><br>The lawsuits, filed by attorneys general from eight states including California, Florida, and New York, claim that TikTok's algorith",
+      "fixable": false,
+      "matched_text": "<br><br>The lawsuits, filed by attorneys general from eight states including California, Florida, and New York, claim that TikTok's algorithm intentionally serves up harmful content to teenagers and children while downplaying the platform's risks to parents.<br><br>\"TikTok has become a digital playground where our children are the unwitting test subjects in a dangerous social experiment,\" said California Attorney General Rob Bonta. \"The company's aggressive data collection practices and manipulative algorithms are designed to keep young users scrolling endlessly, regardless of the consequences to their well-being.\"<br><br>At the center of the legal challenge are TikTok's viral challenges, which often encourage users to perform risky stunts or dangerous activities."
+    },
+    {
+      "rule_id": "EN-LANG-002",
+      "rule_name": "Vague attribution",
+      "category": "content",
+      "severity": "error",
+      "confidence": "high",
+      "message": "The claim is attributed to an unnamed source.",
+      "suggestion": "Name and cite the source, or remove the attribution and narrow the claim.",
+      "start": 3025,
+      "end": 3040,
+      "line": 1,
+      "column": 3026,
+      "excerpt": "…rm's data collection and content recommendation practices.<br><br>Legal experts suggest these lawsuits could have far-reaching implications for social media re…",
+      "fixable": false,
+      "matched_text": "experts suggest"
+    }
+  ]
+}

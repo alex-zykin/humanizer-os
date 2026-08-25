@@ -1,0 +1,59 @@
+{
+  "sample_id": "human-detectors-paraphrased-gpt-4o-record-50",
+  "source_path": "benchmarks/real-world-v1/candidates/human-detectors-paraphrased-gpt-4o-record-50/source.md",
+  "metrics": {
+    "characters": 4134,
+    "words": 599,
+    "sentences": 33,
+    "paragraphs": 1,
+    "findings": 2,
+    "categories": {
+      "rhetoric": 1,
+      "structure": 1
+    },
+    "severities": {
+      "warning": 2
+    },
+    "review_priority": 12,
+    "review_priority_note": "Triage index only; not an AI-authorship score."
+  },
+  "rule_counts": {
+    "EN-RHET-003": 1,
+    "EN-STRUCT-003": 1
+  },
+  "protected_facts": 29,
+  "findings": [
+    {
+      "rule_id": "EN-STRUCT-003",
+      "rule_name": "Repeated sentence openings",
+      "category": "structure",
+      "severity": "warning",
+      "confidence": "medium",
+      "message": "Multiple sentences begin with the same words.",
+      "suggestion": "Merge parallel sentences or vary the syntax where the repetition is accidental.",
+      "start": 2901,
+      "end": 3872,
+      "line": 1,
+      "column": 2902,
+      "excerpt": "…ve user confidence. <br/><br/> Even with these obstacles, the ability of AI agents to revolutionize business software is unquestionable. Adam Evans, a venture c",
+      "fixable": false,
+      "matched_text": "<br/><br/> Even with these obstacles, the ability of AI agents to revolutionize business software is unquestionable. Adam Evans, a venture capitalist, asserts that achieving success depends on the partnership between tech developers and business executives. \"He emphasizes that collaboration is key to tailoring AI agents to business requirements while also tackling ethical and practical issues.\" <br/><br/> As AI agents advance, their presence in business software is expected to grow. The technology's capacity to automate intricate tasks and make decisions based on data provides insight into a future where businesses function with greater efficiency and effectiveness. To achieve this vision, it is essential to thoughtfully address the challenges and opportunities posed by AI agents. <br/><br/> In summary, AI agents signify a major leap in automation technology, with the capability to transform business software and develop a more efficient economic structure."
+    },
+    {
+      "rule_id": "EN-RHET-003",
+      "rule_name": "Formulaic conclusion",
+      "category": "rhetoric",
+      "severity": "warning",
+      "confidence": "medium",
+      "message": "The paragraph announces that it is a conclusion.",
+      "suggestion": "End on the strongest fact, decision, or unresolved consequence instead.",
+      "start": 3704,
+      "end": 3714,
+      "line": 1,
+      "column": 3705,
+      "excerpt": "…ly address the challenges and opportunities posed by AI agents. <br/><br/> In summary, AI agents signify a major leap in automation technology, with the capabil",
+      "fixable": false,
+      "matched_text": "In summary"
+    }
+  ]
+}

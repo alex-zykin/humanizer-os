@@ -1,0 +1,84 @@
+{
+  "schema_version": 1,
+  "target_total_samples": 10,
+  "existing_seed_samples": 1,
+  "selected_candidates": [
+    {
+      "sample_id": "human-detectors-gpt-4o-record-46",
+      "words": 431,
+      "findings": 0,
+      "rule_counts": {},
+      "protected_facts": 12
+    },
+    {
+      "sample_id": "human-detectors-paraphrased-gpt-4o-record-52",
+      "words": 452,
+      "findings": 1,
+      "rule_counts": {
+        "EN-STRUCT-003": 1
+      },
+      "protected_facts": 11
+    },
+    {
+      "sample_id": "human-detectors-paraphrased-gpt-4o-record-35",
+      "words": 483,
+      "findings": 1,
+      "rule_counts": {
+        "EN-STRUCT-003": 1
+      },
+      "protected_facts": 14
+    },
+    {
+      "sample_id": "human-detectors-gpt-4o-record-40",
+      "words": 498,
+      "findings": 1,
+      "rule_counts": {
+        "EN-LANG-003": 1
+      },
+      "protected_facts": 15
+    },
+    {
+      "sample_id": "human-detectors-humanized-o1-pro-record-47",
+      "words": 535,
+      "findings": 0,
+      "rule_counts": {},
+      "protected_facts": 16
+    },
+    {
+      "sample_id": "human-detectors-claude-record-0",
+      "words": 547,
+      "findings": 1,
+      "rule_counts": {
+        "EN-STRUCT-003": 1
+      },
+      "protected_facts": 28
+    },
+    {
+      "sample_id": "human-detectors-o1-pro-record-46",
+      "words": 547,
+      "findings": 0,
+      "rule_counts": {},
+      "protected_facts": 36
+    },
+    {
+      "sample_id": "human-detectors-claude-record-27",
+      "words": 577,
+      "findings": 2,
+      "rule_counts": {
+        "EN-LANG-002": 1,
+        "EN-STRUCT-003": 1
+      },
+      "protected_facts": 20
+    },
+    {
+      "sample_id": "human-detectors-paraphrased-gpt-4o-record-50",
+      "words": 599,
+      "findings": 2,
+      "rule_counts": {
+        "EN-RHET-003": 1,
+        "EN-STRUCT-003": 1
+      },
+      "protected_facts": 29
+    }
+  ]
+}

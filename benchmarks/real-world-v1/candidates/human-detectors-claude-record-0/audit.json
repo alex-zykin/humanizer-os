@@ -1,0 +1,41 @@
+{
+  "sample_id": "human-detectors-claude-record-0",
+  "source_path": "benchmarks/real-world-v1/candidates/human-detectors-claude-record-0/source.md",
+  "metrics": {
+    "characters": 3713,
+    "words": 547,
+    "sentences": 24,
+    "paragraphs": 1,
+    "findings": 1,
+    "categories": {
+      "structure": 1
+    },
+    "severities": {
+      "warning": 1
+    },
+    "review_priority": 6,
+    "review_priority_note": "Triage index only; not an AI-authorship score."
+  },
+  "rule_counts": {
+    "EN-STRUCT-003": 1
+  },
+  "protected_facts": 28,
+  "findings": [
+    {
+      "rule_id": "EN-STRUCT-003",
+      "rule_name": "Repeated sentence openings",
+      "category": "structure",
+      "severity": "warning",
+      "confidence": "medium",
+      "message": "Multiple sentences begin with the same words.",
+      "suggestion": "Merge parallel sentences or vary the syntax where the repetition is accidental.",
+      "start": 353,
+      "end": 1038,
+      "line": 1,
+      "column": 354,
+      "excerpt": "…lawful imprisonment.<br><br>The case, brought forward by animal rights organization NonHuman Rights Project (NHR) on behalf of the elephants – Missy, Lucky, Kim",
+      "fixable": false,
+      "matched_text": "<br><br>The case, brought forward by animal rights organization NonHuman Rights Project (NHR) on behalf of the elephants – Missy, Lucky, Kimba, LouLou, and Jambo – argues that these highly intelligent creatures should be considered \"persons\" under the law and therefore entitled to fundamental legal rights.<br><br>\"These elephants possess complex cognitive abilities, deep emotional bonds, and suffer physically and psychologically in captivity,\" said Steven Wise, president of NHR. \"They should have the basic right to bodily liberty, just as humans do.\"<br><br>The legal team representing the zoo maintains that extending habeas corpus rights to animals would create judicial chaos."
+    }
+  ]
+}

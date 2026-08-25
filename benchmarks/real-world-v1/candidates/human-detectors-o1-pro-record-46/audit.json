@@ -1,0 +1,18 @@
+{
+  "sample_id": "human-detectors-o1-pro-record-46",
+  "source_path": "benchmarks/real-world-v1/candidates/human-detectors-o1-pro-record-46/source.md",
+  "metrics": {
+    "characters": 3279,
+    "words": 547,
+    "sentences": 35,
+    "paragraphs": 7,
+    "findings": 0,
+    "categories": {},
+    "severities": {},
+    "review_priority": 0,
+    "review_priority_note": "Triage index only; not an AI-authorship score."
+  },
+  "rule_counts": {},
+  "protected_facts": 36,
+  "findings": []
+}
