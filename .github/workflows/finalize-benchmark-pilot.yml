@@ -28,6 +28,50 @@ jobs:
           cache: pip
       - run: python -m pip install --upgrade pip
       - run: python -m pip install -e ".[dev]"
+      - name: Harden the pinned dataset download boundary
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          path = Path("scripts/import_human_detectors_batch.py")
+          text = path.read_text(encoding="utf-8")
+          import_marker = "from typing import Any\n"
+          if "from urllib.parse import urlsplit\n" not in text:
+              if text.count(import_marker) != 1:
+                  raise SystemExit("import marker changed")
+              text = text.replace(
+                  import_marker,
+                  import_marker + "from urllib.parse import urlsplit\n",
+                  1,
+              )
+
+          old = '''def _download_json(url: str) -> Any:
+              request = urllib.request.Request(
+                  url,
+                  headers={"User-Agent": "HumanizerOS benchmark importer"},
+              )
+              try:
+                  with urllib.request.urlopen(request, timeout=120) as response:
+                      payload = response.read()
+          '''
+          new = '''def _download_json(url: str) -> Any:
+              parsed = urlsplit(url)
+              if parsed.scheme != "https" or parsed.netloc != "raw.githubusercontent.com":
+                  raise ImportError(f"refusing unsupported dataset URL: {url}")
+
+              # The pinned HTTPS host is checked above; noqa records that boundary.
+              request = urllib.request.Request(  # noqa: S310
+                  url,
+                  headers={"User-Agent": "HumanizerOS benchmark importer"},
+              )
+              try:
+                  with urllib.request.urlopen(request, timeout=120) as response:  # noqa: S310
+                      payload = response.read()
+          '''
+          if old not in text:
+              raise SystemExit("download helper marker changed")
+          path.write_text(text.replace(old, new, 1), encoding="utf-8")
+          PY
       - name: Generate the pilot corpus, manifest, results, docs, and tests
         run: python scripts/finalize_benchmark_pilot.py
       - name: Run the complete project gate
