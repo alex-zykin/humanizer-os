@@ -3,6 +3,7 @@ include .gitattributes
 include .gitignore
 include .pre-commit-config.yaml
 include .github/CODEOWNERS
+include .agents/plugins/marketplace.json
 include LICENSE
 include README.md
 include README.ru.md
@@ -23,6 +24,7 @@ recursive-include benchmarks *.md *.json *.jsonl
 recursive-include schemas *.json
 recursive-include evals *.md *.jsonl
 recursive-include skills *.md
+recursive-include plugins *.md *.json
 recursive-include scripts *.py
 recursive-include tests *.py
 recursive-include .github *.yml *.md
