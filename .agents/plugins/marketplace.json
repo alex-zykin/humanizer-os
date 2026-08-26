@@ -1,0 +1,20 @@
+{
+  "name": "humanizer-os-marketplace",
+  "interface": {
+    "displayName": "HumanizerOS"
+  },
+  "plugins": [
+    {
+      "name": "humanizer-os",
+      "source": {
+        "source": "local",
+        "path": "./plugins/humanizer-os"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    }
+  ]
+}
