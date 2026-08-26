@@ -1,0 +1,24 @@
+{
+  "name": "humanizer-os",
+  "version": "0.1.1",
+  "description": "HumanizerOS writing assistant plugin",
+  "author": {
+    "name": "Alex Zykin"
+  },
+  "license": "MIT",
+  "keywords": ["writing", "editing", "humanizer"],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "HumanizerOS",
+    "shortDescription": "Improve AI-assisted writing while preserving facts.",
+    "longDescription": "HumanizerOS reviews and rewrites English prose while preserving facts and deliberate voice, with optional Russian support.",
+    "developerName": "Alex Zykin",
+    "category": "Productivity",
+    "capabilities": ["Write", "Review"],
+    "defaultPrompt": [
+      "Humanize this text and preserve every fact.",
+      "Review this draft for formulaic writing.",
+      "Rewrite this naturally without changing facts."
+    ]
+  }
+}
