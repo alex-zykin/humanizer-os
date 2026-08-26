@@ -14,7 +14,25 @@ The project does not assign an AI-authorship probability. It reports observable 
 
 ## Install in 10 seconds
 
-Install the canonical Agent Skill with the open [`skills`](https://github.com/vercel-labs/skills) CLI:
+### Codex plugin marketplace
+
+HumanizerOS can be added directly as a Codex plugin marketplace.
+
+1. Open **Plugins → Marketplaces → Add marketplace** in Codex.
+2. Choose the Git repository option.
+3. Paste:
+
+```text
+https://github.com/alex-zykin/humanizer-os
+```
+
+4. Add the marketplace, then install **HumanizerOS** from it.
+
+The repository ships the native marketplace manifest at `.agents/plugins/marketplace.json` and the installable plugin bundle at `plugins/humanizer-os/`.
+
+### Agent Skills CLI
+
+The same canonical skill can also be installed with the open [`skills`](https://github.com/vercel-labs/skills) CLI:
 
 ```bash
 npx skills add alex-zykin/humanizer-os --skill humanizer-os -g -y
@@ -126,7 +144,7 @@ The working split is deliberate: **the agent edits meaning; HumanizerOS controls
 
 ## Claude and Codex setup
 
-The canonical [`SKILL.md`](SKILL.md) is English-first and compatible with the open Agent Skills ecosystem.
+The canonical [`SKILL.md`](SKILL.md) is English-first and compatible with the open Agent Skills ecosystem. The Codex plugin package includes the canonical skill plus explicit English and Russian variants.
 
 Installing the Skill does not rewrite every message automatically. It activates when the user asks to humanize, de-template, rewrite, or review prose. Clean text should remain unchanged.
 
@@ -214,6 +232,7 @@ Read the localized guide in [`README.ru.md`](README.ru.md) or install the explic
 ## What ships today
 
 - one canonical English-first Agent Skill;
+- a native Codex plugin marketplace package;
 - separate English and Russian rule packs;
 - genre profiles for social, email, landing, article, docs, fiction, academic, legal, and general prose;
 - text, versioned JSON, and SARIF output;
